@@ -1,37 +1,38 @@
-# dexworld - A Playground for Exploring Dexterity
+# mimic_retargeter_lab
 
 ## Introduction
+Retargeting algorithms are what enable humans to bridge the embodiment gap with robotic hands. Here, we provide an implementation of different retargeters on different robot hands.
 
 ### Supported Hands
 
 | Hand | Preview |
 |------|---------|
 | mimic P0.50 Hand (`mimic_p050_hand`) | <img src="media/hands/mimic_p050_hand.webp" width="240"> |
-| Shadow Hand (`shadow_hand`) | <img src="media/hands/shadow_hand.webp" width="240"> |
-| Shadow DEXEE (`shadow_dexee_hand`) | <img src="media/hands/shadow_dexee_hand.webp" width="240"> |
-| Wonik Allegro Hand (`wonik_allegro_hand`) | <img src="media/hands/wonik_allegro_hand.webp" width="240"> |
-| LEAP Hand (`leap_hand`) | <img src="media/hands/leap_hand.webp" width="240"> |
-| WuJi Hand (`wuji_hand`) | <img src="media/hands/wuji_hand.webp" width="240"> |
-| Orca V2 Hand (`orca_v2_hand`) | <img src="media/hands/orca_v2_hand.webp" width="240"> |
+| [Shadow Hand](https://github.com/google-deepmind/mujoco_menagerie/tree/main/shadow_hand) (`shadow_hand`) | <img src="media/hands/shadow_hand.webp" width="240"> |
+| [Shadow DEXEE](https://github.com/google-deepmind/mujoco_menagerie/tree/main/shadow_dexee) (`shadow_dexee_hand`) | <img src="media/hands/shadow_dexee_hand.webp" width="240"> |
+| [Wonik Allegro Hand](https://github.com/google-deepmind/mujoco_menagerie/tree/main/wonik_allegro) (`wonik_allegro_hand`) | <img src="media/hands/wonik_allegro_hand.webp" width="240"> |
+| [LEAP Hand](https://github.com/google-deepmind/mujoco_menagerie/tree/main/leap_hand) (`leap_hand`) | <img src="media/hands/leap_hand.webp" width="240"> |
+| [WuJi Hand](https://github.com/wuji-technology/wuji-description) (`wuji_hand`) | <img src="media/hands/wuji_hand.webp" width="240"> |
+| [Orca V2 Hand](https://github.com/orcahand/orcahand_description) (`orca_v2_hand`) | <img src="media/hands/orca_v2_hand.webp" width="240"> |
 
 > Previews are committed under `media/hands/`. To regenerate them, see [docs/regenerating_hand_previews.md](docs/regenerating_hand_previews.md).
 
 ### Supported Online Retargeters
 - Joint Angle [`joint_angle`]
 - Keyvector [`keyvector`]
-- Hybrid [`hybrid`]
-- DexPilot [`dexpilot`]
-- Analyzing Key Objectives (AKO) [`ako`]
-- Sampling-Based [`sampling_based`]
-- Geometric Retargeting [`geort`]
+- [Hybrid](https://arxiv.org/abs/2506.11916) [`hybrid`]
+- [DexPilot](https://arxiv.org/abs/1910.03135) [`dexpilot`]
+- [Analyzing Key Objectives (AKO)](https://arxiv.org/abs/2506.09384) [`ako`]
+- [Sampling-Based](https://arxiv.org/abs/2607.07491) [`sampling_based`]
+- [Geometric Retargeting (GeoRT)](https://arxiv.org/abs/2503.07541) [`geort`]
 
 *Note on running Sampling-Based Retargeter*: `sampling_based` requires a GPU to run because it is sampling many robot positions in parallel. If your system does not have a GPU, the performance will be extremely slow. 
 
 
-## Installation
+## Installation & Setup
 
-### Using uv
-If you prefer to use `uv` for faster dependency resolution:
+### Setting up the virtual environment 
+`uv` is used as the environment and package manager. 
 
 ```bash
 # Clone the repository
@@ -77,8 +78,6 @@ uv run pre-commit autoupdate
 ```
 
 If you need to bypass hooks in an emergency, use `git commit --no-verify`. However, please don't make it a habit.
-
-## Setup
 
 ### Testing Setup
 To test that the setup is complete, run the following tests:
@@ -150,9 +149,38 @@ See [docs/integrating_new_hand.md](docs/integrating_new_hand.md) for a full walk
 
 ## License
 
-This project is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — free for non-commercial use with attribution. See [LICENSE](LICENSE) for details.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). See [LICENSE](LICENSE) for details.
 
 Third-party components are documented in [LICENSE_THIRD_PARTY.md](LICENSE_THIRD_PARTY.md).
+
+## Citation
+
+If you use the sampling-based retargeting algorithm, please cite the paper:
+
+```bibtex
+@misc{malate2026_smoothoperator,
+      title={Smooth Operator: A Real-Time Sampling-Based Algorithm for Kinematic Hand Retargeting}, 
+      author={Robert Jomar Malate and Erik Bauer and Norica Bacuieti and Stefanos Charalambous and Elvis Nava and Robert K. Katzschmann and Benedek Forrai},
+      year={2026},
+      eprint={2607.07491},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2607.07491}, 
+}
+```
+
+If you use this codebase, please cite the repository:
+
+```bibtex
+@software{malate2026_mimicretargeterlab,
+      title={mimic\_retargeter\_lab},
+      author={Robert Jomar Malate and Erik Bauer and Norica Bacuieti and Stefanos Charalambous and Elvis Nava and Robert K. Katzschmann and Benedek Forrai},
+      year={2026},
+      url={https://github.com/mimicrobotics/mimic_retargeter_lab},
+}
+```
+
+This citation metadata is also available in machine-readable form in [CITATION.cff](CITATION.cff), which enables GitHub's "Cite this repository" button.
 
 ## References
 
