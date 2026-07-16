@@ -155,7 +155,7 @@ Third-party components are documented in [LICENSE_THIRD_PARTY.md](LICENSE_THIRD_
 
 ## Citation
 
-If you use the retargeting algorithm, please cite the paper:
+If you use the sampling-based retargeting algorithm, please cite the paper:
 
 ```bibtex
 @misc{malate2026_smoothoperator,
