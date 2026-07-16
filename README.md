@@ -8,12 +8,12 @@ Retargeting algorithms are what enable humans to bridge the embodiment gap with 
 | Hand | Preview |
 |------|---------|
 | mimic P0.50 Hand (`mimic_p050_hand`) | <img src="media/hands/mimic_p050_hand.webp" width="240"> |
-| Shadow Hand (`shadow_hand`) | <img src="media/hands/shadow_hand.webp" width="240"> |
-| Shadow DEXEE (`shadow_dexee_hand`) | <img src="media/hands/shadow_dexee_hand.webp" width="240"> |
-| Wonik Allegro Hand (`wonik_allegro_hand`) | <img src="media/hands/wonik_allegro_hand.webp" width="240"> |
-| LEAP Hand (`leap_hand`) | <img src="media/hands/leap_hand.webp" width="240"> |
-| WuJi Hand (`wuji_hand`) | <img src="media/hands/wuji_hand.webp" width="240"> |
-| Orca V2 Hand (`orca_v2_hand`) | <img src="media/hands/orca_v2_hand.webp" width="240"> |
+| [Shadow Hand](https://github.com/google-deepmind/mujoco_menagerie/tree/main/shadow_hand) (`shadow_hand`) | <img src="media/hands/shadow_hand.webp" width="240"> |
+| [Shadow DEXEE](https://github.com/google-deepmind/mujoco_menagerie/tree/main/shadow_dexee) (`shadow_dexee_hand`) | <img src="media/hands/shadow_dexee_hand.webp" width="240"> |
+| [Wonik Allegro Hand](https://github.com/google-deepmind/mujoco_menagerie/tree/main/wonik_allegro) (`wonik_allegro_hand`) | <img src="media/hands/wonik_allegro_hand.webp" width="240"> |
+| [LEAP Hand](https://github.com/google-deepmind/mujoco_menagerie/tree/main/leap_hand) (`leap_hand`) | <img src="media/hands/leap_hand.webp" width="240"> |
+| [WuJi Hand](https://github.com/wuji-technology/wuji-description) (`wuji_hand`) | <img src="media/hands/wuji_hand.webp" width="240"> |
+| [Orca V2 Hand](https://github.com/orcahand/orcahand_description) (`orca_v2_hand`) | <img src="media/hands/orca_v2_hand.webp" width="240"> |
 
 > Previews are committed under `media/hands/`. To regenerate them, see [docs/regenerating_hand_previews.md](docs/regenerating_hand_previews.md).
 
