@@ -23,8 +23,8 @@ Retargeting algorithms are what enable humans to bridge the embodiment gap with 
 - [Hybrid](https://arxiv.org/abs/2506.11916) [`hybrid`]
 - [DexPilot](https://arxiv.org/abs/1910.03135) [`dexpilot`]
 - [Analyzing Key Objectives (AKO)](https://arxiv.org/abs/2506.09384) [`ako`]
-- Sampling-Based [`sampling_based`]
-- [Geometric Retargeting](https://arxiv.org/abs/2503.07541) [`geort`]
+- [Sampling-Based](https://arxiv.org/abs/2607.07491) [`sampling_based`]
+- [Geometric Retargeting (GeoRT)](https://arxiv.org/abs/2503.07541) [`geort`]
 
 *Note on running Sampling-Based Retargeter*: `sampling_based` requires a GPU to run because it is sampling many robot positions in parallel. If your system does not have a GPU, the performance will be extremely slow. 
 
