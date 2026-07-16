@@ -1,6 +1,7 @@
-# dexworld - A Playground for Exploring Dexterity
+# mimic_retargeter_lab
 
 ## Introduction
+Retargeting algorithms are what enable humans to bridge the embodiment gap with robotic hands. Here, we provide an implementation of different retargeters on different robot hands.
 
 ### Supported Hands
 
@@ -28,10 +29,10 @@
 *Note on running Sampling-Based Retargeter*: `sampling_based` requires a GPU to run because it is sampling many robot positions in parallel. If your system does not have a GPU, the performance will be extremely slow. 
 
 
-## Installation
+## Installation & Setup
 
-### Using uv
-If you prefer to use `uv` for faster dependency resolution:
+### Setting up the virtual environment 
+`uv` is used as the environment and package manager. 
 
 ```bash
 # Clone the repository
@@ -77,8 +78,6 @@ uv run pre-commit autoupdate
 ```
 
 If you need to bypass hooks in an emergency, use `git commit --no-verify`. However, please don't make it a habit.
-
-## Setup
 
 ### Testing Setup
 To test that the setup is complete, run the following tests:
