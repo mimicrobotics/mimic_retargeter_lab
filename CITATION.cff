@@ -18,7 +18,7 @@ authors:
   - given-names: Benedek
     family-names: Forrai
 repository-code: "https://github.com/mimicrobotics/mimic_retargeter_lab"
-license: CC-BY-NC-4.0
+license: MIT
 date-released: "2026-07-16"
 preferred-citation:
   type: article

@@ -149,7 +149,7 @@ See [docs/integrating_new_hand.md](docs/integrating_new_hand.md) for a full walk
 
 ## License
 
-This project is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — free for non-commercial use with attribution. See [LICENSE](LICENSE) for details.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). See [LICENSE](LICENSE) for details.
 
 Third-party components are documented in [LICENSE_THIRD_PARTY.md](LICENSE_THIRD_PARTY.md).
 
