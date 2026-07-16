@@ -1,0 +1,35 @@
+name: joint_angle
+config:
+  device: cpu
+
+  wrist_mapping:
+    tgt_key: wrist
+    root_key: wrist
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  joint_mapping:
+    # Index
+    - { name: index_abduction,  tgt_key: ffj0, src_key: ff_proximal.z, coef: -1.0, offset: 0.0 }
+    - { name: index_mcp,        tgt_key: ffj1, src_key: ff_proximal.x, coef: -1.0, offset: 0.0 }
+    - { name: index_pip,        tgt_key: ffj2, src_key: ff_distal.x,   coef: -1.0, offset: 0.0 }
+    - { name: index_dip,        tgt_key: ffj3, src_key: ff_tip.x,      coef: -1.0, offset: 0.0 }
+
+    # Middle
+    - { name: middle_abduction, tgt_key: mfj0, src_key: mf_proximal.z, coef: -1.0, offset: 0.0 }
+    - { name: middle_mcp,       tgt_key: mfj1, src_key: mf_proximal.x, coef: -1.0, offset: 0.0 }
+    - { name: middle_pip,       tgt_key: mfj2, src_key: mf_distal.x,   coef: -1.0, offset: 0.0 }
+    - { name: middle_dip,       tgt_key: mfj3, src_key: mf_tip.x,      coef: -1.0, offset: 0.0 }
+
+    # Ring
+    - { name: ring_abduction,   tgt_key: rfj0, src_key: rf_proximal.z, coef:  1.0, offset: 0.0 }
+    - { name: ring_mcp,         tgt_key: rfj1, src_key: rf_proximal.x, coef: -1.0, offset: 0.0 }
+    - { name: ring_pip,         tgt_key: rfj2, src_key: rf_distal.x,   coef: -1.0, offset: 0.0 }
+    - { name: ring_dip,         tgt_key: rfj3, src_key: rf_tip.x,      coef: -1.0, offset: 0.0 }
+
+    # Thumb
+    - { name: thumb_abduction,  tgt_key: thj0, src_key: th_proximal.z, coef: -1.0, offset: 0.0 }
+    - { name: thumb_mcp,        tgt_key: thj1, src_key: th_proximal.x, coef: -1.0, offset: 0.0 }
+    - { name: thumb_pip,        tgt_key: thj2, src_key: th_distal.z,   coef: -1.0, offset: 0.0 }
+    - { name: thumb_dip,        tgt_key: thj3, src_key: th_tip.z,      coef: -1.0, offset: 0.0 }
+
+  constant_joints: {}

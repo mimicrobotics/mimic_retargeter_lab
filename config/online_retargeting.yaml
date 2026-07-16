@@ -1,0 +1,32 @@
+# Main Hydra config for offline retargeting
+#
+# `retargeter` selects which retargeter to use (see config/retargeter/ for the
+# available options). The defaults list then interpolates that choice together
+# with `hand` to load the matching settings from
+# config/retargeter_cfg/<retargeter>/human_hand_to_<hand>.yaml, mounted at
+# cfg.retargeter.
+
+defaults:
+  - _self_
+  - hand: shadow_hand
+  - retargeter: joint_angle
+  - hand_tracker: oakd_mediapipe
+  - retargeter_cfg@retargeter: ${retargeter}/human_hand_to_${hand}
+  - optional wrist_controller: null
+  - override hydra/hydra_logging: disabled
+  - override hydra/job_logging: disabled
+
+use_offline_data: false
+chirality: right # left | right
+# hand_dataset: dexycb # e.g. dexycb
+simulator: mujoco
+
+# Debug visualization (keyvector retargeter only; merged in run_retargeting.py)
+debug_mode: false
+debug_every_n_frames: 10
+
+# Don't write logs
+hydra:
+  run:
+    dir: .
+  output_subdir: null

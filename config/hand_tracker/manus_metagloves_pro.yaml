@@ -1,0 +1,17 @@
+_target_: dexworld.data_sources.ManusHandTracker
+cfg:
+  # ZMQ endpoint — must match what ManusZmqBridge publishes on.
+  host: "127.0.0.1"
+  port: 8000
+
+  chirality: ${chirality}
+
+  # MANUS 25-node topology (confirmed via live visualization):
+  #   0        = wrist
+  #   1-4      = thumb  (1=base, 2=mid, 3=dp, 4=tip)
+  #   5-9      = index  (5=MCP, 6=PIP, 7=DIP, 8=DP, 9=tip)
+  #   10-14    = middle (10=MCP, 11=PIP, 12=DIP, 13=DP, 14=tip)
+  #   15-19    = ring   (15=MCP, 16=PIP, 17=DIP, 18=DP, 19=tip)
+  #   20-24    = pinky  (20=MCP, 21=PIP, 22=DIP, 23=DP, 24=tip)
+  #
+  # Landmark mapping is handled by ManusHandModel._MANUS_LANDMARK_MAP.

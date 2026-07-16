@@ -1,0 +1,3 @@
+port: 8050
+debug: true
+host: "127.0.0.1"

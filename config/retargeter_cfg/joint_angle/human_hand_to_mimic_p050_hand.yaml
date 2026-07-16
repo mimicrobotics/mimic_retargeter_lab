@@ -1,0 +1,55 @@
+# Example joint-angle mapping for human-hand -> Mimic P050 Hand (REVERSED KEYS)
+#
+# This file provides an explicit mapping from target (robot) joint names to
+# source (human) joint names. The mapping is expressed as a LIST of entries,
+# where each entry specifies the target joint (`tgt_key`) and the source
+# joint (`src_key`) together with an optional `coef` and `offset`.
+#
+# Notes:
+# - `joint_mapping` is a list of mapping entries. Each entry should include:
+#     - `tgt_key` (str): target (robot) joint name
+#     - `src_key` (str): source (human) joint name
+#     - `coef` (float, optional): multiplicative coefficient (default 1.0)
+#     - `offset` (float, optional): additive offset (default 0.0)
+#     - `name` (str, optional): human-readable name for the mapping entry
+# - If you only want to map a subset of joints, include only those entries.
+# - If you prefer automatic behavior, leave `joint_mapping` empty.
+#
+name: joint_angle
+config:
+  device: cpu
+
+  wrist_mapping:
+    # TODO: fix wrist mapping for actual hand joints
+    tgt_key: thumb_cmc
+    root_key: thumb_cmc
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  joint_mapping:
+    # Thumb (4)
+    - { name: thumb_base2cmc,      tgt_key: thumb_base2cmc,      src_key: th_proximal.z, coef: -1.0, offset: 0.0 }
+    - { name: thumb_cmc2mcp,       tgt_key: thumb_cmc2mcp,       src_key: th_proximal.x, coef: -1.0, offset: 0.0 }
+    - { name: thumb_mcp2pp,        tgt_key: thumb_mcp2pp,        src_key: th_distal.z,   coef: -1.0, offset: 0.0 }
+    - { name: thumb_pp2dp_actuated,tgt_key: thumb_pp2dp_actuated,src_key: th_tip.z,      coef: -1.0, offset: 0.0 }
+
+    # Index (3)
+    - { name: index_base2mcp,      tgt_key: index_base2mcp,      src_key: ff_proximal.z, coef: -1.0, offset: 0.0 }
+    - { name: index_mcp2pp,        tgt_key: index_mcp2pp,        src_key: ff_proximal.x, coef: -1.0, offset: 0.0 }
+    - { name: index_pp2mp,         tgt_key: index_pp2mp,         src_key: ff_distal.x,   coef: -1.0, offset: 0.0 }
+
+    # Middle (3)
+    - { name: middle_base2mcp,     tgt_key: middle_base2mcp,     src_key: mf_proximal.z, coef: -1.0, offset: 0.0 }
+    - { name: middle_mcp2pp,       tgt_key: middle_mcp2pp,       src_key: mf_proximal.x, coef: -1.0, offset: 0.0 }
+    - { name: middle_pp2mp,        tgt_key: middle_pp2mp,        src_key: mf_distal.x,   coef: -1.0, offset: 0.0 }
+
+    # Ring (3)
+    - { name: ring_base2mcp,       tgt_key: ring_base2mcp,       src_key: rf_proximal.z, coef:  1.0, offset: 0.0 }
+    - { name: ring_mcp2pp,         tgt_key: ring_mcp2pp,         src_key: rf_proximal.x, coef: -1.0, offset: 0.0 }
+    - { name: ring_pp2mp,          tgt_key: ring_pp2mp,          src_key: rf_distal.x,   coef: -1.0, offset: 0.0 }
+
+    # Pinky (3)
+    - { name: pinky_base2mcp,      tgt_key: pinky_base2mcp,      src_key: lf_proximal.z, coef:  1.0, offset: 0.0 }
+    - { name: pinky_mcp2pp,        tgt_key: pinky_mcp2pp,        src_key: lf_proximal.x, coef: -1.0, offset: 0.0 }
+    - { name: pinky_pp2mp,         tgt_key: pinky_pp2mp,         src_key: lf_distal.x,   coef: -1.0, offset: 0.0 }
+
+  constant_joints: {}

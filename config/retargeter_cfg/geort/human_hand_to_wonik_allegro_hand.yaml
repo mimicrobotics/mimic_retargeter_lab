@@ -1,0 +1,51 @@
+# GeoRT learned retargeter for human hand -> Wonik Allegro Hand.
+#
+# Wrist is driven by WristRetargeter (palm -> palm; allegro is its own root).
+# 4-fingered hand (no pinky); fingertips list omits the pinky entry and the
+# manus tracker mapping omits its pinky index.
+#
+# Names use the unprefixed qpos form (ffa0 -> ffj0 via _joint_name_from_actuated_name);
+# MjcfHandKinematicModel and GeortRetargeter both accept either spelling.
+name: geort
+config:
+  wrist_mapping:
+    tgt_key: palm
+    root_key: palm
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  checkpoint_tag: wonik_allegro_hand_right_manus_mjcf_run-000
+  constant_joints: {}
+
+  # Same triangle as sampling_based on this hand.
+  alignment_landmarks:
+    - wrist
+    - index_base
+    - ring_base
+  alignment_use_scale: true
+
+training:
+  fingertips:
+    - name: thumb
+      landmark: thumb_tip
+      joint: [thj0, thj1, thj2, thj3]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: index
+      landmark: index_tip
+      joint: [ffj0, ffj1, ffj2, ffj3]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: middle
+      landmark: middle_tip
+      joint: [mfj0, mfj1, mfj2, mfj3]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: ring
+      landmark: ring_tip
+      joint: [rfj0, rfj1, rfj2, rfj3]
+      center_offset: [0.0, 0.0, 0.0]
+
+  trackers:
+    manus:
+      human_hand_ids:
+        thumb: 4
+        index: 9
+        middle: 14
+        ring: 19

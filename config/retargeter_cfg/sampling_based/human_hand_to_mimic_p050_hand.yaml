@@ -1,0 +1,92 @@
+name: sampling_based
+config:
+  wrist_mapping:
+    tgt_key: wrist_link_virtual
+    root_key: base_link
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  precomputed_scale: null
+  alignment_landmarks:
+    - thumb_base
+    - index_base
+    - pinky_base
+
+  dexpilot_params:
+    project_distance: 0.01
+    escape_distance: 0.015
+    scale_factor: 1.0
+    gamma: 0.05
+    weight_default: 1.0
+    weight_vector_set1: 2.0
+    weight_vector_set2: 0.0
+    eta1: 0.001
+    eta2: 0.0
+    weight_loss_velocity: 0.1
+    beta: 0.02
+
+  sampling_params:
+    num_samples: 8192
+    num_samples_elite: 128
+    sigma: 0.2
+    lambda: 0.1
+    learning_rate: 1.0
+    update_cycle: 20
+    rng_seed: 42
+    device: cuda
+    jax_compilation_cache_enable: true
+    jax_compilation_cache_dir: ~/.cache/dexworld/jax_compilation
+
+  debug_mode: false
+  debug_every_n_frames: 1
+
+  keyvectors_cfg:
+    # wrist-to-fingertip
+    - name: wrist_to_thumb_tip
+      src_key: WRIST_to_THUMB_TIP
+      tgt_key: WRIST_to_THUMB_TIP
+    - name: wrist_to_index_tip
+      src_key: WRIST_to_INDEX_TIP
+      tgt_key: WRIST_to_INDEX_TIP
+    - name: wrist_to_middle_tip
+      src_key: WRIST_to_MIDDLE_TIP
+      tgt_key: WRIST_to_MIDDLE_TIP
+    - name: wrist_to_ring_tip
+      src_key: WRIST_to_RING_TIP
+      tgt_key: WRIST_to_RING_TIP
+    - name: wrist_to_pinky_tip
+      src_key: WRIST_to_PINKY_TIP
+      tgt_key: WRIST_to_PINKY_TIP
+
+    # thumb-to-fingertip
+    - name: thumb_tip_to_index_tip
+      src_key: THUMB_TIP_to_INDEX_TIP
+      tgt_key: THUMB_TIP_to_INDEX_TIP
+    - name: thumb_tip_to_middle_tip
+      src_key: THUMB_TIP_to_MIDDLE_TIP
+      tgt_key: THUMB_TIP_to_MIDDLE_TIP
+    - name: thumb_tip_to_ring_tip
+      src_key: THUMB_TIP_to_RING_TIP
+      tgt_key: THUMB_TIP_to_RING_TIP
+    - name: thumb_tip_to_pinky_tip
+      src_key: THUMB_TIP_to_PINKY_TIP
+      tgt_key: THUMB_TIP_to_PINKY_TIP
+
+    # finger-to-finger
+    - name: index_to_middle
+      src_key: INDEX_TIP_to_MIDDLE_TIP
+      tgt_key: INDEX_TIP_to_MIDDLE_TIP
+    - name: index_to_ring
+      src_key: INDEX_TIP_to_RING_TIP
+      tgt_key: INDEX_TIP_to_RING_TIP
+    - name: index_to_pinky
+      src_key: INDEX_TIP_to_PINKY_TIP
+      tgt_key: INDEX_TIP_to_PINKY_TIP
+    - name: middle_to_ring
+      src_key: MIDDLE_TIP_to_RING_TIP
+      tgt_key: MIDDLE_TIP_to_RING_TIP
+    - name: middle_to_pinky
+      src_key: MIDDLE_TIP_to_PINKY_TIP
+      tgt_key: MIDDLE_TIP_to_PINKY_TIP
+    - name: ring_to_pinky
+      src_key: RING_TIP_to_PINKY_TIP
+      tgt_key: RING_TIP_to_PINKY_TIP

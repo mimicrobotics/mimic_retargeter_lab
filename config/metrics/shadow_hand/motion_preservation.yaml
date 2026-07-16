@@ -1,0 +1,12 @@
+_target_: dexworld.metrics.MotionPreservationMetric
+config:
+  display_name: "Motion Preservation"
+
+  task_space_mapping:
+    - landmark: THUMB_TIP
+    - landmark: INDEX_TIP
+    - landmark: MIDDLE_TIP
+    - landmark: RING_TIP
+    - landmark: PINKY_TIP
+
+data_source_cfg: ${dataset.data_source_cfg}

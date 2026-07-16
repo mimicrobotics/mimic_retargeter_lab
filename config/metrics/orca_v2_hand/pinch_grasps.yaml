@@ -1,0 +1,41 @@
+_target_: dexworld.metrics.ReferencePoseMetric
+config:
+  display_name: "Pinch Grasps"
+  reference_type: linear
+  joint_space_mapping: ${joint_angle_retargeter.config.joint_mapping}
+
+  task_space_mapping:
+    - name: "thumb_tip"
+      src: th_tip
+      tgt: right_thumb_tip
+    - name: "index_tip"
+      src: ff_tip
+      tgt: right_index_tip
+    - name: "middle_tip"
+      src: mf_tip
+      tgt: right_middle_tip
+    - name: "ring_tip"
+      src: rf_tip
+      tgt: right_ring_tip
+    - name: "little_tip"
+      src: lf_tip
+      tgt: right_pinky_tip
+
+  vector_diffs:
+    - name: thumb_to_index_tip
+      src: thumb_tip
+      tgt: index_tip
+    - name: thumb_to_middle_tip
+      src: thumb_tip
+      tgt: middle_tip
+    - name: thumb_to_ring_tip
+      src: thumb_tip
+      tgt: ring_tip
+    - name: thumb_to_little_tip
+      src: thumb_tip
+      tgt: pinky_tip
+
+data_source_cfg:
+  _target_: dexworld.data_sources.HandDatasetReader
+  data_path: "./dataset/pinch_grasps"
+  dataset: "pinch_grasps_test"

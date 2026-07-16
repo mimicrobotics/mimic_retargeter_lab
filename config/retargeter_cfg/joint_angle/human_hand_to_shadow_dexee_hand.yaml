@@ -1,0 +1,99 @@
+# Joint-angle mapping for human-hand -> Shadow DEX-EE (3 fingers: F0, F1, F2)
+#
+# Finger role assignment (mirrors the hand model's _landmark_config):
+#   F0 → thumb   (src joints: th_*)
+#   F1 → index   (src joints: ff_*)
+#   F2 → middle  (src joints: mf_*)
+#
+# Each finger has 4 DOFs:
+#   J0: abduction (rotation about the hand's Z axis at the knuckle)
+#   J1: MCP flexion
+#   J2: PIP flexion
+#   J3: DIP flexion
+#
+# The DEX-EE's qpos joint names are the same as its actuated names
+# (joint_map is identity), so tgt_key is just the joint name (e.g. "F0/J0").
+#
+name: joint_angle
+config:
+  device: cpu
+
+  wrist_mapping:
+    tgt_key: hand_base
+    root_key: hand_base
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  joint_mapping:
+    # ------------------------------------------------------------------
+    # F0 ← thumb
+    # ------------------------------------------------------------------
+    - name: f0_abduction
+      tgt_key: F0/J0
+      src_key: th_proximal.z
+      coef: 1.0
+      offset: 0.0
+    - name: f0_mcp
+      tgt_key: F0/J1
+      src_key: th_proximal.x
+      coef: -1.0
+      offset: 0.0
+    - name: f0_pip
+      tgt_key: F0/J2
+      src_key: th_distal.x
+      coef: -1.0
+      offset: 0.0
+    - name: f0_dip
+      tgt_key: F0/J3
+      src_key: th_tip.x
+      coef: -1.0
+      offset: 0.0
+
+    # ------------------------------------------------------------------
+    # F1 ← index
+    # ------------------------------------------------------------------
+    - name: f1_abduction
+      tgt_key: F1/J0
+      src_key: ff_proximal.z
+      coef: -1.0
+      offset: 0.0
+    - name: f1_mcp
+      tgt_key: F1/J1
+      src_key: ff_proximal.x
+      coef: -1.0
+      offset: 0.0
+    - name: f1_pip
+      tgt_key: F1/J2
+      src_key: ff_distal.x
+      coef: -1.0
+      offset: 0.0
+    - name: f1_dip
+      tgt_key: F1/J3
+      src_key: ff_tip.x
+      coef: -1.0
+      offset: 0.0
+
+    # ------------------------------------------------------------------
+    # F2 ← middle
+    # ------------------------------------------------------------------
+    - name: f2_abduction
+      tgt_key: F2/J0
+      src_key: mf_proximal.z
+      coef: -1.0
+      offset: 0.0
+    - name: f2_mcp
+      tgt_key: F2/J1
+      src_key: mf_proximal.x
+      coef: -1.0
+      offset: 0.0
+    - name: f2_pip
+      tgt_key: F2/J2
+      src_key: mf_distal.x
+      coef: -1.0
+      offset: 0.0
+    - name: f2_dip
+      tgt_key: F2/J3
+      src_key: mf_tip.x
+      coef: -1.0
+      offset: 0.0
+
+  constant_joints: {}

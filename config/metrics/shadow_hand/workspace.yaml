@@ -1,0 +1,13 @@
+_target_: dexworld.metrics.WorkspaceMetric
+
+config:
+  display_name: "Workspace"
+
+  task_space_mapping:
+    - landmark: THUMB_TIP
+    - landmark: INDEX_TIP
+    - landmark: MIDDLE_TIP
+    - landmark: RING_TIP
+    - landmark: PINKY_TIP
+
+data_source_cfg: ${dataset.workspace_data_source_cfg}

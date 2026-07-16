@@ -1,0 +1,57 @@
+# GeoRT learned retargeter for human hand -> Wuji Hand.
+#
+# Wrist is driven by WristRetargeter (right_palm_link -> right_palm_link).
+# 5-fingered hand (full thumb + index + middle + ring + pinky), 4 joints each.
+# finger1=thumb, finger2=index, finger3=middle, finger4=ring, finger5=pinky.
+#
+# Names use the unprefixed qpos form (right_finger1_joint1_actuator ->
+# right_finger1_joint1 via _joint_name_from_actuated_name);
+# MjcfHandKinematicModel and GeortRetargeter both accept either spelling.
+name: geort
+config:
+  wrist_mapping:
+    tgt_key: right_palm_link
+    root_key: right_palm_link
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  checkpoint_tag: wuji_hand_right_manus_mjcf_run-000
+  constant_joints: {}
+
+  # Same triangle as sampling_based on this hand.
+  alignment_landmarks:
+    - thumb_base
+    - index_base
+    - pinky_base
+  alignment_use_scale: true
+
+training:
+  fingertips:
+    - name: thumb
+      landmark: thumb_tip
+      joint: [right_finger1_joint1, right_finger1_joint2, right_finger1_joint3, right_finger1_joint4]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: index
+      landmark: index_tip
+      joint: [right_finger2_joint1, right_finger2_joint2, right_finger2_joint3, right_finger2_joint4]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: middle
+      landmark: middle_tip
+      joint: [right_finger3_joint1, right_finger3_joint2, right_finger3_joint3, right_finger3_joint4]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: ring
+      landmark: ring_tip
+      joint: [right_finger4_joint1, right_finger4_joint2, right_finger4_joint3, right_finger4_joint4]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: pinky
+      landmark: pinky_tip
+      joint: [right_finger5_joint1, right_finger5_joint2, right_finger5_joint3, right_finger5_joint4]
+      center_offset: [0.0, 0.0, 0.0]
+
+  trackers:
+    manus:
+      human_hand_ids:
+        thumb: 4
+        index: 9
+        middle: 14
+        ring: 19
+        pinky: 24

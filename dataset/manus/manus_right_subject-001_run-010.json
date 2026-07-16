@@ -1,0 +1,26 @@
+{
+  "manus_version": "3.1.1",
+  "subject": "001",
+  "run": 10,
+  "chirality": "RIGHT",
+  "data_shape": [
+    5000,
+    25,
+    7
+  ],
+  "data_shape_axes": [
+    "frames",
+    "keypoints",
+    "channels"
+  ],
+  "channel_layout": "px, py, pz, qw, qx, qy, qz",
+  "duration_sec": 44.234,
+  "avg_rate_hz": 113.01,
+  "start_time": "2026-05-04T21:46:53",
+  "end_time": "2026-05-04T21:47:37",
+  "quaternion_order": "wxyz",
+  "glove_ids": [
+    3064964832
+  ],
+  "notes": null
+}

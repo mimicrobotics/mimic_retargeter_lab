@@ -1,0 +1,27 @@
+# MANO-mode bundle: continuous wilor stream + Pinch Grasps static dataset.
+# `data_source_cfg` is the reader for stream metrics; `workspace_data_source_cfg`
+# is a separate precomputed dataset used only by the Workspace metric. Pinch
+# Grasps reads its own static dataset and is wired in pinch_grasps.yaml directly.
+defaults:
+  - /metrics@_global_.metrics.motion_preservation: ${hand}/motion_preservation
+  - /metrics@_global_.metrics.keyvector_matching:  ${hand}/keyvector_matching
+  - /metrics@_global_.metrics.pinch_grasps:        ${hand}/pinch_grasps
+  - /metrics@_global_.metrics.flatness:            ${hand}/flatness
+  - /metrics@_global_.metrics.workspace:           ${hand}/workspace
+  - /metrics@_global_.metrics.collision:           ${hand}/collision
+  - /metrics@_global_.metrics.latency:             ${hand}/latency
+
+human_hand: mano_keypoint_hand
+data_path: "./dataset/wilor/"
+
+data_source_cfg:
+  _target_: dexworld.data_sources.HandDatasetReader
+  data_path: ${dataset.data_path}
+  dataset: wilor_test_long
+  num_episodes: 1
+
+workspace_data_source_cfg:
+  _target_: dexworld.data_sources.HandDatasetReader
+  data_path: ./dataset/wilor/workspace
+  dataset: human_hand_workspace
+  num_episodes: 1

@@ -1,0 +1,59 @@
+# GeoRT learned retargeter for human hand -> Shadow Hand.
+#
+# Wrist is driven by WristRetargeter (rh_palm vs rh_forearm). The IK MLP
+# controls all 18 finger actuators, including rh_THJ3 and rh_LFJ5 — chamfer
+# loss has gradient through them via fingertip positions, so we let the
+# model learn meaningful values rather than locking them at 0 the way the
+# other shadow retargeters do.
+#
+# Names use the unprefixed form (rh_A_FFJ0 -> rh_FFJ0 via
+# _joint_name_from_actuated_name); MjcfHandKinematicModel and
+# GeortRetargeter both accept either spelling.
+name: geort
+config:
+  wrist_mapping:
+    tgt_key: rh_palm
+    root_key: rh_forearm
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  checkpoint_tag: shadow_hand_right_manus_mjcf_run-000
+  constant_joints: {}
+
+  # Same triangle as sampling_based / keyvector / dexpilot / ako on shadow.
+  alignment_landmarks:
+    - wrist
+    - thumb_base
+    - ring_base
+  alignment_use_scale: true
+
+training:
+  fingertips:
+    - name: thumb
+      landmark: thumb_tip
+      joint: [rh_THJ5, rh_THJ4, rh_THJ3, rh_THJ2, rh_THJ1]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: index
+      landmark: index_tip
+      joint: [rh_FFJ4, rh_FFJ3, rh_FFJ0]            # FFJ0 = the F0 tendon actuator
+      center_offset: [0.0, 0.0, 0.0]
+    - name: middle
+      landmark: middle_tip
+      joint: [rh_MFJ4, rh_MFJ3, rh_MFJ0]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: ring
+      landmark: ring_tip
+      joint: [rh_RFJ4, rh_RFJ3, rh_RFJ0]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: pinky
+      landmark: pinky_tip
+      joint: [rh_LFJ5, rh_LFJ4, rh_LFJ3, rh_LFJ0]   # 4: includes LFJ5 metacarpal
+      center_offset: [0.0, 0.0, 0.0]
+
+  trackers:
+    manus:
+      human_hand_ids:
+        thumb: 4
+        index: 9
+        middle: 14
+        ring: 19
+        pinky: 24

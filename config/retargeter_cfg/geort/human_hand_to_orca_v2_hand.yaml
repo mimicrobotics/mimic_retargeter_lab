@@ -1,0 +1,57 @@
+# GeoRT learned retargeter for human hand -> ORCA V2 Hand.
+#
+# Wrist is driven by WristRetargeter (right_R-Carpals_8d1f1041 -> itself).
+# 5-fingered hand: thumb has 4 joints (cmc, abd, mcp, pip); the other four
+# fingers have 3 joints each (abd, mcp, pip). Total: 4 + 3*4 = 16.
+#
+# Names use the unprefixed qpos form (right_t-cmc_actuator -> right_t-cmc via
+# _joint_name_from_actuated_name); MjcfHandKinematicModel and GeortRetargeter
+# both accept either spelling.
+name: geort
+config:
+  wrist_mapping:
+    tgt_key: right_R-Carpals_8d1f1041
+    root_key: right_R-Carpals_8d1f1041
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  checkpoint_tag: orca_v2_hand_right_manus_mjcf_run-000
+  constant_joints: {}
+
+  # Same triangle as sampling_based on this hand.
+  alignment_landmarks:
+    - thumb_base
+    - index_base
+    - pinky_base
+  alignment_use_scale: true
+
+training:
+  fingertips:
+    - name: thumb
+      landmark: thumb_tip
+      joint: [right_t-cmc, right_t-abd, right_t-mcp, right_t-pip]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: index
+      landmark: index_tip
+      joint: [right_i-abd, right_i-mcp, right_i-pip]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: middle
+      landmark: middle_tip
+      joint: [right_m-abd, right_m-mcp, right_m-pip]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: ring
+      landmark: ring_tip
+      joint: [right_r-abd, right_r-mcp, right_r-pip]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: pinky
+      landmark: pinky_tip
+      joint: [right_p-abd, right_p-mcp, right_p-pip]
+      center_offset: [0.0, 0.0, 0.0]
+
+  trackers:
+    manus:
+      human_hand_ids:
+        thumb: 4
+        index: 9
+        middle: 14
+        ring: 19
+        pinky: 24

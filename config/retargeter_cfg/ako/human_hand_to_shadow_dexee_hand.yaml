@@ -1,0 +1,93 @@
+name: ako
+config:
+  wrist_mapping:
+    tgt_key: hand_base
+    root_key: hand_base
+    transform: [[1, 0, 0, 0],
+                [0, 1, 0, 0],
+                [0, 0, 1, 0],
+                [0, 0, 0, 1]]
+
+  # Landmarks used for Kabsch-Umeyama alignment of the source pcloud
+  # into the robot hand's frame before computing source keyvectors.
+  precomputed_scale: null
+  alignment_landmarks:
+    - thumb_base
+    - index_base
+    - middle_base
+
+  # Parameters for the AKO (Analyzing Key Objectives) retargeter.
+  # Values follow the paper / reference implementation.
+  # Note: lambda_2 (wrist rotation, 0.1 in paper) has no analog here — dexworld's
+  # WristRetargeter is a pass-through transform, not an optimization target.
+  retargeter_params:
+    epsilon_1: 0.1       # Pinching range upper (m).
+    epsilon_2: 0.01      # Pinching range lower (m).
+    huber_delta: 0.02    # Smooth-L1 transition point (m).
+    weight_joint_vel: 0.01  # Joint-velocity regularizer.
+
+  # Optimizer parameters.
+  solver_params:
+    tolerance: 1.0e-5
+    iterations: 20
+    device: cpu                # cpu | gpu | cuda
+
+  # Debug overlay (src/tgt keyvector segments).
+  debug_mode: false
+  debug_every_n_frames: 1
+
+  # Per-joint position regularization toward a reference pose. DEX-EE has 3 fingers
+  # (F0=thumb, F1=index, F2=middle); only the non-thumb abduction joints are
+  # regularized, following the paper's weight_loss_joint_pos_reg array.
+  regularized_joints:
+    F1/J0: {target: 0.0, weight: 0.5}
+    F2/J0: {target: 0.0, weight: 0.5}
+
+  keyvectors_cfg:
+    # wrist-to-fingertip: DEX-EE has 3 fingers.
+    # Thumb gets lambda_1 (weight_loss_thumb_pos = 10.0); the others get
+    # lambda_3 (weight_loss_fingertip_pos = 1.0).
+    - name: wrist_to_thumb_tip
+      src_key: WRIST_to_THUMB_TIP
+      tgt_key: WRIST_to_THUMB_TIP
+      role: wrist
+      loss_coef: 10.0   # lambda_1
+    - name: wrist_to_index_tip
+      src_key: WRIST_to_INDEX_TIP
+      tgt_key: WRIST_to_INDEX_TIP
+      role: wrist
+      loss_coef: 1.0    # lambda_3
+    - name: wrist_to_middle_tip
+      src_key: WRIST_to_MIDDLE_TIP
+      tgt_key: WRIST_to_MIDDLE_TIP
+      role: wrist
+      loss_coef: 1.0    # lambda_3
+
+    # thumb-to-fingertip (pinch): all use lambda_4 (weight_loss_pinch = 10.0).
+    - name: thumb_tip_to_index_tip
+      src_key: THUMB_TIP_to_INDEX_TIP
+      tgt_key: THUMB_TIP_to_INDEX_TIP
+      role: pinch
+      loss_coef: 10.0   # lambda_4
+    - name: thumb_tip_to_middle_tip
+      src_key: THUMB_TIP_to_MIDDLE_TIP
+      tgt_key: THUMB_TIP_to_MIDDLE_TIP
+      role: pinch
+      loss_coef: 10.0   # lambda_4
+
+    # finger-dp-to-fingertip: all use lambda_5 (weight_loss_fingertip_orientation = 10.0).
+    - name: thumb_dp_to_thumb_tip
+      src_key: THUMB_DP_to_THUMB_TIP
+      tgt_key: THUMB_DP_to_THUMB_TIP
+      role: orientation
+      loss_coef: 10.0   # lambda_5
+    - name: index_dp_to_index_tip
+      src_key: INDEX_DP_to_INDEX_TIP
+      tgt_key: INDEX_DP_to_INDEX_TIP
+      role: orientation
+      loss_coef: 10.0   # lambda_5
+    - name: middle_dp_to_middle_tip
+      src_key: MIDDLE_DP_to_MIDDLE_TIP
+      tgt_key: MIDDLE_DP_to_MIDDLE_TIP
+      role: orientation
+      loss_coef: 10.0   # lambda_5

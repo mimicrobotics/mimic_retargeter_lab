@@ -1,0 +1,78 @@
+# Hybrid (warmstart) retargeter for human hand -> Mimic P050 Hand.
+# Joint-angle pass produces a qpos that warmstarts the keyvector SLSQP solver.
+# wrist_mapping uses the keyvector config's keys (wrist_link_virtual / base_link);
+# the joint_angle yaml's wrist_mapping is TODO'd as wrong, but the children's
+# wrist retargeters are unused here — only the hybrid's own one is.
+name: hybrid
+config:
+  device: cpu
+
+  wrist_mapping:
+    tgt_key: wrist_link_virtual
+    root_key: base_link
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  joint_angle:
+    joint_mapping:
+      # Thumb (4)
+      - { name: thumb_base2cmc,       tgt_key: thumb_base2cmc,       src_key: th_proximal.z, coef: -1.0, offset: 0.0 }
+      - { name: thumb_cmc2mcp,        tgt_key: thumb_cmc2mcp,        src_key: th_proximal.x, coef: -1.0, offset: 0.0 }
+      - { name: thumb_mcp2pp,         tgt_key: thumb_mcp2pp,         src_key: th_distal.z,   coef: -1.0, offset: 0.0 }
+      - { name: thumb_pp2dp_actuated, tgt_key: thumb_pp2dp_actuated, src_key: th_tip.z,      coef: -1.0, offset: 0.0 }
+      # Index (3)
+      - { name: index_base2mcp,       tgt_key: index_base2mcp,       src_key: ff_proximal.z, coef: -1.0, offset: 0.0 }
+      - { name: index_mcp2pp,         tgt_key: index_mcp2pp,         src_key: ff_proximal.x, coef: -1.0, offset: 0.0 }
+      - { name: index_pp2mp,          tgt_key: index_pp2mp,          src_key: ff_distal.x,   coef: -1.0, offset: 0.0 }
+      # Middle (3)
+      - { name: middle_base2mcp,      tgt_key: middle_base2mcp,      src_key: mf_proximal.z, coef: -1.0, offset: 0.0 }
+      - { name: middle_mcp2pp,        tgt_key: middle_mcp2pp,        src_key: mf_proximal.x, coef: -1.0, offset: 0.0 }
+      - { name: middle_pp2mp,         tgt_key: middle_pp2mp,         src_key: mf_distal.x,   coef: -1.0, offset: 0.0 }
+      # Ring (3)
+      - { name: ring_base2mcp,        tgt_key: ring_base2mcp,        src_key: rf_proximal.z, coef:  1.0, offset: 0.0 }
+      - { name: ring_mcp2pp,          tgt_key: ring_mcp2pp,          src_key: rf_proximal.x, coef: -1.0, offset: 0.0 }
+      - { name: ring_pp2mp,           tgt_key: ring_pp2mp,           src_key: rf_distal.x,   coef: -1.0, offset: 0.0 }
+      # Pinky (3)
+      - { name: pinky_base2mcp,       tgt_key: pinky_base2mcp,       src_key: lf_proximal.z, coef:  1.0, offset: 0.0 }
+      - { name: pinky_mcp2pp,         tgt_key: pinky_mcp2pp,         src_key: lf_proximal.x, coef: -1.0, offset: 0.0 }
+      - { name: pinky_pp2mp,          tgt_key: pinky_pp2mp,          src_key: lf_distal.x,   coef: -1.0, offset: 0.0 }
+
+    constant_joints: {}
+
+  keyvector:
+    precomputed_scale: null
+    alignment_landmarks:
+      - thumb_base
+      - index_base
+      - pinky_base
+
+    iterations: 20
+    device: cpu
+
+    regularized_joints: {}
+
+    keyvectors_cfg:
+      - name: wrist_to_thumb_tip
+        src_key: WRIST_to_THUMB_TIP
+        tgt_key: WRIST_to_THUMB_TIP
+        scaling_coef: 1.0
+        loss_coef: 1.0
+      - name: wrist_to_index_tip
+        src_key: WRIST_to_INDEX_TIP
+        tgt_key: WRIST_to_INDEX_TIP
+        scaling_coef: 1.0
+        loss_coef: 1.0
+      - name: wrist_to_middle_tip
+        src_key: WRIST_to_MIDDLE_TIP
+        tgt_key: WRIST_to_MIDDLE_TIP
+        scaling_coef: 1.0
+        loss_coef: 1.0
+      - name: wrist_to_ring_tip
+        src_key: WRIST_to_RING_TIP
+        tgt_key: WRIST_to_RING_TIP
+        scaling_coef: 1.0
+        loss_coef: 1.0
+      - name: wrist_to_pinky_tip
+        src_key: WRIST_to_PINKY_TIP
+        tgt_key: WRIST_to_PINKY_TIP
+        scaling_coef: 1.0
+        loss_coef: 1.0

@@ -1,0 +1,54 @@
+# GeoRT learned retargeter for human hand -> LEAP Hand.
+#
+# Wrist is driven by WristRetargeter (base -> base; LEAP is its own root).
+# 4-fingered hand (no pinky); fingertips list omits the pinky entry and the
+# manus tracker mapping omits its pinky index.
+#
+# LEAP joint names are bare digit strings ("0"-"15") quoted as YAML strings.
+# Names use the unprefixed qpos form ("0_ctrl" -> "0" via
+# _joint_name_from_actuated_name); MjcfHandKinematicModel and GeortRetargeter
+# both accept either spelling. Per-finger order matches get_qpos_joint_names
+# (mcp, rot, pip, dip).
+name: geort
+config:
+  wrist_mapping:
+    tgt_key: base
+    root_key: base
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  checkpoint_tag: leap_hand_right_manus_mjcf_run-000
+  constant_joints: {}
+
+  # Same triangle as sampling_based on this hand.
+  alignment_landmarks:
+    - thumb_base
+    - index_base
+    - ring_base
+  alignment_use_scale: true
+
+training:
+  fingertips:
+    - name: thumb
+      landmark: thumb_tip
+      joint: ["12", "13", "14", "15"]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: index
+      landmark: index_tip
+      joint: ["1", "0", "2", "3"]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: middle
+      landmark: middle_tip
+      joint: ["5", "4", "6", "7"]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: ring
+      landmark: ring_tip
+      joint: ["9", "8", "10", "11"]
+      center_offset: [0.0, 0.0, 0.0]
+
+  trackers:
+    manus:
+      human_hand_ids:
+        thumb: 4
+        index: 9
+        middle: 14
+        ring: 19

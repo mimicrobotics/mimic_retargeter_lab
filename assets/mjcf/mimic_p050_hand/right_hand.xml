@@ -1,0 +1,325 @@
+<mujoco model="p50_autoconverted">
+  <compiler angle="radian"/>
+  <option timestep="0.002" gravity="0 0 0" integrator="implicitfast" cone="elliptic" impratio="10"/>
+  <default>
+    <joint damping="0.2" armature="0.001" frictionloss="0.01" />
+    <position kp="1.0" />
+    <default class="visual">
+      <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.627451 0.627451 0.627451 1"/>
+    </default>
+    <default class="collision">
+      <geom type="mesh" group="3"/>
+    </default>
+  </default>
+
+  <asset>
+    <mesh name="base_link" content_type="model/stl" file="assets/right/visual/base_link.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="index_mcp" content_type="model/stl" file="assets/right/visual/index_mcp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="middle_mcp" content_type="model/stl" file="assets/right/visual/middle_mcp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="pinky_mcp" content_type="model/stl" file="assets/right/visual/pinky_mcp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="ring_mcp" content_type="model/stl" file="assets/right/visual/ring_mcp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="thumb_cmc" content_type="model/stl" file="assets/right/visual/thumb_cmc.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="ring_pp" content_type="model/stl" file="assets/right/visual/ring_pp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="pinky_pp" content_type="model/stl" file="assets/right/visual/pinky_pp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="middle_pp" content_type="model/stl" file="assets/right/visual/middle_pp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="thumb_mp" content_type="model/stl" file="assets/right/visual/thumb_mp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="index_pp" content_type="model/stl" file="assets/right/visual/index_pp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="pinky_mp" content_type="model/stl" file="assets/right/visual/pinky_mp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="middle_mp" content_type="model/stl" file="assets/right/visual/middle_mp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="index_mp" content_type="model/stl" file="assets/right/visual/index_mp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="thumb_pp" content_type="model/stl" file="assets/right/visual/thumb_pp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="ring_mp" content_type="model/stl" file="assets/right/visual/ring_mp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="pinky_dp" content_type="model/stl" file="assets/right/visual/pinky_dp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="thumb_dp" content_type="model/stl" file="assets/right/visual/thumb_dp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="ring_dp" content_type="model/stl" file="assets/right/visual/ring_dp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="index_dp" content_type="model/stl" file="assets/right/visual/index_dp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="middle_dp" content_type="model/stl" file="assets/right/visual/middle_dp.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="index_fingertip" content_type="model/stl" file="assets/right/visual/index_fingertip.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="thumb_fingertip" content_type="model/stl" file="assets/right/visual/thumb_fingertip.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="ring_fingertip" content_type="model/stl" file="assets/right/visual/ring_fingertip.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="middle_fingertip" content_type="model/stl" file="assets/right/visual/middle_fingertip.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="pinky_fingertip" content_type="model/stl" file="assets/right/visual/pinky_fingertip.stl" scale="0.001 0.001 0.001"/>
+  </asset>
+
+  <worldbody>
+    <body name="arm_attachment" pos="0 0 0" euler="0 0 3.14159">
+      <body name="base_link" pos="0 0 0" quat="0 0 0 1">
+        <inertial pos="0 0 0" quat="0 0 0 1" mass="1.4" diaginertia="0 0 0"/>
+        <geom class="visual"    mesh="base_link"/>
+        <geom class="collision" mesh="base_link"/>
+        <body name="wrist_link_virtual" pos="-0.00051 -0.00885 0.12186">
+          <inertial mass="1e-06" pos="0 0 0" quat="0 0 0 1" diaginertia="1e-06 1e-06 1e-06"/>
+        </body>
+        <body name="thumb_cmc" pos="0.0254523 0.013843 0.155881" quat="0.730697 0.298209 0.613125 0.0350849">
+          <inertial pos="-6.28571e-06 -0.0187933 0.00327309" quat="0.386045 0.475804 -0.713802 0.339215" mass="0.136461" diaginertia="2.19734e-05 1.94768e-05 1.22335e-05"/>
+          <joint name="thumb_base2cmc" pos="0 0 0" axis="0 -1 0" range="0 1.48353" actuatorfrcrange="-100 100"/>
+          <geom class="visual"    pos="0.124385 -0.0939887 -0.0288594" quat="0.730697 -0.298209 -0.613125 -0.0350849" mesh="thumb_cmc"/>
+          <geom class="collision" pos="0.124385 -0.0939887 -0.0288594" quat="0.730697 -0.298209 -0.613125 -0.0350849" mesh="thumb_cmc"/>
+          <body name="thumb_mp" pos="0 -0.0211583 0.011" quat="0.939693 -0.340147 0.0357508 0">
+            <inertial pos="0.00114541 -0.000331099 0.0175588" quat="0.421695 0.379721 0.336892 0.751325" mass="0.135542" diaginertia="3.22854e-05 2.61483e-05 1.52136e-05"/>
+            <joint name="thumb_cmc2mcp" pos="0 0 0" axis="-0.994522 0.104528 0" range="-1.22173 0" actuatorfrcrange="-100 100"/>
+            <geom class="visual"    pos="0.128516 -0.0335219 -0.0687347" quat="0.766146 -0.0304259 -0.590338 -0.252183" mesh="thumb_mp"/>
+            <geom class="collision" pos="0.128516 -0.0335219 -0.0687347" quat="0.766146 -0.0304259 -0.590338 -0.252183" mesh="thumb_mp"/>
+            <body name="thumb_pp" pos="0 0 0.035" quat="0.965926 0.027054 0.257401 0">
+              <inertial pos="0.000474312 -4.98512e-05 0.0140373" quat="-0.203812 0.778603 0.0574088 0.590713" mass="0.085611" diaginertia="1.32082e-05 1.19351e-05 6.74612e-06"/>
+              <joint name="thumb_mcp2pp" pos="0 0 0" axis="-0.104528 -0.994522 0" range="0 1.74533" actuatorfrcrange="-100 100"/>
+              <geom class="visual"    pos="0.162603 -0.0371046 -0.0241787" quat="0.587263 0.0147957 -0.774252 -0.23545" mesh="thumb_pp"/>
+              <geom class="collision" pos="0.162603 -0.0371046 -0.0241787" quat="0.587263 0.0147957 -0.774252 -0.23545" mesh="thumb_pp"/>
+              <body name="thumb_dp" pos="0 0 0.031" quat="0.965926 0.027054 0.257401 0">
+                <inertial pos="0.00082573 -9.43246e-05 0.0120219" quat="0.915341 0.180793 -0.343209 0.108042" mass="0.0556879" diaginertia="5.50994e-06 5.14526e-06 2.16674e-06"/>
+                <joint name="thumb_pp2dp_actuated" pos="0 0 0" axis="-0.104528 -0.994522 0" range="0 2.0944" actuatorfrcrange="-100 100"/>
+                <geom class="visual"    pos="0.167978 -0.0376695 0.0350092" quat="0.36836 0.0590089 -0.905402 -0.202673" mesh="thumb_dp"/>
+                <geom class="collision" pos="0.167978 -0.0376695 0.0350092" quat="0.36836 0.0590089 -0.905402 -0.202673" mesh="thumb_dp"/>
+                <body name="thumb_fingertip" pos="-0.00179 0.000188 0.027" euler="1.5707963 -1.5707963 0.0">
+                  <inertial mass="1e-4" pos="0 0 0" diaginertia="1e-8 1e-8 1e-8"/>
+                  <geom class="visual"    pos="0.0199 0.008 -0.1728" euler="0.0734 -0.7628 1.0965" mesh="thumb_fingertip"/>
+                  <geom class="collision" pos="0.0199 0.008 -0.1728" euler="0.0734 -0.7628 1.0965" mesh="thumb_fingertip"/>
+                  <site name="thumb_tip_site" size="0.005" rgba="0 1 1 1"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+        <body name="index_mcp" pos="0.0256972 0.0205955 0.199106" quat="-0.387615 0.504877 0.556781 0.533712">
+          <inertial pos="0.0037576 0 3.16897e-05" quat="0.991515 -0.0669552 -0.0991851 -0.0507654" mass="0.00263955" diaginertia="1.20289e-07 1.14788e-07 6.43228e-08"/>
+          <joint name="index_base2mcp" pos="0 0 0" axis="0 0 1" range="0 0.628319" actuatorfrcrange="-100 100"/>
+          <geom class="visual"    pos="-0.191426 -0.063846 0.00278793" quat="0.387615 0.504877 0.556781 0.533712" mesh="index_mcp"/>
+          <geom class="collision" pos="-0.191426 -0.063846 0.00278793" quat="0.387615 0.504877 0.556781 0.533712" mesh="index_mcp"/>
+          <body name="index_pp" pos="0.009 0 0" quat="0.984808 0 -0.173648 0">
+            <inertial pos="0.018561 -4.81134e-10 0.00151416" quat="0.726752 -0.234252 0.108002 0.636626" mass="0.0118973" diaginertia="2.32804e-06 2.20328e-06 6.8438e-07"/>
+            <joint name="index_mcp2pp" pos="0 0 0" axis="0 1 0" range="0 1.81514" actuatorfrcrange="-100 100"/>
+            <geom class="visual"    pos="-0.187385 -0.063846 0.0711694" quat="0.285042 0.589885 0.615631 0.437933" mesh="index_pp"/>
+            <geom class="collision" pos="-0.187385 -0.063846 0.0711694" quat="0.285042 0.589885 0.615631 0.437933" mesh="index_pp"/>
+            <body name="index_mp" pos="0.039 0 0.001" quat="0.984808 0 -0.173648 0">
+              <inertial pos="0.0142316 0 0.000556809" quat="0.230653 0.584566 -0.698977 0.34134" mass="0.00622757" diaginertia="6.42909e-07 6.38658e-07 2.05133e-07"/>
+              <joint name="index_pp2mp" pos="0 0 0" axis="0 1 0" range="0 1.81514" actuatorfrcrange="-100 100"/>
+              <geom class="visual"    pos="-0.188733 -0.063846 0.143366" quat="0.173809 0.656969 0.655775 0.328848" mesh="index_mp"/>
+              <geom class="collision" pos="-0.188733 -0.063846 0.143366" quat="0.173809 0.656969 0.655775 0.328848" mesh="index_mp"/>
+              <body name="index_dp" pos="0.029 0 0" quat="0.984808 0 -0.173648 0">
+                <inertial pos="0.0111042 2.89526e-07 0.000772625" quat="0.401029 0.544548 -0.596414 0.432357" mass="0.00461705" diaginertia="3.72962e-07 3.37356e-07 1.80239e-07"/>
+                <joint name="index_mp2dp" pos="0 0 0" axis="0 1 0" range="0 1.81514" actuatorfrcrange="-100 100"/>
+                <geom class="visual"    pos="-0.155568 -0.063846 0.209189" quat="0.0572941 0.704092 0.675994 0.20977" mesh="index_dp"/>
+                <geom class="collision" pos="-0.155568 -0.063846 0.209189" quat="0.0572941 0.704092 0.675994 0.20977" mesh="index_dp"/>
+                <body name="index_fingertip" pos="0.019 0 -0.005" euler="3.1416 0 -1.5708">
+                  <inertial mass="1e-4" pos="0 0 0" diaginertia="1e-8 1e-8 1e-8"/>
+                  <geom class="visual"    pos="-0.0638 -0.1746 -0.2142" euler="-0.3825 0.2197 -0.002" mesh="index_fingertip"/>
+                  <geom class="collision" pos="-0.0638 -0.1746 -0.2142" euler="-0.3825 0.2197 -0.002" mesh="index_fingertip"/>
+                  <site name="index_tip_site" size="0.005" rgba="0 1 1 1"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+        <body name="middle_mcp" pos="0.00275 0.0226485 0.202391" quat="-0.385622 0.443607 0.610573 0.530763">
+          <inertial pos="0.0037576 0 3.16897e-05" quat="0.985537 -0.0657584 -0.155631 0.0130785" mass="0.00263955" diaginertia="1.20334e-07 1.14784e-07 6.42818e-08"/>
+          <joint name="middle_base2mcp" pos="0 0 0" axis="0 0 1" range="0 0.628319" actuatorfrcrange="-100 100"/>
+          <geom class="visual"    pos="-0.19276 -0.065523 0.00573921" quat="0.385622 0.443607 0.610573 0.530763" mesh="middle_mcp"/>
+          <geom class="collision" pos="-0.19276 -0.065523 0.00573921" quat="0.385622 0.443607 0.610573 0.530763" mesh="middle_mcp"/>
+          <body name="middle_pp" pos="0.009 0 0" quat="0.984808 0 -0.173648 0">
+            <inertial pos="0.0200189 -4.50578e-10 0.00149369" quat="0.689182 -0.279333 0.0593128 0.665945" mass="0.0128706" diaginertia="2.75734e-06 2.62944e-06 7.33318e-07"/>
+            <joint name="middle_mcp2pp" pos="0 0 0" axis="0 1 0" range="0 1.81514" actuatorfrcrange="-100 100"/>
+            <geom class="visual"    pos="-0.187629 -0.065523 0.074399" quat="0.273738 0.529034 0.668259 0.445668" mesh="middle_pp"/>
+            <geom class="collision" pos="-0.187629 -0.065523 0.074399" quat="0.273738 0.529034 0.668259 0.445668" mesh="middle_pp"/>
+            <body name="middle_mp" pos="0.042 0 0.001" quat="0.984808 0 -0.173648 0">
+              <inertial pos="0.0154623 0 0.000526819" quat="0.177147 0.607545 -0.668823 0.390108" mass="0.00685026" diaginertia="7.82416e-07 7.76297e-07 2.29286e-07"/>
+              <joint name="middle_pp2mp" pos="0 0 0" axis="0 1 0" range="0 1.81514" actuatorfrcrange="-100 100"/>
+              <geom class="visual"    pos="-0.190677 -0.065523 0.14751" quat="0.153538 0.598386 0.705641 0.347031" mesh="middle_mp"/>
+              <geom class="collision" pos="-0.190677 -0.065523 0.14751" quat="0.153538 0.598386 0.705641 0.347031" mesh="middle_mp"/>
+              <body name="middle_dp" pos="0.0315 0 0" quat="0.984808 0 -0.173648 0">
+                <inertial pos="0.0111269 7.0742e-10 0.000790467" quat="0.343104 0.553405 -0.579453 0.49016" mass="0.00460691" diaginertia="3.70686e-07 3.37383e-07 1.78958e-07"/>
+                <joint name="middle_mp2dp" pos="0 0 0" axis="0 1 0" range="0 1.81514" actuatorfrcrange="-100 100"/>
+                <geom class="visual"    pos="-0.158327 -0.065523 0.214603" quat="0.0286719 0.649557 0.721583 0.237851" mesh="middle_dp"/>
+                <geom class="collision" pos="-0.158327 -0.065523 0.214603" quat="0.0286719 0.649557 0.721583 0.237851" mesh="middle_dp"/>
+                <body name="middle_fingertip" pos="0.019 0 -0.005" euler="3.1416 0 -1.5708">
+                  <inertial mass="1e-4" pos="0 0 0" diaginertia="1e-8 1e-8 1e-8"/>
+                  <geom class="visual"    pos="-0.0655 -0.1773 -0.2196" euler="-0.4060 0.2709 -0.1611" mesh="middle_fingertip"/>
+                  <geom class="collision" pos="-0.0655 -0.1773 -0.2196" euler="-0.4060 0.2709 -0.1611" mesh="middle_fingertip"/>
+                  <site name="middle_tip_site" size="0.005" rgba="0 1 1 1"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+        <body name="ring_mcp" pos="-0.0197742 0.0200861 0.194599" quat="-0.388134 0.373214 0.652437 0.533282">
+          <inertial pos="0.0037576 0 -0.00011831" quat="0.973536 -0.0495397 -0.211816 0.0700504" mass="0.00263955" diaginertia="1.20331e-07 1.14788e-07 6.4281e-08"/>
+          <joint name="ring_base2mcp" pos="0 0 0" axis="0 0 1" range="0 0.628319" actuatorfrcrange="-100 100"/>
+          <geom class="visual"    pos="-0.185793 -0.0642867 0.00334313" quat="0.388134 0.373214 0.652437 0.533282" mesh="ring_mcp"/>
+          <geom class="collision" pos="-0.185793 -0.0642867 0.00334313" quat="0.388134 0.373214 0.652437 0.533282" mesh="ring_mcp"/>
+          <body name="ring_pp" pos="0.009 0 -0.00015" quat="0.984808 0 -0.173648 0">
+            <inertial pos="0.018561 -4.81134e-10 0.00151416" quat="0.650926 -0.312364 0.000333709 0.691899" mass="0.0118973" diaginertia="2.32802e-06 2.2033e-06 6.84381e-07"/>
+            <joint name="ring_mcp2pp" pos="0 0 0" axis="0 1 0" range="0 1.81514" actuatorfrcrange="-100 100"/>
+            <geom class="visual"    pos="-0.181851 -0.0642867 0.0699057" quat="0.268943 0.460147 0.709924 0.460372" mesh="ring_pp"/>
+            <geom class="collision" pos="-0.181851 -0.0642867 0.0699057" quat="0.268943 0.460147 0.709924 0.460372" mesh="ring_pp"/>
+            <body name="ring_mp" pos="0.039 0 0.001" quat="0.984808 0 -0.173648 0">
+              <inertial pos="0.0142316 0 0.000556809" quat="0.114116 0.629815 -0.638959 0.426664" mass="0.00622757" diaginertia="6.42897e-07 6.38637e-07 2.05166e-07"/>
+              <joint name="ring_pp2mp" pos="0 0 0" axis="0 1 0" range="0 1.81514" actuatorfrcrange="-100 100"/>
+              <geom class="visual"    pos="-0.183965 -0.0642867 0.140286" quat="0.14158 0.533099 0.74584 0.373474" mesh="ring_mp"/>
+              <geom class="collision" pos="-0.183965 -0.0642867 0.140286" quat="0.14158 0.533099 0.74584 0.373474" mesh="ring_mp"/>
+              <body name="ring_dp" pos="0.029 0 0" quat="0.984808 0 -0.173648 0">
+                <inertial pos="0.0111042 2.89526e-07 0.000772625" quat="0.269922 0.561672 -0.569715 0.535809" mass="0.00461705" diaginertia="3.7196e-07 3.39597e-07 1.79101e-07"/>
+                <joint name="ring_mp2dp" pos="0 0 0" axis="0 1 0" range="0 1.81514" actuatorfrcrange="-100 100"/>
+                <geom class="visual"    pos="-0.152141 -0.0642867 0.204664" quat="0.00991514 0.589853 0.759094 0.275229" mesh="ring_dp"/>
+                <geom class="collision" pos="-0.152141 -0.0642867 0.204664" quat="0.00991514 0.589853 0.759094 0.275229" mesh="ring_dp"/>
+                <body name="ring_fingertip" pos="0.019 0 -0.005" euler="3.1416 0 -1.5708">
+                  <inertial mass="1e-4" pos="0 0 0" diaginertia="1e-8 1e-8 1e-8"/>
+                  <geom class="visual"    pos="-0.0643 -0.1711 -0.2097" euler="-0.4687 0.3148 -0.3254" mesh="ring_fingertip"/>
+                  <geom class="collision" pos="-0.0643 -0.1711 -0.2097" euler="-0.4687 0.3148 -0.3254" mesh="ring_fingertip"/>
+                  <site name="ring_tip_site" size="0.005" rgba="0 1 1 1"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+        <body name="pinky_mcp" pos="-0.0395544 0.0134719 0.181287" quat="0.380451 -0.297661 -0.689194 -0.540062">
+          <inertial pos="0.0037576 0 -0.00011831" quat="0.953627 -0.0301732 -0.275419 0.117601" mass="0.00263955" diaginertia="1.20314e-07 1.14781e-07 6.43047e-08"/>
+          <joint name="pinky_base2mcp" pos="0 0 0" axis="0 0 1" range="0 0.628319" actuatorfrcrange="-100 100"/>
+          <geom class="visual"    pos="-0.17444 -0.0646356 0.00195071" quat="0.380451 0.297661 0.689194 0.540062" mesh="pinky_mcp"/>
+          <geom class="collision" pos="-0.17444 -0.0646356 0.00195071" quat="0.380451 0.297661 0.689194 0.540062" mesh="pinky_mcp"/>
+          <body name="pinky_pp" pos="0.009 0 -0.00015" quat="0.984808 0 -0.173648 0">
+            <inertial pos="0.0168328 -5.25194e-10 0.00154302" quat="0.613218 -0.3472 -0.0651755 0.706518" mass="0.010735" diaginertia="1.88756e-06 1.76685e-06 6.2479e-07"/>
+            <joint name="pinky_mcp2pp" pos="0 0 0" axis="0 1 0" range="0 1.81514" actuatorfrcrange="-100 100"/>
+            <geom class="visual"    pos="-0.171659 -0.0646356 0.0647142" quat="0.254993 0.38692 0.744788 0.480169" mesh="pinky_pp"/>
+            <geom class="collision" pos="-0.171659 -0.0646356 0.0647142" quat="0.254993 0.38692 0.744788 0.480169" mesh="pinky_pp"/>
+            <body name="pinky_mp" pos="0.0355 0 0.001" quat="0.984808 0 -0.173648 0">
+              <inertial pos="0.0122553 0 0.000627712" quat="0.0422061 0.636467 -0.614689 0.463989" mass="0.0052131" diaginertia="4.5745e-07 4.56063e-07 1.64888e-07"/>
+              <joint name="pinky_pp2mp" pos="0 0 0" axis="0 1 0" range="0 1.81514" actuatorfrcrange="-100 100"/>
+              <geom class="visual"    pos="-0.172874 -0.0646356 0.130724" quat="0.121788 0.464422 0.777752 0.405686" mesh="pinky_mp"/>
+              <geom class="collision" pos="-0.172874 -0.0646356 0.130724" quat="0.121788 0.464422 0.777752 0.405686" mesh="pinky_mp"/>
+              <body name="pinky_dp" pos="0.025 0 0" quat="0.984808 0 -0.173648 0">
+                <inertial pos="0.0110681 1.1366e-10 0.000743844" quat="0.187876 0.556392 -0.566772 0.577841" mass="0.00463195" diaginertia="3.74013e-07 3.42473e-07 1.79519e-07"/>
+                <joint name="pinky_mp2dp" pos="0 0 0" axis="0 1 0" range="0 1.81514" actuatorfrcrange="-100 100"/>
+                <geom class="visual"    pos="-0.14123 -0.0646356 0.190517" quat="-0.0151171 0.527813 0.787085 0.318877" mesh="pinky_dp"/>
+                <geom class="collision" pos="-0.14123 -0.0646356 0.190517" quat="-0.0151171 0.527813 0.787085 0.318877" mesh="pinky_dp"/>
+                <body name="pinky_fingertip" pos="0.019 0 -0.005" euler="3.1416 0 -1.5708">
+                  <inertial mass="1e-4" pos="0 0 0" diaginertia="1e-8 1e-8 1e-8"/>
+                  <geom class="visual"    pos="-0.0646 -0.1602 -0.1955" euler="-0.5481 0.3687 -0.4941" mesh="pinky_fingertip"/>
+                  <geom class="collision" pos="-0.0646 -0.1602 -0.1955" euler="-0.5481 0.3687 -0.4941" mesh="pinky_fingertip"/>
+                  <site name="pinky_tip_site" size="0.005" rgba="0 1 1 1"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <contact>
+    <!-- Intra-finger collisions allowed -->
+    <exclude body1="base_link" body2="thumb_cmc"/>
+    <exclude body1="thumb_cmc" body2="thumb_mp"/>
+    <exclude body1="thumb_mp" body2="thumb_pp"/>
+    <exclude body1="thumb_pp" body2="thumb_dp"/>
+    <exclude body1="thumb_dp" body2="thumb_fingertip"/>
+
+    <exclude body1="base_link" body2="index_mcp"/>
+    <exclude body1="index_mcp" body2="index_pp"/>
+    <exclude body1="index_pp" body2="index_mp"/>
+    <exclude body1="index_mp" body2="index_dp"/>
+    <exclude body1="index_dp" body2="index_fingertip"/>
+
+    <exclude body1="base_link" body2="middle_mcp"/>
+    <exclude body1="middle_mcp" body2="middle_pp"/>
+    <exclude body1="middle_pp" body2="middle_mp"/>
+    <exclude body1="middle_mp" body2="middle_dp"/>
+    <exclude body1="middle_dp" body2="middle_fingertip"/>
+
+    <exclude body1="base_link" body2="ring_mcp"/>
+    <exclude body1="ring_mcp" body2="ring_pp"/>
+    <exclude body1="ring_pp" body2="ring_mp"/>
+    <exclude body1="ring_mp" body2="ring_dp"/>
+    <exclude body1="ring_dp" body2="ring_fingertip"/>
+
+    <exclude body1="base_link" body2="pinky_mcp"/>
+    <exclude body1="pinky_mcp" body2="pinky_pp"/>
+    <exclude body1="pinky_pp" body2="pinky_mp"/>
+    <exclude body1="pinky_mp" body2="pinky_dp"/>
+    <exclude body1="pinky_dp" body2="pinky_fingertip"/>
+
+    <!-- Ignoring collisions from from default setup (due to provided collision meshes) -->
+    <exclude body1="base_link" body2="thumb_mp"/>
+    <exclude body1="base_link" body2="index_pp"/>
+    <exclude body1="base_link" body2="middle_pp"/>
+    <exclude body1="base_link" body2="ring_pp"/>
+    <exclude body1="base_link" body2="pinky_pp"/>
+
+    <!-- Fingertip pinch collisions (even if body is being driven hard, this is useful in practice)
+    DP bodies are the fingertips as well -->
+    <exclude body1="thumb_fingertip" body2="index_fingertip"/>
+    <exclude body1="thumb_fingertip" body2="middle_fingertip"/>
+    <exclude body1="thumb_fingertip" body2="ring_fingertip"/>
+    <exclude body1="thumb_fingertip" body2="pinky_fingertip"/>
+    <exclude body1="index_fingertip" body2="middle_fingertip"/>
+    <exclude body1="index_fingertip" body2="ring_fingertip"/>
+    <exclude body1="index_fingertip" body2="pinky_fingertip"/>
+    <exclude body1="middle_fingertip" body2="ring_fingertip"/>
+    <exclude body1="middle_fingertip" body2="pinky_fingertip"/>
+    <exclude body1="ring_fingertip" body2="pinky_fingertip"/>
+    <exclude body1="thumb_dp" body2="index_dp"/>
+    <exclude body1="thumb_dp" body2="middle_dp"/>
+    <exclude body1="thumb_dp" body2="ring_dp"/>
+    <exclude body1="thumb_dp" body2="pinky_dp"/>
+    <exclude body1="index_dp" body2="middle_dp"/>
+    <exclude body1="index_dp" body2="ring_dp"/>
+    <exclude body1="index_dp" body2="pinky_dp"/>
+    <exclude body1="middle_dp" body2="ring_dp"/>
+    <exclude body1="middle_dp" body2="pinky_dp"/>
+    <exclude body1="ring_dp" body2="pinky_dp"/>
+    <exclude body1="thumb_dp" body2="index_fingertip"/>
+    <exclude body1="thumb_dp" body2="middle_fingertip"/>
+    <exclude body1="thumb_dp" body2="ring_fingertip"/>
+    <exclude body1="thumb_dp" body2="pinky_fingertip"/>
+    <exclude body1="index_dp" body2="thumb_fingertip"/>
+    <exclude body1="index_dp" body2="middle_fingertip"/>
+    <exclude body1="index_dp" body2="ring_fingertip"/>
+    <exclude body1="index_dp" body2="pinky_fingertip"/>
+    <exclude body1="middle_dp" body2="thumb_fingertip"/>
+    <exclude body1="middle_dp" body2="index_fingertip"/>
+    <exclude body1="middle_dp" body2="ring_fingertip"/>
+    <exclude body1="middle_dp" body2="pinky_fingertip"/>
+    <exclude body1="ring_dp" body2="thumb_fingertip"/>
+    <exclude body1="ring_dp" body2="index_fingertip"/>
+    <exclude body1="ring_dp" body2="middle_fingertip"/>
+    <exclude body1="ring_dp" body2="pinky_fingertip"/>
+    <exclude body1="pinky_dp" body2="thumb_fingertip"/>
+    <exclude body1="pinky_dp" body2="index_fingertip"/>
+    <exclude body1="pinky_dp" body2="middle_fingertip"/>
+    <exclude body1="pinky_dp" body2="ring_fingertip"/>
+  </contact>
+
+  <actuator>
+    <!-- Thumb (4) -->
+    <position name="A_thumb_base2cmc"      joint="thumb_base2cmc"      kp="3" ctrlrange="0 1.48353"/>
+    <position name="A_thumb_cmc2mcp"       joint="thumb_cmc2mcp"       kp="3" ctrlrange="-1.22173 0"/>
+    <position name="A_thumb_mcp2pp"        joint="thumb_mcp2pp"        kp="3" ctrlrange="0 1.74533"/>
+    <position name="A_thumb_pp2dp_actuated" joint="thumb_pp2dp_actuated" kp="3" ctrlrange="0 2.0944"/>
+
+    <!-- Index (3) -->
+    <position name="A_index_base2mcp"      joint="index_base2mcp"      kp="3" ctrlrange="0 0.628319"/>
+    <position name="A_index_mcp2pp"        joint="index_mcp2pp"        kp="3" ctrlrange="0 1.81514"/>
+    <position name="A_index_pp2mp"         joint="index_pp2mp"         kp="3" ctrlrange="0 1.81514"/>
+
+    <!-- Middle (3) -->
+    <position name="A_middle_base2mcp"     joint="middle_base2mcp"     kp="3" ctrlrange="0 0.628319"/>
+    <position name="A_middle_mcp2pp"       joint="middle_mcp2pp"       kp="3" ctrlrange="0 1.81514"/>
+    <position name="A_middle_pp2mp"        joint="middle_pp2mp"        kp="3" ctrlrange="0 1.81514"/>
+
+    <!-- Ring (3) -->
+    <position name="A_ring_base2mcp"       joint="ring_base2mcp"       kp="3" ctrlrange="0 0.628319"/>
+    <position name="A_ring_mcp2pp"         joint="ring_mcp2pp"         kp="3" ctrlrange="0 1.81514"/>
+    <position name="A_ring_pp2mp"          joint="ring_pp2mp"          kp="3" ctrlrange="0 1.81514"/>
+
+    <!-- Pinky (3) -->
+    <position name="A_pinky_base2mcp"      joint="pinky_base2mcp"      kp="3" ctrlrange="0 0.628319"/>
+    <position name="A_pinky_mcp2pp"        joint="pinky_mcp2pp"        kp="3" ctrlrange="0 1.81514"/>
+    <position name="A_pinky_pp2mp"         joint="pinky_pp2mp"         kp="3" ctrlrange="0 1.81514"/>
+  </actuator>
+
+  <!-- Coupled joints -->
+  <equality>
+    <joint joint1="index_pp2mp" joint2="index_mp2dp" polycoef="0 1 0 0 0"/>
+    <joint joint1="middle_pp2mp" joint2="middle_mp2dp" polycoef="0 1 0 0 0"/>
+    <joint joint1="ring_pp2mp" joint2="ring_mp2dp" polycoef="0 1 0 0 0"/>
+    <joint joint1="pinky_pp2mp" joint2="pinky_mp2dp" polycoef="0 1 0 0 0"/>
+  </equality>
+</mujoco>

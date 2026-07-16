@@ -1,0 +1,43 @@
+# Main Hydra config for offline retargeting
+#
+# `retargeter` selects which retargeter to use (see config/retargeter/ for the
+# available options). The defaults list then interpolates that choice together
+# with `hand` to load the matching settings from
+# config/retargeter_cfg/<retargeter>/human_hand_to_<hand>.yaml, mounted at
+# cfg.retargeter.
+
+defaults:
+  - _self_
+  - hand: mimic_p050_hand
+  - retargeter: keyvector
+  - retargeter_cfg@retargeter: ${retargeter}/human_hand_to_${hand}
+  - override hydra/hydra_logging: disabled
+  - override hydra/job_logging: disabled
+
+chirality: right # left | right
+data_base_path: ./dataset/wilor # base path for hand dataset (can be absolute)
+# hand_dataset: dexycb # e.g. dexycb
+hand_dataset: wilor_test_long
+# Which offline reader to use when use_offline_data is true.
+# - wilor: HandDatasetReader (MANO 21-keypoint zarr); reads cfg.hand_dataset.
+# - manus: ManusNpzReader (MANUS 25-keypoint npz); reads every .npz under cfg.data_base_path.
+#         Override data_base_path=./dataset/manus when picking this.
+offline_source: wilor
+simulator: mujoco
+logging:
+  level: INFO
+
+# Debug visualization (keyvector retargeter only; merged in runners)
+debug_mode: false
+debug_every_n_frames: 1
+
+# Execution options
+num_steps: null # Number of steps to run; null -> run until interrupted
+num_episodes: 1 # Number of episodes to load from the dataset
+use_offline_data: true
+
+# Don't write logs
+hydra:
+  run:
+    dir: .
+  output_subdir: null

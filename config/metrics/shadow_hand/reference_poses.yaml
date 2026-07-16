@@ -1,0 +1,11 @@
+reference_pose_paths:
+  # Pinch grasps
+  pinch_th_ff: ".."
+  pinch_th_mf: ".."
+  pinch_th_rf: ".."
+  pinch_th_lf: ".."
+
+  # Keyvector Matching
+  keyvector_matching: ".."
+
+  # Other poses

@@ -1,0 +1,41 @@
+name: joint_angle
+config:
+  device: cpu
+
+  wrist_mapping:
+    tgt_key: right_palm_link
+    root_key: right_palm_link
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  joint_mapping:
+    # Thumb (finger1) - 4 joints
+    - { name: thumb_mcp,      tgt_key: right_finger1_joint1, src_key: th_proximal.z, coef: -1.0, offset: 0.0 }
+    - { name: thumb_rotation,  tgt_key: right_finger1_joint2, src_key: th_proximal.x, coef: -1.0, offset: 0.0 }
+    - { name: thumb_pip,       tgt_key: right_finger1_joint3, src_key: th_distal.z,   coef: -1.0, offset: 0.0 }
+    - { name: thumb_dip,       tgt_key: right_finger1_joint4, src_key: th_tip.z,      coef: -1.0, offset: 0.0 }
+
+    # Index (finger2) - 4 joints
+    - { name: index_mcp,      tgt_key: right_finger2_joint1, src_key: ff_proximal.z, coef: -1.0, offset: 0.0 }
+    - { name: index_rotation,  tgt_key: right_finger2_joint2, src_key: ff_proximal.x, coef: -1.0, offset: 0.0 }
+    - { name: index_pip,       tgt_key: right_finger2_joint3, src_key: ff_distal.x,   coef: -1.0, offset: 0.0 }
+    - { name: index_dip,       tgt_key: right_finger2_joint4, src_key: ff_tip.x,      coef: -1.0, offset: 0.0 }
+
+    # Middle (finger3) - 4 joints
+    - { name: middle_mcp,     tgt_key: right_finger3_joint1, src_key: mf_proximal.z, coef: -1.0, offset: 0.0 }
+    - { name: middle_rotation, tgt_key: right_finger3_joint2, src_key: mf_proximal.x, coef: -1.0, offset: 0.0 }
+    - { name: middle_pip,      tgt_key: right_finger3_joint3, src_key: mf_distal.x,   coef: -1.0, offset: 0.0 }
+    - { name: middle_dip,      tgt_key: right_finger3_joint4, src_key: mf_tip.x,      coef: -1.0, offset: 0.0 }
+
+    # Ring (finger4) - 4 joints
+    - { name: ring_mcp,       tgt_key: right_finger4_joint1, src_key: rf_proximal.z, coef:  1.0, offset: 0.0 }
+    - { name: ring_rotation,   tgt_key: right_finger4_joint2, src_key: rf_proximal.x, coef: -1.0, offset: 0.0 }
+    - { name: ring_pip,        tgt_key: right_finger4_joint3, src_key: rf_distal.x,   coef: -1.0, offset: 0.0 }
+    - { name: ring_dip,        tgt_key: right_finger4_joint4, src_key: rf_tip.x,      coef: -1.0, offset: 0.0 }
+
+    # Pinky (finger5) - 4 joints
+    - { name: pinky_mcp,      tgt_key: right_finger5_joint1, src_key: lf_proximal.z, coef:  1.0, offset: 0.0 }
+    - { name: pinky_rotation,  tgt_key: right_finger5_joint2, src_key: lf_proximal.x, coef: -1.0, offset: 0.0 }
+    - { name: pinky_pip,       tgt_key: right_finger5_joint3, src_key: lf_distal.x,   coef: -1.0, offset: 0.0 }
+    - { name: pinky_dip,       tgt_key: right_finger5_joint4, src_key: lf_tip.x,      coef: -1.0, offset: 0.0 }
+
+  constant_joints: {}

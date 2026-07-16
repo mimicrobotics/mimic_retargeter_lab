@@ -1,0 +1,31 @@
+defaults:
+  - _self_
+  - dataset: wilor # wilor | manus — pulls in human_hand, data_path, metric variants
+  - hand: shadow_hand
+  - retargeter: keyvector
+  - retargeter_cfg@keyvector_retargeter: keyvector/human_hand_to_${hand}
+  - retargeter_cfg@joint_angle_retargeter: joint_angle/human_hand_to_${hand}
+  - retargeter_cfg@retargeter: ${retargeter}/human_hand_to_${hand}
+  - dashboard: dashboard
+  - override hydra/hydra_logging: disabled
+  - override hydra/job_logging: disabled
+
+chirality: right # left | right
+human_hand: ${dataset.human_hand}
+simulator: mujoco
+reports_dir: ./reports
+logging:
+  level: INFO
+
+# Debug visualization (keyvector retargeter only; merged in compute_hand_retargeter_pair_metrics.py)
+debug_mode: false
+debug_every_n_frames: 10
+
+# Serve dashboard
+serve_dashboard: true
+
+# Don't write logs
+hydra:
+  run:
+    dir: .
+  output_subdir: null

@@ -1,0 +1,45 @@
+name: keyvector
+config:
+  wrist_mapping:
+    tgt_key: right_palm_link
+    root_key: right_palm_link
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  precomputed_scale: null
+  alignment_landmarks:
+    - thumb_base
+    - index_base
+    - pinky_base
+
+  iterations: 20
+  device: cpu                  # cpu | gpu | cuda
+
+  regularized_joints: {}
+
+  keyvectors_cfg:
+    # wrist-to-fingertips
+    - name: wrist_to_thumb_tip
+      src_key: WRIST_to_THUMB_TIP
+      tgt_key: WRIST_to_THUMB_TIP
+      scaling_coef: 1.0
+      loss_coef: 1.0
+    - name: wrist_to_index_tip
+      src_key: WRIST_to_INDEX_TIP
+      tgt_key: WRIST_to_INDEX_TIP
+      scaling_coef: 1.0
+      loss_coef: 1.0
+    - name: wrist_to_middle_tip
+      src_key: WRIST_to_MIDDLE_TIP
+      tgt_key: WRIST_to_MIDDLE_TIP
+      scaling_coef: 1.0
+      loss_coef: 1.0
+    - name: wrist_to_ring_tip
+      src_key: WRIST_to_RING_TIP
+      tgt_key: WRIST_to_RING_TIP
+      scaling_coef: 1.0
+      loss_coef: 1.0
+    - name: wrist_to_pinky_tip
+      src_key: WRIST_to_PINKY_TIP
+      tgt_key: WRIST_to_PINKY_TIP
+      scaling_coef: 1.0
+      loss_coef: 1.0

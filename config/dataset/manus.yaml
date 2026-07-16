@@ -1,0 +1,22 @@
+# Manus-mode bundle: continuous manus npz stream. Pinch Grasps is MANO-only
+# (static reference poses) and is intentionally omitted.
+# Reads the same per-hand metric YAMLs as the wilor bundle — the data source
+# (reader class + args) is injected here, not duplicated per metric.
+defaults:
+  - /metrics@_global_.metrics.motion_preservation: ${hand}/motion_preservation
+  - /metrics@_global_.metrics.keyvector_matching:  ${hand}/keyvector_matching
+  - /metrics@_global_.metrics.flatness:            ${hand}/flatness
+  - /metrics@_global_.metrics.workspace:           ${hand}/workspace
+  - /metrics@_global_.metrics.collision:           ${hand}/collision
+  - /metrics@_global_.metrics.latency:             ${hand}/latency
+
+human_hand: manus_hand
+data_path: ./dataset/manus/
+
+data_source_cfg:
+  _target_: dexworld.data_sources.datasets.ManusNpzReader
+  data_path: ${dataset.data_path}
+  num_episodes: null
+
+# Workspace runs Monte Carlo on the same manus stream — no precomputed cache.
+workspace_data_source_cfg: ${dataset.data_source_cfg}

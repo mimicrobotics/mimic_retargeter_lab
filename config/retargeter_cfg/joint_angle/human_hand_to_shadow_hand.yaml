@@ -1,0 +1,140 @@
+# Example joint-angle mapping for human-hand -> Shadow Hand (REVERSED KEYS)
+#
+# This file provides an explicit mapping from target (robot) joint names to
+# source (human) joint names. The mapping is expressed as a LIST of entries,
+# where each entry specifies the target joint (`tgt_key`) and the source
+# joint (`src_key`) together with an optional `coef` and `offset`.
+#
+# Notes:
+# - `joint_mapping` is a list of mapping entries. Each entry should include:
+#     - `tgt_key` (str): target (robot) joint name
+#     - `src_key` (str): source (human) joint name
+#     - `coef` (float, optional): multiplicative coefficient (default 1.0)
+#     - `offset` (float, optional): additive offset (default 0.0)
+#     - `name` (str, optional): human-readable name for the mapping entry
+# - If you only want to map a subset of joints, include only those entries.
+# - If you prefer automatic behavior, leave `joint_mapping` empty.
+#
+name: joint_angle
+config:
+  device: cpu
+
+  wrist_mapping:
+    tgt_key: rh_palm
+    root_key: rh_forearm
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  joint_mapping:
+    # Thumb
+    - name: thumb_base_rotation
+      tgt_key: rh_THJ5
+      src_key: th_proximal.z
+      coef: -1.0
+      offset: 0.0
+    - name: thumb_base_closure
+      tgt_key: rh_THJ4
+      src_key: th_proximal.z
+      coef: -1.0
+      offset: 0.0
+    - name: thumb_proximal
+      tgt_key: rh_THJ2
+      src_key: th_distal.z
+      coef: -1.0
+      offset: 0.0
+    - name: thumb_distal
+      tgt_key: rh_THJ1
+      src_key: th_tip.z
+      coef: -1.0
+      offset: 0.0
+
+    # Index finger
+    - name: index_abduction
+      tgt_key: rh_FFJ4
+      src_key: ff_proximal.z
+      coef: -1.0
+      offset: -0.4
+    - name: index_mcp
+      tgt_key: rh_FFJ3
+      src_key: ff_proximal.x
+      coef: -1.0
+      offset: 0.0
+    - name: index_proximal
+      tgt_key: rh_FFJ2
+      src_key: ff_distal.x
+      coef: -1.0
+      offset: 0.0
+    - name: index_distal
+      tgt_key: rh_FFJ1
+      src_key: ff_tip.x
+      coef: -1.0
+      offset: 0.0
+
+    # Middle finger
+    - name: middle_abduction
+      tgt_key: rh_MFJ4
+      src_key: mf_proximal.z
+      coef: -1.0
+      offset: -0.2
+    - name: middle_mcp
+      tgt_key: rh_MFJ3
+      src_key: mf_proximal.x
+      coef: -1.0
+      offset: 0.0
+    - name: middle_proximal
+      tgt_key: rh_MFJ2
+      src_key: mf_distal.x
+      coef: -1.0
+      offset: 0.0
+    - name: middle_distal
+      tgt_key: rh_MFJ1
+      src_key: mf_tip.x
+      coef: -1.0
+      offset: 0.0
+
+    # Ring finger
+    - name: ring_abduction
+      tgt_key: rh_RFJ4
+      src_key: rf_proximal.z
+      coef: 1.0
+      offset: -0.2
+    - name: ring_mcp
+      tgt_key: rh_RFJ3
+      src_key: rf_proximal.x
+      coef: -1.0
+      offset: 0.0
+    - name: ring_proximal
+      tgt_key: rh_RFJ2
+      src_key: rf_distal.x
+      coef: -1.0
+      offset: 0.0
+    - name: ring_distal
+      tgt_key: rh_RFJ1
+      src_key: rf_tip.x
+      coef: -1.0
+      offset: 0.0
+
+    # Little finger
+    - name: little_abduction
+      tgt_key: rh_LFJ4
+      src_key: lf_proximal.z
+      coef: 1.0
+      offset: -0.5
+    - name: little_mcp
+      tgt_key: rh_LFJ3
+      src_key: lf_proximal.x
+      coef: -1.0
+      offset: 0.0
+    - name: little_proximal
+      tgt_key: rh_LFJ2
+      src_key: lf_distal.x
+      coef: -1.0
+      offset: 0.0
+    - name: little_distal
+      tgt_key: rh_LFJ1
+      src_key: lf_tip.x
+      coef: -1.0
+      offset: 0.0
+
+  constant_joints:
+    rh_THJ3: 0.0
+    rh_LFJ5: 0.0

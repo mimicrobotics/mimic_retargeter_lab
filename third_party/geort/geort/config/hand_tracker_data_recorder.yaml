@@ -1,0 +1,7 @@
+avp:
+    hand_tracker_right_normalized_pcloud_topic_name_string: "/hand_tracker/avp/right/link_poses_normalized"
+    hand_tracker_left_normalized_pcloud_topic_name_string: "/hand_tracker/avp/left/link_poses_normalized"
+
+manus:
+    hand_tracker_right_normalized_pcloud_topic_name_string: "/hand_tracker/manus/right/link_poses_normalized"
+    hand_tracker_left_normalized_pcloud_topic_name_string: "/hand_tracker/manus/left/link_poses_normalized"

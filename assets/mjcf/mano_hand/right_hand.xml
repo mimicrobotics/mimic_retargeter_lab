@@ -1,0 +1,439 @@
+<mujoco model="mano_hand">
+  <compiler meshdir="assets" angle="radian" autolimits="true" eulerseq="xyz" />
+
+  <option timestep="0.002" gravity="0 0 -9.81" />
+
+  <asset>
+    <mesh name="palm" file="palm.stl" />
+    <mesh name="palm_col" file="palm_collision.stl" />
+
+    <mesh name="index1" file="index1.stl" />
+    <mesh name="index1_col" file="index1_collision.stl" />
+    <mesh name="index2" file="index2.stl" />
+    <mesh name="index2_col" file="index2_collision.stl" />
+    <mesh name="index3" file="index3.stl" />
+    <mesh name="index3_col" file="index3_collision.stl" />
+
+    <mesh name="middle1" file="middle1.stl" />
+    <mesh name="middle1_col" file="middle1_collision.stl" />
+    <mesh name="middle2" file="middle2.stl" />
+    <mesh name="middle2_col" file="middle2_collision.stl" />
+    <mesh name="middle3" file="middle3.stl" />
+    <mesh name="middle3_col" file="middle3_collision.stl" />
+
+    <mesh name="pinky1" file="pinky1.stl" />
+    <mesh name="pinky1_col" file="pinky1_collision.stl" />
+    <mesh name="pinky2" file="pinky2.stl" />
+    <mesh name="pinky2_col" file="pinky2_collision.stl" />
+    <mesh name="pinky3" file="pinky3.stl" />
+    <mesh name="pinky3_col" file="pinky3_collision.stl" />
+
+    <mesh name="ring1" file="ring1.stl" />
+    <mesh name="ring1_col" file="ring1_collision.stl" />
+    <mesh name="ring2" file="ring2.stl" />
+    <mesh name="ring2_col" file="ring2_collision.stl" />
+    <mesh name="ring3" file="ring3.stl" />
+    <mesh name="ring3_col" file="ring3_collision.stl" />
+
+    <mesh name="thumb1" file="thumb1.stl" />
+    <mesh name="thumb1_col" file="thumb1_collision.stl" />
+    <mesh name="thumb2" file="thumb2.stl" />
+    <mesh name="thumb2_col" file="thumb2_collision.stl" />
+    <mesh name="thumb3" file="thumb3.stl" />
+    <mesh name="thumb3_col" file="thumb3_collision.stl" />
+
+    <material name="skin" rgba="0.9 0.8 0.7 1" specular="0.3" shininess="0.1" />
+    <material name="collision_mat" rgba="1 0 0 0.5" />
+  </asset>
+
+  <default>
+    <joint damping="0.1" stiffness="0.01" limited="true" />
+
+    <default class="visual">
+        <geom
+                type="mesh"
+                material="skin"
+                group="1"
+                contype="0"
+                conaffinity="0"
+            />
+    </default>
+    <default class="collision">
+        <geom type="mesh" material="collision_mat" group="3" />
+    </default>
+
+    <!-- Default settings for the actuators -->
+    <default class="motor">
+        <!-- kp=2.0 gives the servo reasonable strength -->
+        <position kp="2.0" ctrllimited="true" ctrlrange="-3.14 3.14" />
+    </default>
+  </default>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+    <geom name="floor" type="plane" size="2 2 0.1" rgba=".8 .9 .8 1" />
+
+    <!-- === ROOT / PALM === -->
+    <body name="palm" pos="0.095670 0.006383 0.006186">
+      <inertial pos="0 0 0" mass="0.3" diaginertia="0.001 0.001 0.001" />
+
+      <!-- Root Translations -->
+      <joint
+                name="root_x"
+                type="slide"
+                axis="1 0 0"
+                range="-10 10"
+            /> <!-- Side Translation -->
+      <joint
+                name="root_y"
+                type="slide"
+                axis="0 1 0"
+                range="-10 10"
+            /> <!-- Forward Translation -->
+      <joint
+                name="root_z"
+                type="slide"
+                axis="0 0 1"
+                range="-10 10"
+            /> <!-- Up Translation -->
+
+      <joint
+                name="root_yaw"
+                axis="0 0 1"
+                range="-3.141593 3.141593"
+            />   <!-- Rotation around Up (Z) -->
+      <joint
+                name="root_pitch"
+                axis="1 0 0"
+                range="-3.141593 3.141593"
+            /> <!-- Rotation around Side (X) -->
+      <joint
+                name="root_roll"
+                axis="0 1 0"
+                range="-3.141593 3.141593"
+            />  <!-- Rotation around Forward (Y) -->
+
+      <geom mesh="palm" class="visual" />
+      <geom mesh="palm_col" class="collision" />
+
+      <!-- === INDEX FINGER === -->
+      <body name="index1" pos="-0.088097 -0.005200 0.020686">
+        <!-- X (Side), Y (Forward), Z (Up) axes preserved -->
+        <joint name="index1_x_joint" axis="1 0 0" range="-3.141593 3.141593" />
+        <joint name="index1_y_joint" axis="0 1 0" range="-1.570796 1.570796" />
+        <joint name="index1_z_joint" axis="0 0 1" range="-3.141593 3.141593" />
+
+        <geom mesh="index1" class="visual" />
+        <geom mesh="index1_col" class="collision" />
+
+        <body name="index2" pos="-0.032679 0.004009 0.002217">
+           <joint
+                        name="index2_x_joint"
+                        axis="1 0 0"
+                        range="-3.141593 3.141593"
+                    />
+           <joint
+                        name="index2_y_joint"
+                        axis="0 1 0"
+                        range="-1.570796 1.570796"
+                    />
+           <joint
+                        name="index2_z_joint"
+                        axis="0 0 1"
+                        range="-3.141593 3.141593"
+                    />
+
+           <geom mesh="index2" class="visual" />
+           <geom mesh="index2_col" class="collision" />
+
+           <body name="index3" pos="-0.022156 -0.001298 -0.000114">
+              <joint
+                            name="index3_x_joint"
+                            axis="1 0 0"
+                            range="-3.141593 3.141593"
+                        />
+              <joint
+                            name="index3_y_joint"
+                            axis="0 1 0"
+                            range="-1.570796 1.570796"
+                        />
+              <joint
+                            name="index3_z_joint"
+                            axis="0 0 1"
+                            range="-3.141593 3.141593"
+                        />
+
+              <geom mesh="index3" class="visual" />
+              <geom mesh="index3_col" class="collision" />
+           </body>
+        </body>
+      </body>
+
+      <!-- === MIDDLE FINGER === -->
+      <body name="middle1" pos="-0.094660 -0.001479 -0.003358">
+        <joint name="middle1_x_joint" axis="1 0 0" range="-3.141593 3.141593" />
+        <joint name="middle1_y_joint" axis="0 1 0" range="-1.570796 1.570796" />
+        <joint name="middle1_z_joint" axis="0 0 1" range="-3.141593 3.141593" />
+
+        <geom mesh="middle1" class="visual" />
+        <geom mesh="middle1_col" class="collision" />
+
+        <body name="middle2" pos="-0.031183 0.001861 -0.005595">
+           <joint
+                        name="middle2_x_joint"
+                        axis="1 0 0"
+                        range="-3.141593 3.141593"
+                    />
+           <joint
+                        name="middle2_y_joint"
+                        axis="0 1 0"
+                        range="-1.570796 1.570796"
+                    />
+           <joint
+                        name="middle2_z_joint"
+                        axis="0 0 1"
+                        range="-3.141593 3.141593"
+                    />
+
+           <geom mesh="middle2" class="visual" />
+           <geom mesh="middle2_col" class="collision" />
+
+           <body name="middle3" pos="-0.022905 -0.001252 -0.003945">
+              <joint
+                            name="middle3_x_joint"
+                            axis="1 0 0"
+                            range="-3.141593 3.141593"
+                        />
+              <joint
+                            name="middle3_y_joint"
+                            axis="0 1 0"
+                            range="-1.570796 1.570796"
+                        />
+              <joint
+                            name="middle3_z_joint"
+                            axis="0 0 1"
+                            range="-3.141593 3.141593"
+                        />
+
+              <geom mesh="middle3" class="visual" />
+              <geom mesh="middle3_col" class="collision" />
+           </body>
+        </body>
+      </body>
+
+      <!-- === PINKY FINGER === -->
+      <body name="pinky1" pos="-0.068787 -0.009940 -0.043209">
+        <joint name="pinky1_x_joint" axis="1 0 0" range="-3.141593 3.141593" />
+        <joint name="pinky1_y_joint" axis="0 1 0" range="-1.570796 1.570796" />
+        <joint name="pinky1_z_joint" axis="0 0 1" range="-3.141593 3.141593" />
+
+        <geom mesh="pinky1" class="visual" />
+        <geom mesh="pinky1_col" class="collision" />
+
+        <body name="pinky2" pos="-0.017014 0.000062 -0.012499">
+           <joint
+                        name="pinky2_x_joint"
+                        axis="1 0 0"
+                        range="-3.141593 3.141593"
+                    />
+           <joint
+                        name="pinky2_y_joint"
+                        axis="0 1 0"
+                        range="-1.570796 1.570796"
+                    />
+           <joint
+                        name="pinky2_z_joint"
+                        axis="0 0 1"
+                        range="-3.141593 3.141593"
+                    />
+
+           <geom mesh="pinky2" class="visual" />
+           <geom mesh="pinky2_col" class="collision" />
+
+           <body name="pinky3" pos="-0.015867 -0.000691 -0.010332">
+              <joint
+                            name="pinky3_x_joint"
+                            axis="1 0 0"
+                            range="-3.141593 3.141593"
+                        />
+              <joint
+                            name="pinky3_y_joint"
+                            axis="0 1 0"
+                            range="-1.570796 1.570796"
+                        />
+              <joint
+                            name="pinky3_z_joint"
+                            axis="0 0 1"
+                            range="-3.141593 3.141593"
+                        />
+
+              <geom mesh="pinky3" class="visual" />
+              <geom mesh="pinky3_col" class="collision" />
+           </body>
+        </body>
+      </body>
+
+      <!-- === RING FINGER === -->
+      <body name="ring1" pos="-0.081736 -0.003957 -0.026673">
+        <joint name="ring1_x_joint" axis="1 0 0" range="-3.141593 3.141593" />
+        <joint name="ring1_y_joint" axis="0 1 0" range="-1.570796 1.570796" />
+        <joint name="ring1_z_joint" axis="0 0 1" range="-3.141593 3.141593" />
+
+        <geom mesh="ring1" class="visual" />
+        <geom mesh="ring1_col" class="collision" />
+
+        <body name="ring2" pos="-0.028314 0.002067 -0.005099">
+           <joint
+                        name="ring2_x_joint"
+                        axis="1 0 0"
+                        range="-3.141593 3.141593"
+                    />
+           <joint
+                        name="ring2_y_joint"
+                        axis="0 1 0"
+                        range="-1.570796 1.570796"
+                    />
+           <joint
+                        name="ring2_z_joint"
+                        axis="0 0 1"
+                        range="-3.141593 3.141593"
+                    />
+
+           <geom mesh="ring2" class="visual" />
+           <geom mesh="ring2_col" class="collision" />
+
+           <body name="ring3" pos="-0.023521 -0.001688 -0.007634">
+              <joint
+                            name="ring3_x_joint"
+                            axis="1 0 0"
+                            range="-3.141593 3.141593"
+                        />
+              <joint
+                            name="ring3_y_joint"
+                            axis="0 1 0"
+                            range="-1.570796 1.570796"
+                        />
+              <joint
+                            name="ring3_z_joint"
+                            axis="0 0 1"
+                            range="-3.141593 3.141593"
+                        />
+
+              <geom mesh="ring3" class="visual" />
+              <geom mesh="ring3_col" class="collision" />
+           </body>
+        </body>
+      </body>
+
+      <!-- === THUMB === -->
+      <body name="thumb1" pos="-0.024090 -0.015522 0.025813">
+        <joint name="thumb1_x_joint" axis="1 0 0" range="-3.141593 3.141593" />
+        <joint name="thumb1_y_joint" axis="0 1 0" range="-1.570796 1.570796" />
+        <joint name="thumb1_z_joint" axis="0 0 1" range="-3.141593 3.141593" />
+
+        <geom mesh="thumb1" class="visual" />
+        <geom mesh="thumb1_col" class="collision" />
+
+        <body name="thumb2" pos="-0.019633 0.000891 0.023700">
+           <joint
+                        name="thumb2_x_joint"
+                        axis="1 0 0"
+                        range="-3.141593 3.141593"
+                    />
+           <joint
+                        name="thumb2_y_joint"
+                        axis="0 1 0"
+                        range="-1.570796 1.570796"
+                    />
+           <joint
+                        name="thumb2_z_joint"
+                        axis="0 0 1"
+                        range="-3.141593 3.141593"
+                    />
+
+           <geom mesh="thumb2" class="visual" />
+           <geom mesh="thumb2_col" class="collision" />
+
+           <body name="thumb3" pos="-0.022218 -0.005433 0.014524">
+              <joint
+                            name="thumb3_x_joint"
+                            axis="1 0 0"
+                            range="-3.141593 3.141593"
+                        />
+              <joint
+                            name="thumb3_y_joint"
+                            axis="0 1 0"
+                            range="-1.570796 1.570796"
+                        />
+              <joint
+                            name="thumb3_z_joint"
+                            axis="0 0 1"
+                            range="-3.141593 3.141593"
+                        />
+
+              <geom mesh="thumb3" class="visual" />
+              <geom mesh="thumb3_col" class="collision" />
+           </body>
+        </body>
+      </body>
+
+    </body>
+  </worldbody>
+
+  <actuator>
+    <!-- Index -->
+    <position class="motor" name="index1_x" joint="index1_x_joint" />
+    <position class="motor" name="index1_y" joint="index1_y_joint" />
+    <position class="motor" name="index1_z" joint="index1_z_joint" />
+    <position class="motor" name="index2_x" joint="index2_x_joint" />
+    <position class="motor" name="index2_y" joint="index2_y_joint" />
+    <position class="motor" name="index2_z" joint="index2_z_joint" />
+    <position class="motor" name="index3_x" joint="index3_x_joint" />
+    <position class="motor" name="index3_y" joint="index3_y_joint" />
+    <position class="motor" name="index3_z" joint="index3_z_joint" />
+
+    <!-- Middle -->
+    <position class="motor" name="middle1_x" joint="middle1_x_joint" />
+    <position class="motor" name="middle1_y" joint="middle1_y_joint" />
+    <position class="motor" name="middle1_z" joint="middle1_z_joint" />
+    <position class="motor" name="middle2_x" joint="middle2_x_joint" />
+    <position class="motor" name="middle2_y" joint="middle2_y_joint" />
+    <position class="motor" name="middle2_z" joint="middle2_z_joint" />
+    <position class="motor" name="middle3_x" joint="middle3_x_joint" />
+    <position class="motor" name="middle3_y" joint="middle3_y_joint" />
+    <position class="motor" name="middle3_z" joint="middle3_z_joint" />
+
+    <!-- Pinky -->
+    <position class="motor" name="pinky1_x" joint="pinky1_x_joint" />
+    <position class="motor" name="pinky1_y" joint="pinky1_y_joint" />
+    <position class="motor" name="pinky1_z" joint="pinky1_z_joint" />
+    <position class="motor" name="pinky2_x" joint="pinky2_x_joint" />
+    <position class="motor" name="pinky2_y" joint="pinky2_y_joint" />
+    <position class="motor" name="pinky2_z" joint="pinky2_z_joint" />
+    <position class="motor" name="pinky3_x" joint="pinky3_x_joint" />
+    <position class="motor" name="pinky3_y" joint="pinky3_y_joint" />
+    <position class="motor" name="pinky3_z" joint="pinky3_z_joint" />
+
+    <!-- Ring -->
+    <position class="motor" name="ring1_x" joint="ring1_x_joint" />
+    <position class="motor" name="ring1_y" joint="ring1_y_joint" />
+    <position class="motor" name="ring1_z" joint="ring1_z_joint" />
+    <position class="motor" name="ring2_x" joint="ring2_x_joint" />
+    <position class="motor" name="ring2_y" joint="ring2_y_joint" />
+    <position class="motor" name="ring2_z" joint="ring2_z_joint" />
+    <position class="motor" name="ring3_x" joint="ring3_x_joint" />
+    <position class="motor" name="ring3_y" joint="ring3_y_joint" />
+    <position class="motor" name="ring3_z" joint="ring3_z_joint" />
+
+    <!-- Thumb -->
+    <position class="motor" name="thumb1_x" joint="thumb1_x_joint" />
+    <position class="motor" name="thumb1_y" joint="thumb1_y_joint" />
+    <position class="motor" name="thumb1_z" joint="thumb1_z_joint" />
+    <position class="motor" name="thumb2_x" joint="thumb2_x_joint" />
+    <position class="motor" name="thumb2_y" joint="thumb2_y_joint" />
+    <position class="motor" name="thumb2_z" joint="thumb2_z_joint" />
+    <position class="motor" name="thumb3_x" joint="thumb3_x_joint" />
+    <position class="motor" name="thumb3_y" joint="thumb3_y_joint" />
+    <position class="motor" name="thumb3_z" joint="thumb3_z_joint" />
+  </actuator>
+</mujoco>

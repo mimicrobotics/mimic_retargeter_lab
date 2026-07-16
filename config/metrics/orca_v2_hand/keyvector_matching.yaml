@@ -1,0 +1,20 @@
+_target_: dexworld.metrics.KeyvectorMatchingMetric
+config:
+  display_name: "Keyvector Matching"
+  joint_space_mapping: ${joint_angle_retargeter.config.joint_mapping}
+
+  vector_diffs:
+    - name: thumb_to_index_tip
+      src: thumb_tip
+      tgt: index_tip
+    - name: thumb_to_middle_tip
+      src: thumb_tip
+      tgt: middle_tip
+    - name: thumb_to_ring_tip
+      src: thumb_tip
+      tgt: ring_tip
+    - name: thumb_to_little_tip
+      src: thumb_tip
+      tgt: pinky_tip
+
+data_source_cfg: ${dataset.data_source_cfg}

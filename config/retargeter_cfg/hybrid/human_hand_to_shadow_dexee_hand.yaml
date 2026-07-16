@@ -1,0 +1,60 @@
+# Hybrid (warmstart) retargeter for human hand -> Shadow DEX-EE.
+# Joint-angle pass produces a qpos that warmstarts the keyvector SLSQP solver.
+name: hybrid
+config:
+  device: cpu
+
+  wrist_mapping:
+    tgt_key: hand_base
+    root_key: hand_base
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  joint_angle:
+    joint_mapping:
+      # F0 ← thumb
+      - { name: f0_abduction, tgt_key: F0/J0, src_key: th_proximal.z, coef:  1.0, offset: 0.0 }
+      - { name: f0_mcp,       tgt_key: F0/J1, src_key: th_proximal.x, coef: -1.0, offset: 0.0 }
+      - { name: f0_pip,       tgt_key: F0/J2, src_key: th_distal.x,   coef: -1.0, offset: 0.0 }
+      - { name: f0_dip,       tgt_key: F0/J3, src_key: th_tip.x,      coef: -1.0, offset: 0.0 }
+      # F1 ← index
+      - { name: f1_abduction, tgt_key: F1/J0, src_key: ff_proximal.z, coef: -1.0, offset: 0.0 }
+      - { name: f1_mcp,       tgt_key: F1/J1, src_key: ff_proximal.x, coef: -1.0, offset: 0.0 }
+      - { name: f1_pip,       tgt_key: F1/J2, src_key: ff_distal.x,   coef: -1.0, offset: 0.0 }
+      - { name: f1_dip,       tgt_key: F1/J3, src_key: ff_tip.x,      coef: -1.0, offset: 0.0 }
+      # F2 ← middle
+      - { name: f2_abduction, tgt_key: F2/J0, src_key: mf_proximal.z, coef: -1.0, offset: 0.0 }
+      - { name: f2_mcp,       tgt_key: F2/J1, src_key: mf_proximal.x, coef: -1.0, offset: 0.0 }
+      - { name: f2_pip,       tgt_key: F2/J2, src_key: mf_distal.x,   coef: -1.0, offset: 0.0 }
+      - { name: f2_dip,       tgt_key: F2/J3, src_key: mf_tip.x,      coef: -1.0, offset: 0.0 }
+
+    constant_joints: {}
+
+  keyvector:
+    precomputed_scale: null
+    alignment_landmarks:
+      - thumb_base
+      - index_base
+      - middle_base
+
+    iterations: 20
+    device: cpu
+
+    regularized_joints: {}
+
+    keyvectors_cfg:
+      # DEX-EE has 3 fingers: F0=thumb, F1=index, F2=middle.
+      - name: thumb_to_index
+        src_key: THUMB_TIP_to_INDEX_TIP
+        tgt_key: THUMB_TIP_to_INDEX_TIP
+        scaling_coef: 1.0
+        loss_coef: 1.0
+      - name: thumb_to_middle
+        src_key: THUMB_TIP_to_MIDDLE_TIP
+        tgt_key: THUMB_TIP_to_MIDDLE_TIP
+        scaling_coef: 1.0
+        loss_coef: 1.0
+      - name: index_to_middle
+        src_key: INDEX_TIP_to_MIDDLE_TIP
+        tgt_key: INDEX_TIP_to_MIDDLE_TIP
+        scaling_coef: 1.0
+        loss_coef: 1.0

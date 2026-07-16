@@ -1,0 +1,93 @@
+name: dexpilot
+config:
+  wrist_mapping:
+    tgt_key: hand_base
+    root_key: hand_base
+    transform: [[1, 0, 0, 0],
+                [0, 1, 0, 0],
+                [0, 0, 1, 0],
+                [0, 0, 0, 1]]
+
+  # Landmarks used for Kabsch-Umeyama alignment of the source pcloud
+  # into the robot hand's frame before computing source keyvectors.
+  precomputed_scale: null
+  alignment_landmarks:
+    - thumb_base
+    - index_base
+    - middle_base
+
+  # Parameters for the DexPilot retargeter.
+  retargeter_params:
+    project_distance: 0.03
+    escape_distance: 0.05
+    scale_factor: 1.0
+    gamma: 2.5e-3 # Joint smoothness regularizer: gamma * sum(qpos^2).
+    beta: 0.02 # Smooth-L1 transition point (meters). Residuals below this are quadratic.
+
+  # Optimizer parameters
+  solver_params:
+    tolerance: 1.0e-6
+    iterations: 20
+    device: cpu                # cpu | gpu | cuda
+
+  # Debug overlay (src/tgt keyvector segments + grasp_active flags).
+  debug_mode: false
+  debug_every_n_frames: 1
+
+  regularized_joints: {}
+
+  # DEX-EE has 3 fingertips: thumb, index, middle.
+  keyvectors_cfg:
+    # wrist-to-fingertip
+    # - name: wrist_to_thumb_tip
+    #   src_key: WRIST_to_THUMB_TIP
+    #   tgt_key: WRIST_to_THUMB_TIP
+    #   role: wrist
+    #   loss_coef: 1.0
+    #   active_loss_coef: 1.0
+    #   scaling_coef: 1.0
+    #   eta: null
+    # - name: wrist_to_index_tip
+    #   src_key: WRIST_to_INDEX_TIP
+    #   tgt_key: WRIST_to_INDEX_TIP
+    #   role: wrist
+    #   loss_coef: 1.0
+    #   active_loss_coef: 1.0
+    #   scaling_coef: 1.0
+    #   eta: null
+    # - name: wrist_to_middle_tip
+    #   src_key: WRIST_to_MIDDLE_TIP
+    #   tgt_key: WRIST_to_MIDDLE_TIP
+    #   role: wrist
+    #   loss_coef: 1.0
+    #   active_loss_coef: 1.0
+    #   scaling_coef: 1.0
+    #   eta: null
+
+    # thumb-to-fingertip
+    - name: thumb_tip_to_index_tip
+      src_key: THUMB_TIP_to_INDEX_TIP
+      tgt_key: THUMB_TIP_to_INDEX_TIP
+      role: thumb
+      loss_coef: 1.0
+      active_loss_coef: 200.0
+      scaling_coef: 1.0
+      eta: 5.0e-3
+    - name: thumb_tip_to_middle_tip
+      src_key: THUMB_TIP_to_MIDDLE_TIP
+      tgt_key: THUMB_TIP_to_MIDDLE_TIP
+      role: thumb
+      loss_coef: 1.0
+      active_loss_coef: 200.0
+      scaling_coef: 1.0
+      eta: 5.0e-3
+
+    # finger-to-finger
+    - name: index_to_middle
+      src_key: INDEX_TIP_to_MIDDLE_TIP
+      tgt_key: INDEX_TIP_to_MIDDLE_TIP
+      role: finger
+      loss_coef: 1.0
+      active_loss_coef: 400.0
+      scaling_coef: 1.0
+      eta: 3.0e-2

@@ -1,0 +1,13 @@
+torch
+torchvision
+torchaudio
+numpy<2.0.0
+scipy
+sapien==2.2.2   # Version that is believed to be used at time of publication
+gym
+tqdm
+open3d
+trimesh
+zmq
+pin==2.6.21     # For bare-bone version
+meshcat

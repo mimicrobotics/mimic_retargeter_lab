@@ -1,0 +1,180 @@
+# Hybrid (warmstart) retargeter for human hand -> Shadow Hand.
+#
+# Each frame:
+#   1) JointAngleRetargeter analytically maps source joint angles to a robot qpos.
+#   2) That qpos is fed as the initial guess to KeyvectorRetargeter's SLSQP solver,
+#      which refines fingertip placement against the keyvector loss.
+#
+# The shared `wrist_mapping` block is forwarded to both children.
+name: hybrid
+config:
+  device: cpu
+
+  wrist_mapping:
+    tgt_key: rh_palm
+    root_key: rh_forearm
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+    rot_offset_euler: [-1.5708, -0.3927, -1.5708]
+    trans_offset: [0, 0, -0.24]
+
+  joint_angle:
+    joint_mapping:
+      - name: thumb_base_rotation
+        tgt_key: rh_THJ5
+        src_key: th_proximal.z
+        coef: -1.0
+        offset: 0.0
+      - name: thumb_base_closure
+        tgt_key: rh_THJ4
+        src_key: th_proximal.z
+        coef: -1.0
+        offset: 0.0
+      - name: thumb_proximal
+        tgt_key: rh_THJ2
+        src_key: th_distal.z
+        coef: -1.0
+        offset: 0.0
+      - name: thumb_distal
+        tgt_key: rh_THJ1
+        src_key: th_tip.z
+        coef: -1.0
+        offset: 0.0
+
+      - name: index_abduction
+        tgt_key: rh_FFJ4
+        src_key: ff_proximal.z
+        coef: -1.0
+        offset: -0.4
+      - name: index_mcp
+        tgt_key: rh_FFJ3
+        src_key: ff_proximal.x
+        coef: -1.0
+        offset: 0.0
+      - name: index_proximal
+        tgt_key: rh_FFJ2
+        src_key: ff_distal.x
+        coef: -1.0
+        offset: 0.0
+      - name: index_distal
+        tgt_key: rh_FFJ1
+        src_key: ff_tip.x
+        coef: -1.0
+        offset: 0.0
+
+      - name: middle_abduction
+        tgt_key: rh_MFJ4
+        src_key: mf_proximal.z
+        coef: -1.0
+        offset: -0.2
+      - name: middle_mcp
+        tgt_key: rh_MFJ3
+        src_key: mf_proximal.x
+        coef: -1.0
+        offset: 0.0
+      - name: middle_proximal
+        tgt_key: rh_MFJ2
+        src_key: mf_distal.x
+        coef: -1.0
+        offset: 0.0
+      - name: middle_distal
+        tgt_key: rh_MFJ1
+        src_key: mf_tip.x
+        coef: -1.0
+        offset: 0.0
+
+      - name: ring_abduction
+        tgt_key: rh_RFJ4
+        src_key: rf_proximal.z
+        coef: 1.0
+        offset: -0.2
+      - name: ring_mcp
+        tgt_key: rh_RFJ3
+        src_key: rf_proximal.x
+        coef: -1.0
+        offset: 0.0
+      - name: ring_proximal
+        tgt_key: rh_RFJ2
+        src_key: rf_distal.x
+        coef: -1.0
+        offset: 0.0
+      - name: ring_distal
+        tgt_key: rh_RFJ1
+        src_key: rf_tip.x
+        coef: -1.0
+        offset: 0.0
+
+      - name: little_abduction
+        tgt_key: rh_LFJ4
+        src_key: lf_proximal.z
+        coef: 1.0
+        offset: -0.5
+      - name: little_mcp
+        tgt_key: rh_LFJ3
+        src_key: lf_proximal.x
+        coef: -1.0
+        offset: 0.0
+      - name: little_proximal
+        tgt_key: rh_LFJ2
+        src_key: lf_distal.x
+        coef: -1.0
+        offset: 0.0
+      - name: little_distal
+        tgt_key: rh_LFJ1
+        src_key: lf_tip.x
+        coef: -1.0
+        offset: 0.0
+
+    constant_joints:
+      rh_THJ3: 0.0
+      rh_LFJ5: 0.0
+
+  keyvector:
+    precomputed_scale: null
+    alignment_landmarks:
+      - wrist
+      - thumb_base
+      - ring_base
+
+    iterations: 10
+    device: cpu
+
+    regularized_joints:
+      rh_A_FFJ4:
+        target: 0.0
+        weight: 0.01
+      rh_A_MFJ4:
+        target: 0.0
+        weight: 0.01
+      rh_A_RFJ4:
+        target: 0.0
+        weight: 0.01
+      rh_A_LFJ4:
+        target: 0.0
+        weight: 0.01
+
+    keyvectors_cfg:
+      - name: wrist_to_thumb_tip
+        src_key: WRIST_to_THUMB_TIP
+        tgt_key: WRIST_to_THUMB_TIP
+        scaling_coef: 1.0
+        loss_coef: 1.0
+      - name: wrist_to_index_tip
+        src_key: WRIST_to_INDEX_TIP
+        tgt_key: WRIST_to_INDEX_TIP
+        scaling_coef: 1.0
+        loss_coef: 1.0
+      - name: wrist_to_middle_tip
+        src_key: WRIST_to_MIDDLE_TIP
+        tgt_key: WRIST_to_MIDDLE_TIP
+        scaling_coef: 1.0
+        loss_coef: 1.0
+      - name: wrist_to_ring_tip
+        src_key: WRIST_to_RING_TIP
+        tgt_key: WRIST_to_RING_TIP
+        scaling_coef: 1.0
+        loss_coef: 1.0
+      - name: wrist_to_pinky_tip
+        src_key: WRIST_to_PINKY_TIP
+        tgt_key: WRIST_to_PINKY_TIP
+        scaling_coef: 1.0
+        loss_coef: 1.0

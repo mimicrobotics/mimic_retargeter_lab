@@ -1,0 +1,64 @@
+# GeoRT learned retargeter for human hand -> Mimic P050 Hand.
+#
+# `config` block — read by GeortRetargeter at inference time and by the
+# trainer at training time. `alignment_landmarks` matches the convention
+# used by sampling_based / keyvector / hybrid (siblings under `config:`).
+# `training` block — read by `dexworld.retargeting.online.geort.train` only;
+# carries the per-finger joint chains and per-tracker keypoint indices that
+# don't have a parallel in the other retargeters.
+name: geort
+config:
+  wrist_mapping:
+    tgt_key: wrist_link_virtual
+    root_key: base_link
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  checkpoint_tag: mimic_p050_hand_right_manus_mjcf_run-000
+  constant_joints: {}
+
+  # Landmarks used to fit the per-frame Kabsch-Umeyama transform during
+  # training; the canonical target (dataset mean of these positions) is
+  # baked into the trained checkpoint's config.json and replayed at
+  # inference. Same triangle as sampling_based on this hand.
+  alignment_landmarks:
+    - thumb_base
+    - index_base
+    - pinky_base
+  alignment_use_scale: true
+
+training:
+  # Per-finger joint chain on the robot side. `landmark` selects the MJCF
+  # body/site via to_model._landmark_config; `joint` is the list of actuated
+  # joint names that drive that finger (matches GeoRT's `fingertip_link.joint`).
+  fingertips:
+    - name: thumb
+      landmark: thumb_tip
+      joint: [thumb_base2cmc, thumb_cmc2mcp, thumb_mcp2pp, thumb_pp2dp_actuated]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: index
+      landmark: index_tip
+      joint: [index_base2mcp, index_mcp2pp, index_pp2mp]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: middle
+      landmark: middle_tip
+      joint: [middle_base2mcp, middle_mcp2pp, middle_pp2mp]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: ring
+      landmark: ring_tip
+      joint: [ring_base2mcp, ring_mcp2pp, ring_pp2mp]
+      center_offset: [0.0, 0.0, 0.0]
+    - name: pinky
+      landmark: pinky_tip
+      joint: [pinky_base2mcp, pinky_mcp2pp, pinky_pp2mp]
+      center_offset: [0.0, 0.0, 0.0]
+
+  # Per-tracker mapping: which keypoint index in the human (T, N, 3) stream
+  # corresponds to each fingertip on the robot. MANUS uses 25-pt indexing.
+  trackers:
+    manus:
+      human_hand_ids:
+        thumb: 4
+        index: 9
+        middle: 14
+        ring: 19
+        pinky: 24

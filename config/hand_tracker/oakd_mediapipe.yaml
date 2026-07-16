@@ -1,0 +1,85 @@
+_target_: dexworld.data_sources.OakDHandTracker
+cfg:
+  # Set to true to use HandTrackerEdge (postprocessing on device)
+  use_edge: true
+
+  tracker:
+    # Path to video or image file. 'null' uses the OAK color camera.
+    # Corresponds to '-i' or '--input'
+    # input_src: null
+
+    # Path to a blob file for palm detection model
+    # Corresponds to '--pd_model'
+    # pd_model: null
+
+    # Set to false to only run palm detection (no hand landmark model)
+    # Corresponds to '--no_lm'
+    # use_lm: true
+
+    # Landmark model 'full', 'lite', 'sparse' or path to a blob file
+    # Corresponds to '--lm_model'
+    # lm_model: null
+
+    # Fetch landmark 3D coordinates in meters
+    # Corresponds to '--use_world_landmarks'
+    use_world_landmarks: true
+
+    # Solo mode: detect one hand max. Default is Duo mode (2 hands).
+    # Corresponds to '-s' or '--solo'
+    solo: false
+
+    # Enable spatial location measure of palm centers
+    # Corresponds to '-xyz' or '--xyz'
+    xyz: true
+
+    # Enable gesture recognition
+    # Corresponds to '-g' or '--gesture'
+    # use_gesture: false
+
+    # Center crop frames to a square shape
+    # Corresponds to '-c' or '--crop'
+    # crop: false
+
+    # Fps of internal color camera. Too high value lowers NN fps.
+    # 'null' uses the model's default.
+    # Corresponds to '-f' or '--internal_fps'
+    # internal_fps: null
+
+    # Sensor resolution: 'lite' (1280x720), 'full' (1920x1080), or 'ultra' (3840x2160)
+    # Corresponds to '-r' or '--resolution'
+    resolution: "lite"
+
+    # Internal color camera frame height in pixels
+    # Corresponds to '--internal_frame_height'
+    internal_frame_height: 640
+
+    # Use handedness average (more robust). Set to false to use last inferred handedness.
+    # Corresponds to '--use_last_handedness'
+    use_handedness_average: true
+
+    # (Duo mode only) Number of frames after only one hand is detected
+    # before calling palm detection.
+    # Corresponds to '--single_hand_tolerance_thresh'
+    # single_hand_tolerance_thresh: 10
+
+    # (Edge Duo mode only) Force the use of the same image when inferring
+    # landmarks of the 2 hands (faster but skeleton less shifted).
+    # Set to false to disable.
+    # Corresponds to '--dont_force_same_image'
+    # use_same_image: true
+
+    # Number of the landmark model inference threads (1 or 2)
+    # Corresponds to '-lmt' or '--lm_nb_threads'
+    # lm_nb_threads: 2
+
+    # Print some debug infos. (0=off)
+    # Corresponds to '-t' or '--trace'
+    # trace: 0
+
+    # Always enabled in the script, kept here for clarity
+    # stats: true
+
+  renderer:
+    # Path to output video file. 'null' displays in a window.
+    # Corresponds to '-o' or '--output'
+    output: null

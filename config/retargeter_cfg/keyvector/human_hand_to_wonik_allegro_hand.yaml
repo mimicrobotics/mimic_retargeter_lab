@@ -1,0 +1,46 @@
+name: keyvector
+config:
+  wrist_mapping:
+    tgt_key: palm
+    root_key: palm
+    transform: [[1, 0, 0, 0],
+                [0, 1, 0, 0],
+                [0, 0, 1, 0],
+                [0, 0, 0, 1]]
+    # rot_offset_euler and trans_offset are auto-computed from the robot's
+    # neutral-pose landmarks when omitted. To override, uncomment and tune:
+    # rot_offset_euler: [-1.5708, -0.4363, -1.5708]  # XYZ euler radians
+    # trans_offset: [0, 0, 0.095]                     # metres, in robot-local frame
+
+  precomputed_scale: null
+  alignment_landmarks:
+    - wrist
+    - index_base
+    - ring_base
+
+  iterations: 10
+  device: cpu                  # cpu | gpu | cuda
+  regularized_joints: {}
+
+  keyvectors_cfg:
+    # wrist-to-fingertips
+    - name: wrist_to_thumb_tip
+      src_key: WRIST_to_THUMB_TIP
+      tgt_key: WRIST_to_THUMB_TIP
+      scaling_coef: 1.0
+      loss_coef: 1.0
+    - name: wrist_to_index_tip
+      src_key: WRIST_to_INDEX_TIP
+      tgt_key: WRIST_to_INDEX_TIP
+      scaling_coef: 1.0
+      loss_coef: 1.0
+    - name: wrist_to_middle_tip
+      src_key: WRIST_to_MIDDLE_TIP
+      tgt_key: WRIST_to_MIDDLE_TIP
+      scaling_coef: 1.0
+      loss_coef: 1.0
+    - name: wrist_to_ring_tip
+      src_key: WRIST_to_RING_TIP
+      tgt_key: WRIST_to_RING_TIP
+      scaling_coef: 1.0
+      loss_coef: 1.0

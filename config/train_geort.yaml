@@ -1,0 +1,35 @@
+# Hydra config for `dexworld.retargeting.online.geort.train`.
+# Reuses the per-hand retargeter yaml (config/retargeter_cfg/geort/...) for
+# fingertip mapping, alignment, and tracker indices.
+defaults:
+  - _self_
+  - hand: mimic_p050_hand
+  - retargeter_cfg@retargeter: geort/human_hand_to_${hand}
+  - override hydra/hydra_logging: disabled
+  - override hydra/job_logging: disabled
+
+chirality: right       # left | right
+tracker: manus         # selects training.trackers.<tracker>.human_hand_ids
+human_data: "./dataset/manus/manus_right_subject-RJM_run-010.npz"        # required: path to .npz (manus) or .npy (legacy)
+exp_id: "000"
+
+# Loss weights and epoch count forwarded to GeoRTTrainer.train(**kwargs).
+training_kwargs:
+  w_chamfer: 80.0
+  w_curvature: 0.1
+  w_collision: 0.0
+  w_pinch: 1.0
+  epoch: 200
+
+# Auto-publish: copy the resulting last.pth + config.json into
+# checkpoints/geort/<run-name>/ so GeortRetargeter can find them. Disable
+# if you want to inspect raw output before promoting.
+auto_publish: true
+
+logging:
+  level: INFO
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null

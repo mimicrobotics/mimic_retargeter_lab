@@ -1,0 +1,109 @@
+name: ako
+config:
+  wrist_mapping:
+    tgt_key: right_palm_link
+    root_key: right_palm_link
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  precomputed_scale: null
+  alignment_landmarks:
+    - thumb_base
+    - index_base
+    - pinky_base
+
+  retargeter_params:
+    epsilon_1: 0.02
+    epsilon_2: 0.01
+    huber_delta: 0.02
+    weight_joint_vel: 0.1
+
+  solver_params:
+    tolerance: 1.0e-5
+    iterations: 20
+    device: cpu                # cpu | gpu | cuda
+
+  debug_mode: false
+  debug_every_n_frames: 1
+
+  regularized_joints:
+    right_finger2_joint1: {target: 0.0, weight: 0.5}
+    right_finger3_joint1: {target: 0.0, weight: 0.5}
+    right_finger4_joint1: {target: 0.0, weight: 0.5}
+    right_finger5_joint1: {target: 0.0, weight: 0.5}
+
+  keyvectors_cfg:
+    # wrist-to-fingertip
+    - name: wrist_to_thumb_tip
+      src_key: WRIST_to_THUMB_TIP
+      tgt_key: WRIST_to_THUMB_TIP
+      role: wrist
+      loss_coef: 10.0
+    - name: wrist_to_index_tip
+      src_key: WRIST_to_INDEX_TIP
+      tgt_key: WRIST_to_INDEX_TIP
+      role: wrist
+      loss_coef: 1.0
+    - name: wrist_to_middle_tip
+      src_key: WRIST_to_MIDDLE_TIP
+      tgt_key: WRIST_to_MIDDLE_TIP
+      role: wrist
+      loss_coef: 1.0
+    - name: wrist_to_ring_tip
+      src_key: WRIST_to_RING_TIP
+      tgt_key: WRIST_to_RING_TIP
+      role: wrist
+      loss_coef: 1.0
+    - name: wrist_to_pinky_tip
+      src_key: WRIST_to_PINKY_TIP
+      tgt_key: WRIST_to_PINKY_TIP
+      role: wrist
+      loss_coef: 1.0
+
+    # thumb-to-fingertip (pinch)
+    - name: thumb_tip_to_index_tip
+      src_key: THUMB_TIP_to_INDEX_TIP
+      tgt_key: THUMB_TIP_to_INDEX_TIP
+      role: pinch
+      loss_coef: 10.0
+    - name: thumb_tip_to_middle_tip
+      src_key: THUMB_TIP_to_MIDDLE_TIP
+      tgt_key: THUMB_TIP_to_MIDDLE_TIP
+      role: pinch
+      loss_coef: 10.0
+    - name: thumb_tip_to_ring_tip
+      src_key: THUMB_TIP_to_RING_TIP
+      tgt_key: THUMB_TIP_to_RING_TIP
+      role: pinch
+      loss_coef: 10.0
+    - name: thumb_tip_to_pinky_tip
+      src_key: THUMB_TIP_to_PINKY_TIP
+      tgt_key: THUMB_TIP_to_PINKY_TIP
+      role: pinch
+      loss_coef: 10.0
+
+    # finger-dp-to-fingertip (orientation)
+    - name: thumb_dp_to_thumb_tip
+      src_key: THUMB_DP_to_THUMB_TIP
+      tgt_key: THUMB_DP_to_THUMB_TIP
+      role: orientation
+      loss_coef: 10.0
+    - name: index_dp_to_index_tip
+      src_key: INDEX_DP_to_INDEX_TIP
+      tgt_key: INDEX_DP_to_INDEX_TIP
+      role: orientation
+      loss_coef: 10.0
+    - name: middle_dp_to_middle_tip
+      src_key: MIDDLE_DP_to_MIDDLE_TIP
+      tgt_key: MIDDLE_DP_to_MIDDLE_TIP
+      role: orientation
+      loss_coef: 10.0
+    - name: ring_dp_to_ring_tip
+      src_key: RING_DP_to_RING_TIP
+      tgt_key: RING_DP_to_RING_TIP
+      role: orientation
+      loss_coef: 10.0
+    - name: pinky_dp_to_pinky_tip
+      src_key: PINKY_DP_to_PINKY_TIP
+      tgt_key: PINKY_DP_to_PINKY_TIP
+      role: orientation
+      loss_coef: 10.0

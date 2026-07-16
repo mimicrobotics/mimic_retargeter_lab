@@ -1,0 +1,113 @@
+# Whether each keyvector uses scalar (True) or full-vector (False) distance.
+# If null, the retargeter will pass None and let KeyvectorLoss use its defaults.
+name: keyvector
+config:
+  wrist_mapping:
+    tgt_key: wrist_link_virtual
+    root_key: base_link
+    transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+    # rot_offset_euler and trans_offset are auto-computed from the robot's
+    # neutral-pose landmarks when omitted. To override, uncomment and tune:
+    # rot_offset_euler: [1.5708, 0, 0]  # XYZ euler radians
+    # trans_offset: [0, 0, -0.12]       # metres, in robot-local frame
+
+  # Landmarks to use for Kabsch-Umeyama alignment
+  precomputed_scale: null
+  alignment_landmarks:
+    - thumb_base
+    - index_base
+    - pinky_base
+
+  # Optimization / solver parameters
+  iterations: 20
+  device: cpu                  # cpu | gpu | cuda
+
+  # These joints are free during the optimization process, but constrained at the output
+  # Actually, these additional dofs during optimization for the wrist seem to improve retargeting
+  regularized_joints: {}
+
+  keyvectors_cfg:
+    # wrist-to-fingertips
+    - name: wrist_to_thumb_tip
+      src_key: WRIST_to_THUMB_TIP
+      tgt_key: WRIST_to_THUMB_TIP
+      scaling_coef: 1.0
+      loss_coef: 1.0
+    - name: wrist_to_index_tip
+      src_key: WRIST_to_INDEX_TIP
+      tgt_key: WRIST_to_INDEX_TIP
+      scaling_coef: 1.0
+      loss_coef: 1.0
+    - name: wrist_to_middle_tip
+      src_key: WRIST_to_MIDDLE_TIP
+      tgt_key: WRIST_to_MIDDLE_TIP
+      scaling_coef: 1.0
+      loss_coef: 1.0
+    - name: wrist_to_ring_tip
+      src_key: WRIST_to_RING_TIP
+      tgt_key: WRIST_to_RING_TIP
+      scaling_coef: 1.0
+      loss_coef: 1.0
+    - name: wrist_to_pinky_tip
+      src_key: WRIST_to_PINKY_TIP
+      tgt_key: WRIST_to_PINKY_TIP
+      scaling_coef: 1.0
+      loss_coef: 1.0
+
+    # # thumb-tip-to-fingertips
+    # - name: thumb_tip_to_index_tip
+    #   src_key: th_tip_to_ff_tip
+    #   tgt_key: THUMB_TIP_to_INDEX_TIP
+    #   scaling_coef: 1.0
+    #   loss_coef: 1.0
+    # - name: thumb_tip_to_middle_tip
+    #   src_key: th_tip_to_mf_tip
+    #   tgt_key: THUMB_TIP_to_MIDDLE_TIP
+    #   scaling_coef: 1.0
+    #   loss_coef: 1.0
+    # - name: thumb_tip_to_ring_tip
+    #   src_key: th_tip_to_rf_tip
+    #   tgt_key: THUMB_TIP_to_RING_TIP
+    #   scaling_coef: 1.0
+    #   loss_coef: 1.0
+    # - name: thumb_tip_to_pinky_tip
+    #   src_key: th_tip_to_lf_tip
+    #   tgt_key: THUMB_TIP_to_PINKY_TIP
+    #   scaling_coef: 1.0
+    #   loss_coef: 1.0
+
+    # # index-tip-to-fingertips
+    # - name: index_to_middle
+    #   src_key: ff_tip_to_mf_tip
+    #   tgt_key: INDEX_TIP_to_MIDDLE_TIP
+    #   scaling_coef: 1.0
+    #   loss_coef: 1.0
+    # - name: index_to_ring
+    #   src_key: ff_tip_to_rf_tip
+    #   tgt_key: INDEX_TIP_to_RING_TIP
+    #   scaling_coef: 1.0
+    #   loss_coef: 1.0
+    # - name: index_to_pinky
+    #   src_key: ff_tip_to_lf_tip
+    #   tgt_key: INDEX_TIP_to_PINKY_TIP
+    #   scaling_coef: 1.0
+    #   loss_coef: 1.0
+
+    # # middle-tip-to-fingertips
+    # - name: middle_to_ring
+    #   src_key: mf_tip_to_rf_tip
+    #   tgt_key: MIDDLE_TIP_to_RING_TIP
+    #   scaling_coef: 1.0
+    #   loss_coef: 1.0
+    # - name: middle_to_pinky
+    #   src_key: mf_tip_to_lf_tip
+    #   tgt_key: MIDDLE_TIP_to_PINKY_TIP
+    #   scaling_coef: 1.0
+    #   loss_coef: 1.0
+
+    # # ring-tip-to-fingertips
+    # - name: ring_to_pinky
+    #   src_key: rf_tip_to_lf_tip
+    #   tgt_key: RING_TIP_to_PINKY_TIP
+    #   scaling_coef: 1.0
+    #   loss_coef: 1.0

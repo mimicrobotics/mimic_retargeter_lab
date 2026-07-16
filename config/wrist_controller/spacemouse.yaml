@@ -1,0 +1,20 @@
+_target_: dexworld.data_sources.SpaceMouseController
+cfg:
+  # Scaling factors: raw axes are in [-1, 1]; these convert to physical units.
+  linear_scale: 0.001     # meters per unit per tick
+  angular_scale: 0.005    # radians per unit per tick
+
+  # Values below this threshold are zeroed out.
+  dead_zone: 0.05
+
+  # How often to poll the HID device.
+  poll_rate_hz: 200
+
+  # Device name for pyspacemouse.open(). null = auto-detect first device.
+  device_name: null
+
+  # Reference frame for translating / rotating the wrist.
+  #   "world" = along world axes (default for translation)
+  #   "body"  = relative to current hand orientation (default for rotation)
+  translation_frame: world
+  rotation_frame: world

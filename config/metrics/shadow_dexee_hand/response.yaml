@@ -1,0 +1,17 @@
+_target_: dexworld.metrics.ResponseMetric
+config:
+  display_name: "Response"
+  reference_type: linear
+
+  joint_space_mapping: ${joint_angle_retargeter.config.joint_mapping}
+
+  task_space_mapping:
+    - landmark: THUMB_TIP
+    - landmark: INDEX_TIP
+    - landmark: MIDDLE_TIP
+
+data_source_cfg:
+  _target_: dexworld.data_sources.HandDatasetReader
+  data_path: "./dataset/wilor/"
+  dataset: "wilor_test_long"
+  num_episodes: 1
