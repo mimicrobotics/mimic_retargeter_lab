@@ -155,7 +155,7 @@ Third-party components are documented in [LICENSE_THIRD_PARTY.md](LICENSE_THIRD_
 
 ## Citation
 
-If you use the sampling-based retargeting algorithm, please cite the paper:
+If you use this repo, please cite our work:
 
 ```bibtex
 @misc{malate2026_smoothoperator,
@@ -166,17 +166,6 @@ If you use the sampling-based retargeting algorithm, please cite the paper:
       archivePrefix={arXiv},
       primaryClass={cs.RO},
       url={https://arxiv.org/abs/2607.07491}, 
-}
-```
-
-If you use this codebase, please cite the repository:
-
-```bibtex
-@software{malate2026_mimicretargeterlab,
-      title={mimic\_retargeter\_lab},
-      author={Robert Jomar Malate and Erik Bauer and Norica Bacuieti and Stefanos Charalambous and Elvis Nava and Robert K. Katzschmann and Benedek Forrai},
-      year={2026},
-      url={https://github.com/mimicrobotics/mimic_retargeter_lab},
 }
 ```
 
