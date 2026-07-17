@@ -121,13 +121,13 @@ To compute the metrics without serving anything (useful in scripts), add `serve_
 
 ### Comparing every hand against every retargeter
 
-The comparison dashboard reads the cached `reports/*.pkl` files rather than computing anything itself, so **populate them first**. [`run_all_metrics.sh`](scripts/run_all_metrics.sh) sweeps every hand × retargeter combination for you:
+The comparison dashboard reads the cached `reports/*.pkl` files rather than computing anything itself, so **populate them first**. [`compute_all_pair_metrics.sh`](scripts/compute_all_pair_metrics.sh) sweeps every hand × retargeter combination for you:
 
 ```bash
-bash scripts/run_all_metrics.sh
+bash scripts/compute_all_pair_metrics.sh
 ```
 
-That is 42 runs (6 hands × 7 retargeters) and takes a while — it is doing the retargeting work up front that the dashboard then just reads back. Edit the `DATASETS` / `HANDS` / `RETARGETERS` arrays at the top of the script to narrow the sweep.
+By default that's 6 runs (2 hands × 3 retargeters) — it is doing the retargeting work up front that the dashboard then just reads back. Edit the `DATASETS` / `HANDS` / `RETARGETERS` arrays at the top of the script to widen or narrow the sweep (up to 7 hands × 7 retargeters, per [`config/hand/`](config/hand/) and [`config/retargeter/`](config/retargeter/)).
 
 Then serve the comparison, passing the dataset the sweep used:
 

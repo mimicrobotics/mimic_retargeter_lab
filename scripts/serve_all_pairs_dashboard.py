@@ -31,7 +31,7 @@ Usage
     # default), then exit
     python scripts/serve_all_pairs_dashboard.py --list-metrics
 
-Run ``scripts/run_all_metrics.sh`` first to populate the pkl files.
+Run ``scripts/compute_all_pair_metrics.sh`` first to populate the pkl files.
 """
 
 import argparse
@@ -186,7 +186,7 @@ def main() -> int:
     if not per_hand_per_retargeter:
         print(
             f"error: no metrics-stats_{args.dataset}_*.pkl files found in "
-            f"{args.reports_dir}. Run scripts/run_all_metrics.sh first.",
+            f"{args.reports_dir}. Run scripts/compute_all_pair_metrics.sh first.",
             file=sys.stderr,
         )
         return 2
