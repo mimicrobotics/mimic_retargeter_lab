@@ -1,4 +1,4 @@
-_target_: dexworld.metrics.LatencyMetric
+_target_: mimic_retargeter_lab.metrics.LatencyMetric
 config:
   display_name: "Latency"
 

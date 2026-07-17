@@ -5,8 +5,8 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from dexworld.retargeting.online import base_online_retargeter as bor_mod
-from dexworld.retargeting.online.joint_angle_retargeter import JointAngleRetargeter
+from mimic_retargeter_lab.retargeting.online import base_online_retargeter as bor_mod
+from mimic_retargeter_lab.retargeting.online.joint_angle_retargeter import JointAngleRetargeter
 
 
 class FakeFromModel:

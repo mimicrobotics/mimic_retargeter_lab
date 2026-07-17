@@ -23,17 +23,17 @@ import mujoco
 import numpy as np
 from omegaconf import OmegaConf
 
-from dexworld.data_sources import HandDatasetReader
-from dexworld.hand_models import create_human_hand, create_robot_hand
-from dexworld.retargeting.online import create_retargeter
-from dexworld.types import (
+from mimic_retargeter_lab.data_sources import HandDatasetReader
+from mimic_retargeter_lab.hand_models import create_human_hand, create_robot_hand
+from mimic_retargeter_lab.retargeting.online import create_retargeter
+from mimic_retargeter_lab.types import (
     Chirality,
     HandDataset,
     HumanHandType,
     Retargeter,
     RobotHandType,
 )
-from dexworld.utils import retarget_points_sequence
+from mimic_retargeter_lab.utils import retarget_points_sequence
 
 
 @hydra.main(config_path="../config", config_name="compute_metrics", version_base="1.2")

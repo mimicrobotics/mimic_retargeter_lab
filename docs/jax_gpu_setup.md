@@ -1,7 +1,7 @@
 # JAX / GPU setup notes for retargeters
 
 This document captures why running `SamplingBasedRetargeter` on GPU was
-non-trivial in dexworld, what the failure modes looked like, and what
+non-trivial in mimic_retargeter_lab, what the failure modes looked like, and what
 the fixes do. Read this if you're installing GPU support, integrating a
 new GPU-accelerated retargeter, debugging a "looks GPU but runs at CPU
 speed" symptom, or extending the pattern to other retargeters.
@@ -35,7 +35,7 @@ this setup has.
 
 ## TL;DR
 
-Running JAX on GPU under MJX has four traps that compound. dexworld
+Running JAX on GPU under MJX has four traps that compound. mimic_retargeter_lab
 addresses all of them:
 
 1. **Process platform default**: pin to `cpu` (plus `cuda` when the CUDA
@@ -74,7 +74,7 @@ because MJX builds the model before the retargeter runs.
 **Fix** — pin platform priority so CPU is the process default and CUDA
 is still discoverable for retargeters that opt in:
 
-- `dexworld/__init__.py` does
+- `mimic_retargeter_lab/__init__.py` does
   `os.environ.setdefault("JAX_PLATFORMS", "cpu,cuda" if _HAS_CUDA_PLUGIN else "cpu")`,
   where `_HAS_CUDA_PLUGIN` tests whether `jax_cuda12_plugin` is importable.
   The `cuda` entry is conditional because JAX treats every platform named in
@@ -83,12 +83,12 @@ is still discoverable for retargeters that opt in:
   `RuntimeError: Unable to initialize backend 'cuda'` rather than fall back to
   CPU, which would break every entry script for users without a GPU.
 - Entry scripts (`run_offline_retargeting.py`, `compute_hand_retargeter_pair_metrics.py`,
-  `precompute_workspace.py`) `import dexworld` at the very top —
+  `precompute_workspace.py`) `import mimic_retargeter_lab` at the very top —
   **before** `import jax`.
 
 The order matters: JAX caches the platform priority during config-object
 construction, which runs on `import jax`. Setting the env var after
-that point is too late. `dexworld/__init__.py` is intentionally tiny
+that point is too late. `mimic_retargeter_lab/__init__.py` is intentionally tiny
 (no `import jax`) so importing it can't trigger backend init.
 
 Override at the shell with `JAX_PLATFORMS=cuda` (etc.) to force GPU
@@ -104,7 +104,7 @@ not re-place arrays captured by closure**. The JIT'd FK
 batch of CPU-pinned helper arrays, so it kept running on CPU.
 
 Worse, the JAX persistent cache (under
-`~/.cache/dexworld/jax_compilation`) had previously saved a CPU-compiled
+`~/.cache/mimic_retargeter_lab/jax_compilation`) had previously saved a CPU-compiled
 binary from earlier runs. JAX cheerfully loaded it. Symptom: warmup
 "completed in 2.95 s" — way too fast for a real GPU compile, because
 the cache was hitting a CPU-targeted artifact and reusing it. The robot
@@ -196,12 +196,12 @@ data loader, not the optimizer.
 
 ## Key APIs
 
-### `dexworld.utils.resolve_jax_device(device_str, logger=None)`
+### `mimic_retargeter_lab.utils.resolve_jax_device(device_str, logger=None)`
 Resolve `"cpu"` / `"cuda"` / `"gpu"` to a `jax.Device`. Falls back to
 CPU with a logger warning if a GPU was requested but no CUDA jaxlib is
 available. Used by all four retargeters.
 
-### `dexworld.utils.rebuild_mjx_fk_on_device(to_model, device, logger=None)`
+### `mimic_retargeter_lab.utils.rebuild_mjx_fk_on_device(to_model, device, logger=None)`
 No-op when `device.platform == "cpu"`. Otherwise calls
 `to_model.create_mjx_kinematic_model(device=device)` to re-place the
 MJX model + JIT'd FK functions on `device`. Required because closure-
@@ -214,7 +214,7 @@ Also no-op when the FK is already pinned to the requested `device`
 `RuntimeError` if the FK is already pinned to a *different* non-CPU
 device — see [One hand model, one device](#one-hand-model-one-device).
 
-### `dexworld.utils.device_put_attrs(obj, attr_names, device)`
+### `mimic_retargeter_lab.utils.device_put_attrs(obj, attr_names, device)`
 In-place `jax.device_put` for a batch of named JAX attributes on
 `obj`. Skips attributes whose value is `None`; raises
 `AttributeError` on a typo. The standard call site is at the end of a
@@ -250,7 +250,7 @@ All four retargeters expose a `device` field, defaulting to `cpu`:
 sampling_params:
   device: cuda            # cpu | gpu | cuda
   jax_compilation_cache_enable: true
-  jax_compilation_cache_dir: ~/.cache/dexworld/jax_compilation
+  jax_compilation_cache_dir: ~/.cache/mimic_retargeter_lab/jax_compilation
   num_samples: 8192
   num_samples_elite: 128
   ...
@@ -312,7 +312,7 @@ in this codebase; if you hit it, build two `to_model` instances.
 
 - **Stale JAX cache**: if you change device targets and see fishy
   warmup times (sub-second on fresh code, or "fast warmup but slow
-  frames"), nuke `~/.cache/dexworld/jax_compilation` and the
+  frames"), nuke `~/.cache/mimic_retargeter_lab/jax_compilation` and the
   in-repo `.jax_cache` directory. JAX will rebuild a correctly-targeted
   artifact and cache it.
 - **`uv sync` without `--extra gpu`** removes the CUDA jaxlib. After
@@ -320,13 +320,13 @@ in this codebase; if you hit it, build two `to_model` instances.
   `UV_EXTRA=gpu` in your shell.
 - **Sharing the venv across machines**: the JAX cache and the
   CUDA-jaxlib install are machine-specific. Don't copy them.
-- **`dexworld/__init__.py` not running after a fresh `uv sync`**: if
+- **`mimic_retargeter_lab/__init__.py` not running after a fresh `uv sync`**: if
   you add or modify side effects in the package init and they don't
   fire (env var unset, log filter not applied), the editable install's
   metadata may have been generated when the package had no
-  `__init__.py` and is now treating dexworld as a namespace package
-  (you'll see `dexworld.__file__ is None`). Fix:
-  `uv sync --extra gpu --reinstall-package dexworld`.
+  `__init__.py` and is now treating mimic_retargeter_lab as a namespace package
+  (you'll see `mimic_retargeter_lab.__file__ is None`). Fix:
+  `uv sync --extra gpu --reinstall-package mimic_retargeter_lab`.
 
 ## Adding a new GPU-capable retargeter
 
@@ -337,7 +337,7 @@ runs a JIT'd JAX loss and you'll be GPU-correct out of the box.
 ### 1. In `__init__`, after resolving `self._device`
 
 ```python
-from dexworld.utils import (
+from mimic_retargeter_lab.utils import (
     device_put_attrs,
     rebuild_mjx_fk_on_device,
     resolve_jax_device,

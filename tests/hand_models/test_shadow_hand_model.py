@@ -1,7 +1,7 @@
 import pytest
 
-from dexworld.hand_models import ShadowHandModel
-from dexworld.types import HandLandmark
+from mimic_retargeter_lab.hand_models import ShadowHandModel
+from mimic_retargeter_lab.types import HandLandmark
 from tests.hand_models.test_robot_hand_models_base import BaseHandModelRegressionSuite
 
 

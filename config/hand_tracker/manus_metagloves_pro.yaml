@@ -1,4 +1,4 @@
-_target_: dexworld.data_sources.ManusHandTracker
+_target_: mimic_retargeter_lab.data_sources.ManusHandTracker
 cfg:
   # ZMQ endpoint — must match what ManusZmqBridge publishes on.
   host: "127.0.0.1"

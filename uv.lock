@@ -11,7 +11,7 @@ resolution-markers = [
 
 [manifest]
 members = [
-    "dexworld",
+    "mimic_retargeter_lab",
     "geort",
 ]
 
@@ -245,7 +245,7 @@ wheels = [
 ]
 
 [[package]]
-name = "dexworld"
+name = "mimic_retargeter_lab"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

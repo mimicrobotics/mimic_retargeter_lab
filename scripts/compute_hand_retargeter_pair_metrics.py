@@ -1,7 +1,7 @@
-# Import dexworld first — its package init pins ``JAX_PLATFORMS``
+# Import mimic_retargeter_lab first — its package init pins ``JAX_PLATFORMS``
 # and silences MJX's misleading "Using JAX default device" log. Must come
 # before ``import jax`` because JAX caches platform priority at import time.
-import dexworld  # noqa: F401
+import mimic_retargeter_lab  # noqa: F401
 
 import json
 import pickle
@@ -22,11 +22,11 @@ jax.config.update("jax_compilation_cache_dir", str(cache_dir))
 # Force JAX to cache EVERYTHING, ignoring the 1-second rule
 jax.config.update("jax_persistent_cache_min_compile_time_secs", 0)
 
-from dexworld.dashboard.dashboard import Dashboard
-from dexworld.hand_models import create_human_hand, create_robot_hand
-from dexworld.retargeting.online import create_retargeter
-from dexworld.types import Chirality, HumanHandType, RobotHandType, Retargeter
-from dexworld.utils import RetargetCache, configure_logging, get_logger
+from mimic_retargeter_lab.dashboard.dashboard import Dashboard
+from mimic_retargeter_lab.hand_models import create_human_hand, create_robot_hand
+from mimic_retargeter_lab.retargeting.online import create_retargeter
+from mimic_retargeter_lab.types import Chirality, HumanHandType, RobotHandType, Retargeter
+from mimic_retargeter_lab.utils import RetargetCache, configure_logging, get_logger
 
 
 @hydra.main(config_path="../config", config_name="compute_metrics", version_base="1.2")

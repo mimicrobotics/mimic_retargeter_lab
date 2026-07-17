@@ -18,7 +18,7 @@ config:
 
   # Parameters for the AKO (Analyzing Key Objectives) retargeter.
   # Values follow the paper / reference implementation.
-  # Note: lambda_2 (wrist rotation, 0.1 in paper) has no analog here — dexworld's
+  # Note: lambda_2 (wrist rotation, 0.1 in paper) has no analog here — mimic_retargeter_lab's
   # WristRetargeter is a pass-through transform, not an optimization target.
   retargeter_params:
     epsilon_1: 0.1       # Pinching range upper (m).

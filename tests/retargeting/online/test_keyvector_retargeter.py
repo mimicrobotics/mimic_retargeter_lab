@@ -6,10 +6,10 @@ import jax.numpy as jnp
 import numpy as np
 from scipy.spatial.transform import Rotation as SciRotation
 
-from dexworld.retargeting.online import base_online_retargeter as bor_mod
-from dexworld.retargeting.online import keyvector_retargeter as kvr_mod
-from dexworld.retargeting.online.keyvector_retargeter import KeyvectorRetargeter
-from dexworld.types import HandLandmark
+from mimic_retargeter_lab.retargeting.online import base_online_retargeter as bor_mod
+from mimic_retargeter_lab.retargeting.online import keyvector_retargeter as kvr_mod
+from mimic_retargeter_lab.retargeting.online.keyvector_retargeter import KeyvectorRetargeter
+from mimic_retargeter_lab.types import HandLandmark
 
 
 class FakeWristRetargeter:

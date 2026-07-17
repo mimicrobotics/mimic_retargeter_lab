@@ -36,8 +36,8 @@ Retargeting algorithms are what enable humans to bridge the embodiment gap with 
 
 ```bash
 # Clone the repository
-git clone https://github.com/mimicrobotics/mimic_dexworld.git
-cd mimic_dexworld
+git clone https://github.com/mimicrobotics/mimic_retargeter_lab.git
+cd mimic_retargeter_lab
 
 # Install dependencies (creates ./.venv automatically)
 uv sync

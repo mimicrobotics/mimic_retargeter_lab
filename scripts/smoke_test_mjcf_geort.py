@@ -4,15 +4,15 @@ Run from repo root:
     JAX_PLATFORMS=cpu python scripts/smoke_test_mjcf_geort.py
 """
 
-import dexworld  # noqa: F401  pins JAX_PLATFORMS
+import mimic_retargeter_lab  # noqa: F401  pins JAX_PLATFORMS
 
 from pathlib import Path
 
 import numpy as np
 
-from dexworld.hand_models import create_robot_hand
-from dexworld.retargeting.online.geort import MjcfHandKinematicModel
-from dexworld.types import Chirality, RobotHandType
+from mimic_retargeter_lab.hand_models import create_robot_hand
+from mimic_retargeter_lab.retargeting.online.geort import MjcfHandKinematicModel
+from mimic_retargeter_lab.types import Chirality, RobotHandType
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent

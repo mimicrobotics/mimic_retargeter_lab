@@ -1,4 +1,4 @@
-_target_: dexworld.data_sources.SpaceMouseController
+_target_: mimic_retargeter_lab.data_sources.SpaceMouseController
 cfg:
   # Scaling factors: raw axes are in [-1, 1]; these convert to physical units.
   linear_scale: 0.001     # meters per unit per tick

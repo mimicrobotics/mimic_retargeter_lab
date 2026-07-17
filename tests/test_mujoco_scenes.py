@@ -12,7 +12,7 @@ class TestMujocoModels:
         """Set up test fixtures."""
         # Get the project root directory
         cls.project_root = Path(__file__).parent.parent
-        cls.menagerie_path = cls.project_root / "dexworld" / "mujoco_menagerie"
+        cls.menagerie_path = cls.project_root / "mimic_retargeter_lab" / "mujoco_menagerie"
 
         # Verify the menagerie directory exists
         assert cls.menagerie_path.exists(), (

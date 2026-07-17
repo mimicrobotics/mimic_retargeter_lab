@@ -1,6 +1,6 @@
 # GeoRT learned retargeter
 
-DexWorld integration of [GeoRT](https://github.com/facebookresearch/GeoRT) — a
+mimic_retargeter_lab integration of [GeoRT](https://github.com/facebookresearch/GeoRT) — a
 learning-based hand retargeter (forward-kinematics MLP + inverse-kinematics
 MLP) — adapted to drive MJCF-defined robot hands without any URDF in the
 loop.
@@ -17,7 +17,7 @@ verbatim from upstream — only the kinematic backend changes.
 ```
 third_party/geort/                     # vendored upstream (path-dep in pyproject.toml)
 checkpoints/geort/<run-name>/          # trained models — config.json + last.pth (gitignored)
-dexworld/retargeting/online/
+mimic_retargeter_lab/retargeting/online/
     geort_retargeter.py                # inference adapter (BaseOnlineRetargeter)
     geort/
         mjcf_kinematic_model.py        # MjcfHandKinematicModel — MJCF-backed FK
@@ -32,16 +32,16 @@ config/
 ## Pipelines
 
 Two pipelines that share the same Kabsch-Umeyama alignment convention as
-the rest of dexworld's retargeters (`sampling_based`, `keyvector`,
+the rest of mimic_retargeter_lab's retargeters (`sampling_based`, `keyvector`,
 `hybrid`): per-frame fit between human landmarks and robot landmarks via
-[`align_pcloud_kabsch_umeyama`](../dexworld/utils/retarget_utils.py#L82).
+[`align_pcloud_kabsch_umeyama`](../mimic_retargeter_lab/utils/retarget_utils.py#L82).
 
 ### Training (one shot per hand+tracker+dataset)
 
 Canonical command (run from repo root):
 
 ```bash
-JAX_PLATFORMS=cpu python -m dexworld.retargeting.online.geort.train \
+JAX_PLATFORMS=cpu python -m mimic_retargeter_lab.retargeting.online.geort.train \
     hand=mimic_p050_hand \
     chirality=right \
     tracker=manus \
@@ -122,7 +122,7 @@ What happens, in order:
 
 10. **Auto-publish** — copy `config.json + last.pth` from upstream's verbose
     `third_party/geort/checkpoint/<cache_name>_<datetime>_<auto-tag>/` into
-    a clean dexworld-owned `checkpoints/geort/<cache_name>_run-<exp_id>/`.
+    a clean mimic_retargeter_lab-owned `checkpoints/geort/<cache_name>_run-<exp_id>/`.
     The verbose name stays in `third_party/` for traceability; the clean
     `run-<exp_id>` form is what `GeortRetargeter`'s `checkpoint_tag`
     substring-matches against. Re-running the same `exp_id` overwrites the
@@ -194,7 +194,7 @@ the model will still load and run.
 
 ## What touches MJCF vs URDF
 
-- **MJCF (dexworld-owned)**: workspace sampling FK, joint limits,
+- **MJCF (mimic_retargeter_lab-owned)**: workspace sampling FK, joint limits,
   fingertip positions, the `joint_map` for coupled-DIP handling. Drives
   both training and inference.
 - **URDF**: nothing. The lazy-import patch in
@@ -230,7 +230,7 @@ the model will still load and run.
 ## Device reporting
 
 The latency metric reads `retargeter._device.platform`
-([`utils/retarget_utils.py:184-185`](../dexworld/utils/retarget_utils.py#L184-L185))
+([`utils/retarget_utils.py:184-185`](../mimic_retargeter_lab/utils/retarget_utils.py#L184-L185))
 to label dashboard timings. JAX-based retargeters set this via
 `resolve_jax_device(...)`. GeoRT's IK MLP runs in **PyTorch on CUDA** (the
 upstream `.cuda()` is hardcoded in
@@ -261,7 +261,7 @@ synchronizes the CUDA stream.
 - GeoRT's IKModel hardcodes `.cuda()` in
   [`export.py:26-27`](../third_party/geort/geort/export.py#L26-L27);
   inference will fail on CPU-only hosts.
-- DexWorld pins `JAX_PLATFORMS` in `dexworld/__init__.py`, appending `cuda`
+- mimic_retargeter_lab pins `JAX_PLATFORMS` in `mimic_retargeter_lab/__init__.py`, appending `cuda`
   only when `jax[cuda12]`'s plugin is installed; CPU-only machines get
   `JAX_PLATFORMS=cpu` and need no manual override.
 

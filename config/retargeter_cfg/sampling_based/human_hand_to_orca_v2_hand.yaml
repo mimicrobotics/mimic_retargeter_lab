@@ -37,7 +37,7 @@ config:
     rng_seed: 42
     device: cuda                 # cuda | gpu | cpu
     jax_compilation_cache_enable: true
-    jax_compilation_cache_dir: ~/.cache/dexworld/jax_compilation
+    jax_compilation_cache_dir: ~/.cache/mimic_retargeter_lab/jax_compilation
 
   debug_mode: false
   debug_every_n_frames: 1

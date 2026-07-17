@@ -2,7 +2,7 @@
 """
 Run offline retargeting using Hydra configuration.
 
-This script expects `dexworld/config/offline_retargeting.yaml` to use Hydra
+This script expects `mimic_retargeter_lab/config/offline_retargeting.yaml` to use Hydra
 interpolation so that `retargeter_cfg` is already the mapping for the chosen
 retargeter (e.g. `retargeter_cfg: ${retargeters.${retargeter}}`).
 
@@ -14,10 +14,10 @@ Behavior:
   interpolation (recommended).
 """
 
-# Import dexworld first — its package init pins ``JAX_PLATFORMS``
+# Import mimic_retargeter_lab first — its package init pins ``JAX_PLATFORMS``
 # and silences MJX's misleading "Using JAX default device" log. Must come
 # before ``import jax`` because JAX caches platform priority at import time.
-import dexworld  # noqa: F401
+import mimic_retargeter_lab  # noqa: F401
 
 from pathlib import Path
 
@@ -32,12 +32,12 @@ jax.config.update("jax_compilation_cache_dir", str(cache_dir))
 # Force JAX to cache EVERYTHING, ignoring the 1-second rule
 jax.config.update("jax_persistent_cache_min_compile_time_secs", 0)
 
-from dexworld.data_sources import HandDatasetReader
-from dexworld.data_sources.datasets import ManusNpzReader
-from dexworld.scenes import KinematicRetargetingScene
-from dexworld.types import Chirality, RobotHandType, Retargeter, Simulator
-from dexworld.types.types import HandDataset
-from dexworld.utils import configure_logging, get_logger
+from mimic_retargeter_lab.data_sources import HandDatasetReader
+from mimic_retargeter_lab.data_sources.datasets import ManusNpzReader
+from mimic_retargeter_lab.scenes import KinematicRetargetingScene
+from mimic_retargeter_lab.types import Chirality, RobotHandType, Retargeter, Simulator
+from mimic_retargeter_lab.types.types import HandDataset
+from mimic_retargeter_lab.utils import configure_logging, get_logger
 
 
 @hydra.main(

@@ -23,7 +23,7 @@ from pathlib import Path
 
 import numpy as np
 
-from dexworld.types.metrics import Metric, metric_spec
+from mimic_retargeter_lab.types.metrics import Metric, metric_spec
 
 
 KNOWN_DATASETS = ("wilor", "manus")
@@ -117,7 +117,7 @@ _KV_COLUMN_TO_METRIC = {
 def kv_table_label(key: str) -> str:
     """Column label for a Keyvector Matching sub-table — defers to the
     registry's :attr:`MetricSpec.summary_label` so a rename in
-    :data:`dexworld.types.metrics.METRICS` propagates here automatically.
+    :data:`mimic_retargeter_lab.types.metrics.METRICS` propagates here automatically.
     """
     m = _KV_COLUMN_TO_METRIC.get(key)
     return metric_spec(m).summary_label if m is not None else key
@@ -129,7 +129,7 @@ def extract_reference_pose_metric(data, metric_name, key):
     Dispatches on the metric:
       - "Keyvector Matching" — time-series schema:
           ``vector_metrics[name][<short_key>]``. The (pkl_subkey, stat)
-          pair comes from :func:`dexworld.types.metrics.metric_spec`'s
+          pair comes from :func:`mimic_retargeter_lab.types.metrics.metric_spec`'s
           ``kv_detail`` so it stays in sync with the dashboard.
           Median is computed from the raw per-frame array; mean is read
           from the precomputed summary field.

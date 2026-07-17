@@ -30,10 +30,10 @@ from pathlib import Path
 import numpy as np
 from omegaconf import OmegaConf
 
-from dexworld.hand_models import create_robot_hand
-from dexworld.hand_models.mano_keypoint_hand import ManoKeypointHandModel
-from dexworld.retargeting.online import create_retargeter
-from dexworld.types import Chirality, HandLandmark, Retargeter, RobotHandType
+from mimic_retargeter_lab.hand_models import create_robot_hand
+from mimic_retargeter_lab.hand_models.mano_keypoint_hand import ManoKeypointHandModel
+from mimic_retargeter_lab.retargeting.online import create_retargeter
+from mimic_retargeter_lab.types import Chirality, HandLandmark, Retargeter, RobotHandType
 
 
 def _coerce_retargeter_kwargs(cfg: dict) -> dict:
@@ -115,7 +115,7 @@ def main() -> None:
 
     # Silence the chosen retargeter's debug logs during profiling.
     logging.getLogger(
-        f"dexworld.retargeting.online.{args.retargeter}_retargeter"
+        f"mimic_retargeter_lab.retargeting.online.{args.retargeter}_retargeter"
     ).setLevel(logging.WARNING)
 
     retargeter_type = Retargeter(args.retargeter)

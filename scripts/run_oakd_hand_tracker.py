@@ -1,7 +1,7 @@
 import hydra
 from omegaconf import DictConfig
 
-from dexworld.data_sources import OakDHandTracker
+from mimic_retargeter_lab.data_sources import OakDHandTracker
 
 
 @hydra.main(

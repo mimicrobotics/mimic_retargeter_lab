@@ -29,12 +29,12 @@ debug/
 
 # MANUS SDK — proprietary code not redistributable (see hand_trackers/README.md)
 # Ignore the entire manus_hand_tracker directory, then allowlist our zmq_bridge
-dexworld/data_sources/hand_trackers/manus_hand_tracker/*
-!dexworld/data_sources/hand_trackers/manus_hand_tracker/zmq_bridge/
+mimic_retargeter_lab/data_sources/hand_trackers/manus_hand_tracker/*
+!mimic_retargeter_lab/data_sources/hand_trackers/manus_hand_tracker/zmq_bridge/
 # Build artifacts inside zmq_bridge
-dexworld/data_sources/hand_trackers/manus_hand_tracker/zmq_bridge/objects/
-dexworld/data_sources/hand_trackers/manus_hand_tracker/zmq_bridge/*.out
-dexworld/data_sources/hand_trackers/manus_hand_tracker/zmq_bridge/log.txt
+mimic_retargeter_lab/data_sources/hand_trackers/manus_hand_tracker/zmq_bridge/objects/
+mimic_retargeter_lab/data_sources/hand_trackers/manus_hand_tracker/zmq_bridge/*.out
+mimic_retargeter_lab/data_sources/hand_trackers/manus_hand_tracker/zmq_bridge/log.txt
 
 # Workspace cache (for debugging)
 assets/workspace_cache/

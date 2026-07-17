@@ -7,12 +7,12 @@ import numpy as np
 import pytest
 from scipy.spatial.transform import Rotation as SciRotation
 
-from dexworld.retargeting.online import base_online_retargeter as bor_mod
-from dexworld.retargeting.online import sampling_based_retargeter as sbr_mod
-from dexworld.retargeting.online.sampling_based_retargeter import (
+from mimic_retargeter_lab.retargeting.online import base_online_retargeter as bor_mod
+from mimic_retargeter_lab.retargeting.online import sampling_based_retargeter as sbr_mod
+from mimic_retargeter_lab.retargeting.online.sampling_based_retargeter import (
     SamplingBasedRetargeter,
 )
-from dexworld.types import HandLandmark
+from mimic_retargeter_lab.types import HandLandmark
 
 
 _FINGERTIP_LANDMARKS = [

@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 from pathlib import Path
-from dexworld.types import Chirality
+from mimic_retargeter_lab.types import Chirality
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 FIXTURES_PATH = REPO_ROOT / "tests" / "fixtures"

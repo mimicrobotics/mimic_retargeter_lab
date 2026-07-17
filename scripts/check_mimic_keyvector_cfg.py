@@ -11,9 +11,9 @@ from pathlib import Path
 import numpy as np
 import yaml
 
-from dexworld.hand_models import ManoKeypointHandModel, MimicP050HandModel
-from dexworld.types import Chirality
-from dexworld.utils import configure_logging, get_logger
+from mimic_retargeter_lab.hand_models import ManoKeypointHandModel, MimicP050HandModel
+from mimic_retargeter_lab.types import Chirality
+from mimic_retargeter_lab.utils import configure_logging, get_logger
 
 
 def main():

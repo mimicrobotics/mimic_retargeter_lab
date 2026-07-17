@@ -12,7 +12,7 @@ Usage (from repo root):
         --n-samples 2000
 """
 
-import dexworld  # noqa: F401  pins JAX_PLATFORMS
+import mimic_retargeter_lab  # noqa: F401  pins JAX_PLATFORMS
 
 import argparse
 from pathlib import Path
@@ -22,8 +22,8 @@ import numpy as np
 import torch
 from omegaconf import OmegaConf
 
-from dexworld.hand_models import create_robot_hand
-from dexworld.types import Chirality, HandLandmark, RobotHandType
+from mimic_retargeter_lab.hand_models import create_robot_hand
+from mimic_retargeter_lab.types import Chirality, HandLandmark, RobotHandType
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -92,7 +92,7 @@ def main() -> None:
     if not fk_ckpt_path.exists():
         raise FileNotFoundError(
             f"FK MLP checkpoint not found: {fk_ckpt_path}\n"
-            f"Train one first with `python -m dexworld.retargeting.online.geort.train ...`"
+            f"Train one first with `python -m mimic_retargeter_lab.retargeting.online.geort.train ...`"
         )
 
     from geort.formatter import HandFormatter

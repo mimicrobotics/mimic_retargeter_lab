@@ -16,8 +16,8 @@ from pathlib import Path
 import mujoco
 import mujoco.viewer
 
-from dexworld.types import Chirality, RobotHandType
-from dexworld.utils import configure_logging, get_logger
+from mimic_retargeter_lab.types import Chirality, RobotHandType
+from mimic_retargeter_lab.utils import configure_logging, get_logger
 
 MJCF_BASE_DIR = Path("assets/mjcf")
 

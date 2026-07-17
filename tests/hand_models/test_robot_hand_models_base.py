@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from dexworld.types import HandLandmark
+from mimic_retargeter_lab.types import HandLandmark
 
 
 class BaseHandModelRegressionSuite:

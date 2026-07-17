@@ -44,7 +44,7 @@ import dash_bootstrap_components as dbc
 from dash import Dash
 from flask import abort, send_from_directory
 
-from dexworld.dashboard.comparison_dashboard import ComparisonDashboard
+from mimic_retargeter_lab.dashboard.comparison_dashboard import ComparisonDashboard
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent

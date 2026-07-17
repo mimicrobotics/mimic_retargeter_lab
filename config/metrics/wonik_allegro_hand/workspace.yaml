@@ -1,4 +1,4 @@
-_target_: dexworld.metrics.WorkspaceMetric
+_target_: mimic_retargeter_lab.metrics.WorkspaceMetric
 
 config:
   display_name: "Workspace"

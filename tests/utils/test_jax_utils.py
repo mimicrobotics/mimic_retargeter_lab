@@ -9,7 +9,7 @@ import jax.numpy as jnp
 import numpy as np
 import pytest
 
-from dexworld.utils.jax_utils import (
+from mimic_retargeter_lab.utils.jax_utils import (
     device_put_attrs,
     rebuild_mjx_fk_on_device,
     resolve_jax_device,
