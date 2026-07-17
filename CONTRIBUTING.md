@@ -1,4 +1,4 @@
-# Contributing to dexworld
+# Contributing to mimic_retargeter_lab
 
 Thanks for your interest in contributing. This document covers the development workflow. For environment setup, dependencies, and GPU configuration, follow the [README](README.md) — particularly the [Installation](README.md#installation) and [Setup](README.md#setup) sections, which cover the uv-based install and the GPU requirements for the sampling-based retargeter.
 

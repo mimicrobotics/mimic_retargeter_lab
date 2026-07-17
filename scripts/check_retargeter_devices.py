@@ -28,9 +28,9 @@ Usage
     uv run python scripts/check_retargeter_devices.py --hand shadow_hand
 """
 
-# Import dexworld first — its package init pins JAX_PLATFORMS
+# Import mimic_retargeter_lab first — its package init pins JAX_PLATFORMS
 # and silences MJX's misleading "Using JAX default device" log.
-import dexworld  # noqa: F401
+import mimic_retargeter_lab  # noqa: F401
 
 import argparse
 from pathlib import Path
@@ -39,9 +39,9 @@ import jax
 import numpy as np
 from omegaconf import OmegaConf
 
-from dexworld.hand_models import create_robot_hand
-from dexworld.retargeting.online import create_retargeter
-from dexworld.types import Chirality, Retargeter, RobotHandType
+from mimic_retargeter_lab.hand_models import create_robot_hand
+from mimic_retargeter_lab.retargeting.online import create_retargeter
+from mimic_retargeter_lab.types import Chirality, Retargeter, RobotHandType
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent

@@ -1,10 +1,10 @@
 [project]
-name = "dexworld"
+name = "mimic_retargeter_lab"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 license = {text = "CC-BY-NC-4.0"}
-requires-python = ">=3.12"
+requires-python = ">=3.12,<3.13"
 dependencies = [
     "geort",
     # Simulation / kinematics
@@ -52,7 +52,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-include = ["dexworld*"]
+include = ["mimic_retargeter_lab*"]
 exclude = ["assets*"]
 
 [tool.uv.sources]
@@ -81,8 +81,8 @@ filterwarnings = [
 target-version = "py312"
 force-exclude = true
 extend-exclude = [
-    "dexworld/data_sources/hand_trackers/depthai_hand_tracker", # third-party
-    "dexworld/data_sources/hand_trackers/manus_hand_tracker",    # third-party
+    "mimic_retargeter_lab/data_sources/hand_trackers/depthai_hand_tracker", # third-party
+    "mimic_retargeter_lab/data_sources/hand_trackers/manus_hand_tracker",    # third-party
     "third_party",
 ]
 

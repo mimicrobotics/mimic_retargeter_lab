@@ -3,8 +3,8 @@ import numpy as np
 from pathlib import Path
 import tyro
 
-from dexworld.utils import ManoPreprocessor
-from dexworld.utils import HumanDataWriter
+from mimic_retargeter_lab.utils import ManoPreprocessor
+from mimic_retargeter_lab.utils import HumanDataWriter
 
 """
 

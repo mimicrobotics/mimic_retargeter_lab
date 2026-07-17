@@ -1,7 +1,7 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below. If you use the retargeting algorithm described in our paper, please cite the paper instead (see preferred-citation)."
-title: "mimic_retargeter_lab"
-type: software
+message: "If you use this work, please cite it as below."
+title: "Smooth Operator: A Real-Time Sampling-Based Algorithm for Kinematic Hand Retargeting"
+type: article
 authors:
   - given-names: Robert Jomar
     family-names: Malate
@@ -17,26 +17,7 @@ authors:
     family-names: Katzschmann
   - given-names: Benedek
     family-names: Forrai
+year: 2026
+url: "https://arxiv.org/abs/2607.07491"
 repository-code: "https://github.com/mimicrobotics/mimic_retargeter_lab"
 license: MIT
-date-released: "2026-07-16"
-preferred-citation:
-  type: article
-  title: "Smooth Operator: A Real-Time Sampling-Based Algorithm for Kinematic Hand Retargeting"
-  authors:
-    - given-names: Robert Jomar
-      family-names: Malate
-    - given-names: Erik
-      family-names: Bauer
-    - given-names: Norica
-      family-names: Bacuieti
-    - given-names: Stefanos
-      family-names: Charalambous
-    - given-names: Elvis
-      family-names: Nava
-    - given-names: Robert K.
-      family-names: Katzschmann
-    - given-names: Benedek
-      family-names: Forrai
-  year: 2026
-  url: "https://arxiv.org/abs/2607.07491"

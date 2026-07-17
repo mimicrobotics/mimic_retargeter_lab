@@ -1,4 +1,4 @@
-_target_: dexworld.metrics.CollisionMetric
+_target_: mimic_retargeter_lab.metrics.CollisionMetric
 config:
   display_name: "Collision"
   # Penetrations <= this threshold (mm) are ignored to account for soft-body compliance

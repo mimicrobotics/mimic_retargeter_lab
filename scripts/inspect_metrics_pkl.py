@@ -2,7 +2,7 @@
 """Inspect a metrics-stats_*.pkl file produced by ``compute_hand_retargeter_pair_metrics.py``.
 
 Walks every metric's nested structure and prints the canonical 12-stat
-block (defined in ``dexworld.metrics._stats.STAT_KEYS``) at each
+block (defined in ``mimic_retargeter_lab.metrics._stats.STAT_KEYS``) at each
 stat-bearing location, then runs a coverage check that fails loudly if
 any expected location is missing keys.
 
@@ -21,7 +21,7 @@ import sys
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Tuple
 
-from dexworld.metrics._stats import STAT_KEYS
+from mimic_retargeter_lab.metrics._stats import STAT_KEYS
 
 
 # Each metric maps to a function ``(ep_data) -> [(label, stat_block), ...]``

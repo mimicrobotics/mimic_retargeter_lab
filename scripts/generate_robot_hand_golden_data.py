@@ -33,9 +33,9 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from dexworld.hand_models import ROBOT_HAND_REGISTRY, create_robot_hand
-from dexworld.types import Chirality, HandLandmark, RobotHandType
-from dexworld.utils import configure_logging, get_logger
+from mimic_retargeter_lab.hand_models import ROBOT_HAND_REGISTRY, create_robot_hand
+from mimic_retargeter_lab.types import Chirality, HandLandmark, RobotHandType
+from mimic_retargeter_lab.utils import configure_logging, get_logger
 
 ASSETS_PATH = REPO_ROOT / "assets" / "mjcf"
 FIXTURES_PATH = REPO_ROOT / "tests" / "fixtures"

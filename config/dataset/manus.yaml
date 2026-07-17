@@ -14,7 +14,7 @@ human_hand: manus_hand
 data_path: ./dataset/manus/
 
 data_source_cfg:
-  _target_: dexworld.data_sources.datasets.ManusNpzReader
+  _target_: mimic_retargeter_lab.data_sources.datasets.ManusNpzReader
   data_path: ${dataset.data_path}
   num_episodes: null
 

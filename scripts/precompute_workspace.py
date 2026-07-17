@@ -8,10 +8,10 @@ Usage:
     python scripts/precompute_workspace.py [--num-samples 100000] [--hands shadow_hand mimic_p050_hand ...]
 """
 
-# Import dexworld first — its package init pins ``JAX_PLATFORMS``
+# Import mimic_retargeter_lab first — its package init pins ``JAX_PLATFORMS``
 # and silences MJX's misleading "Using JAX default device" log. Must come
 # before ``import jax`` because JAX caches platform priority at import time.
-import dexworld  # noqa: F401
+import mimic_retargeter_lab  # noqa: F401
 
 import argparse
 from pathlib import Path
@@ -25,8 +25,8 @@ cache_dir.mkdir(parents=True, exist_ok=True)
 jax.config.update("jax_compilation_cache_dir", str(cache_dir))
 jax.config.update("jax_persistent_cache_min_compile_time_secs", 0)
 
-from dexworld.hand_models import create_robot_hand
-from dexworld.types import Chirality, RobotHandType
+from mimic_retargeter_lab.hand_models import create_robot_hand
+from mimic_retargeter_lab.types import Chirality, RobotHandType
 
 ASSETS_DIR = Path(__file__).parent.parent / "assets" / "mjcf"
 OUTPUT_DIR = Path(__file__).parent.parent / "assets" / "workspace_cache"

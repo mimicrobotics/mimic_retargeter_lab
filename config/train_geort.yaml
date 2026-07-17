@@ -1,4 +1,4 @@
-# Hydra config for `dexworld.retargeting.online.geort.train`.
+# Hydra config for `mimic_retargeter_lab.retargeting.online.geort.train`.
 # Reuses the per-hand retargeter yaml (config/retargeter_cfg/geort/...) for
 # fingertip mapping, alignment, and tracker indices.
 defaults:

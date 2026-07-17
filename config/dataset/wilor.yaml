@@ -15,13 +15,13 @@ human_hand: mano_keypoint_hand
 data_path: "./dataset/wilor/"
 
 data_source_cfg:
-  _target_: dexworld.data_sources.HandDatasetReader
+  _target_: mimic_retargeter_lab.data_sources.HandDatasetReader
   data_path: ${dataset.data_path}
   dataset: wilor_test_long
   num_episodes: 1
 
 workspace_data_source_cfg:
-  _target_: dexworld.data_sources.HandDatasetReader
+  _target_: mimic_retargeter_lab.data_sources.HandDatasetReader
   data_path: ./dataset/wilor/workspace
   dataset: human_hand_workspace
   num_episodes: 1

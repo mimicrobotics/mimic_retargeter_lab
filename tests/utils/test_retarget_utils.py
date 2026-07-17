@@ -5,7 +5,7 @@ import pytest
 from scipy.spatial.transform import Rotation
 from numpy.testing import assert_allclose
 
-from dexworld.utils.retarget_utils import (
+from mimic_retargeter_lab.utils.retarget_utils import (
     compute_kabsch_umeyama_transform,
     align_pcloud_kabsch_umeyama,
 )

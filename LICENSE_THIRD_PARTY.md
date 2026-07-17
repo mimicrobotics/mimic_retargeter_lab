@@ -26,7 +26,7 @@ This is the primary reason the overall project is licensed CC BY-NC 4.0.
 
 ## MANUS SDK
 
-**Location:** `dexworld/data_sources/hand_trackers/manus_hand_tracker/zmq_bridge/` (bridge only)
+**Location:** `mimic_retargeter_lab/data_sources/hand_trackers/manus_hand_tracker/zmq_bridge/` (bridge only)
 **License:** Proprietary — Manus Software License Agreement
 
 The MANUS SDK binaries and headers are **not** distributed with this repository.

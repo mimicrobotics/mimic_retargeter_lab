@@ -1,6 +1,6 @@
 #!/bin/bash
 # Run compute_hand_retargeter_pair_metrics.py for every dataset × hand × retargeter combination.
-# Usage: bash scripts/run_all_metrics.sh
+# Usage: bash scripts/compute_all_pair_metrics.sh
 
 set -e
 

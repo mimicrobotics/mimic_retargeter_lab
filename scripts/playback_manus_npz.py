@@ -18,7 +18,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
-from dexworld.hand_models.manus_hand import ManusHandModel
+from mimic_retargeter_lab.hand_models.manus_hand import ManusHandModel
 
 
 def parse_args() -> argparse.Namespace:

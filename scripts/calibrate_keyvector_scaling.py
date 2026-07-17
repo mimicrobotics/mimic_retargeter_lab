@@ -1,7 +1,7 @@
-from dexworld.data_sources import HandDatasetReader
-from dexworld.retargeting.online import KeyvectorRetargeter
-from dexworld.types import HandDataset, Chirality
-from dexworld.hand_models import ShadowHandModel
+from mimic_retargeter_lab.data_sources import HandDatasetReader
+from mimic_retargeter_lab.retargeting.online import KeyvectorRetargeter
+from mimic_retargeter_lab.types import HandDataset, Chirality
+from mimic_retargeter_lab.hand_models import ShadowHandModel
 
 import numpy as np
 import matplotlib.pyplot as plt

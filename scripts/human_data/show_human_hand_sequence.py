@@ -1,5 +1,5 @@
-from dexworld.scenes import HumanHandViewScene
-from dexworld.types import HandDataset, Simulator
+from mimic_retargeter_lab.scenes import HumanHandViewScene
+from mimic_retargeter_lab.types import HandDataset, Simulator
 from pathlib import Path
 import tyro
 

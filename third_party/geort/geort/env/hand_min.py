@@ -6,7 +6,7 @@ Author(s):
 
 import numpy as np
 
-# Pinocchio is the URDF backend only — lazy-imported so dexworld's MJCF
+# Pinocchio is the URDF backend only — lazy-imported so mimic_retargeter_lab's MJCF
 # training path can `import geort.trainer` (which imports this module) on
 # machines without pinocchio installed. URDF users still get a clear error
 # at construction time below.
@@ -26,7 +26,7 @@ class HandKinematicModel:
             raise ImportError(
                 "pinocchio is required for the URDF kinematic backend "
                 "(HandKinematicModel). Install it via `pip install pin==2.6.21`. "
-                "If you're using dexworld's MJCF training path, use "
+                "If you're using mimic_retargeter_lab's MJCF training path, use "
                 "`MjcfHandKinematicModel` instead."
             )
         # Load model with Pinocchio

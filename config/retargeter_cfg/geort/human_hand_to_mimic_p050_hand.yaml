@@ -3,7 +3,7 @@
 # `config` block — read by GeortRetargeter at inference time and by the
 # trainer at training time. `alignment_landmarks` matches the convention
 # used by sampling_based / keyvector / hybrid (siblings under `config:`).
-# `training` block — read by `dexworld.retargeting.online.geort.train` only;
+# `training` block — read by `mimic_retargeter_lab.retargeting.online.geort.train` only;
 # carries the per-finger joint chains and per-tracker keypoint indices that
 # don't have a parallel in the other retargeters.
 name: geort

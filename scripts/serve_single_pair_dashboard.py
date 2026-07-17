@@ -29,9 +29,9 @@ import hydra
 from dash import Dash
 from hydra.core.hydra_config import HydraConfig
 
-from dexworld.dashboard.dashboard import Dashboard
-from dexworld.types import Retargeter, RobotHandType
-from dexworld.utils import configure_logging, get_logger
+from mimic_retargeter_lab.dashboard.dashboard import Dashboard
+from mimic_retargeter_lab.types import Retargeter, RobotHandType
+from mimic_retargeter_lab.utils import configure_logging, get_logger
 
 
 @hydra.main(config_path="../config", config_name="compute_metrics", version_base="1.2")

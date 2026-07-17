@@ -15,9 +15,9 @@ from pathlib import Path
 import hydra
 from omegaconf import DictConfig, OmegaConf
 
-from dexworld.scenes import KinematicRetargetingScene
-from dexworld.types import Chirality, RobotHandType, Retargeter, Simulator
-from dexworld.utils import KBHit
+from mimic_retargeter_lab.scenes import KinematicRetargetingScene
+from mimic_retargeter_lab.types import Chirality, RobotHandType, Retargeter, Simulator
+from mimic_retargeter_lab.utils import KBHit
 
 
 @hydra.main(

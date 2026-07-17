@@ -1,7 +1,7 @@
 # Workspace utilization — Monte Carlo sphere-union method
 
 This document explains the implementation of the **Workspace** metric in
-[`dexworld/metrics/workspace.py`](../dexworld/metrics/workspace.py), what
+[`mimic_retargeter_lab/metrics/workspace.py`](../mimic_retargeter_lab/metrics/workspace.py), what
 it measures, and what changed when we replaced the previous voxel-grid
 implementation with a gridless Monte Carlo (MC) sphere-union estimator
 (GeoRT-style).
@@ -163,11 +163,11 @@ Statistics: utilization=18.14% (9069/50000 samples) | radius=0.005 m
 ## Implementation pointers
 
 - Sphere-union utilization function:
-  [`dexworld/metrics/workspace.py:_compute_sphere_union_utilization`](../dexworld/metrics/workspace.py)
+  [`mimic_retargeter_lab/metrics/workspace.py:_compute_sphere_union_utilization`](../mimic_retargeter_lab/metrics/workspace.py)
 - Joint-space sampling + shared FK sweep:
-  [`dexworld/metrics/workspace.py:WorkspaceMetric._ensure_p_robot`](../dexworld/metrics/workspace.py)
+  [`mimic_retargeter_lab/metrics/workspace.py:WorkspaceMetric._ensure_p_robot`](../mimic_retargeter_lab/metrics/workspace.py)
 - Dashboard rendering:
-  [`dexworld/dashboard/pages/workspace_page.py`](../dexworld/dashboard/pages/workspace_page.py)
+  [`mimic_retargeter_lab/dashboard/pages/workspace_page.py`](../mimic_retargeter_lab/dashboard/pages/workspace_page.py)
 - Reachable-workspace sample is FK'd from
   `RobotHandModel.get_actuated_joint_limits()` and
   `get_landmark_transforms(joint_angles=..., joint_space="ctrl")`.
@@ -182,6 +182,6 @@ Statistics: utilization=18.14% (9069/50000 samples) | radius=0.005 m
 The precompute infrastructure (`scripts/precompute_workspace.py`,
 `assets/workspace_cache/`) was already present from the previous voxel
 implementation — it's now reused as the source of `P_robot`. The
-`chamfer_distance` helper (`dexworld/objectives/chamfer_distance.py`) is
+`chamfer_distance` helper (`mimic_retargeter_lab/objectives/chamfer_distance.py`) is
 still present but no longer consumed by the Workspace metric path; safe
 to remove in a follow-up.

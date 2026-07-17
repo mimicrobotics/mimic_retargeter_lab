@@ -8,7 +8,7 @@ Place your MuJoCo XML in `assets/mjcf/<hand_name>/right_hand.xml` (and optionall
 
 **Key requirements:**
 
-- **`arm_attachment` wrapper body.** The first body under `<worldbody>` must be named `arm_attachment`. The retargeting scene resolves it as the hand's wrist body ([`kinematic_retargeting.py`](../dexworld/scenes/kinematic_retargeting.py)) in order to position the hand in the scene. If you're converting from a URDF that has a `freejoint`, replace it:
+- **`arm_attachment` wrapper body.** The first body under `<worldbody>` must be named `arm_attachment`. The retargeting scene resolves it as the hand's wrist body ([`kinematic_retargeting.py`](../mimic_retargeter_lab/scenes/kinematic_retargeting.py)) in order to position the hand in the scene. If you're converting from a URDF that has a `freejoint`, replace it:
   ```xml
   <worldbody>
     <body name="arm_attachment" pos="0 0 0" childclass="robot">
@@ -39,7 +39,7 @@ Place your MuJoCo XML in `assets/mjcf/<hand_name>/right_hand.xml` (and optionall
 
 ### 2. Add to `RobotHandType` Enum
 
-**File:** `dexworld/types/types.py`
+**File:** `mimic_retargeter_lab/types/types.py`
 
 ```python
 class RobotHandType(str, enum.Enum):
@@ -49,7 +49,7 @@ class RobotHandType(str, enum.Enum):
 
 ### 3. Create the Hand Model Class
 
-**File:** `dexworld/hand_models/<hand_name>.py`
+**File:** `mimic_retargeter_lab/hand_models/<hand_name>.py`
 
 Use an existing 4-finger hand (e.g., `wonik_allegro_hand.py`) or 5-finger hand (e.g., `mimic_p050_hand.py`) as a template. You need to implement:
 
@@ -79,7 +79,7 @@ Use an existing 4-finger hand (e.g., `wonik_allegro_hand.py`) or 5-finger hand (
 
 ### 4. Register the Hand Model
 
-**File:** `dexworld/hand_models/__init__.py`
+**File:** `mimic_retargeter_lab/hand_models/__init__.py`
 
 Add to the registry:
 ```python
@@ -136,8 +136,8 @@ config/metrics/<hand_name>/
 
 ```python
 import pytest
-from dexworld.hand_models import LeapHandModel
-from dexworld.types import HandLandmark
+from mimic_retargeter_lab.hand_models import LeapHandModel
+from mimic_retargeter_lab.types import HandLandmark
 from tests.hand_models.test_robot_hand_models_base import BaseHandModelRegressionSuite
 
 @pytest.fixture
@@ -193,9 +193,9 @@ python scripts/run_online_retargeting.py hand=<hand_name>
 | Step | Files |
 |------|-------|
 | MJCF model | `assets/mjcf/<hand_name>/right_hand.xml` (+ `left_hand.xml`) |
-| Type enum | `dexworld/types/types.py` |
-| Hand model class | `dexworld/hand_models/<hand_name>.py` |
-| Factory registration | `dexworld/hand_models/__init__.py` |
+| Type enum | `mimic_retargeter_lab/types/types.py` |
+| Hand model class | `mimic_retargeter_lab/hand_models/<hand_name>.py` |
+| Factory registration | `mimic_retargeter_lab/hand_models/__init__.py` |
 | Hand config | `config/hand/<hand_name>.yaml` |
 | Retargeter configs (x4) | `config/retargeter_cfg/{keyvector,dexpilot,ako,joint_angle}/human_hand_to_<hand_name>.yaml` |
 | Metrics configs (x6) | `config/metrics/<hand_name>/{flatness,keyvector_matching,motion_preservation,pinch_grasps,response,workspace}.yaml` |

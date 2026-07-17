@@ -1,5 +1,5 @@
-from dexworld.types import Chirality, Simulator, RobotHandType, Scene
-from dexworld.scenes import FingertipViewScene
+from mimic_retargeter_lab.types import Chirality, Simulator, RobotHandType, Scene
+from mimic_retargeter_lab.scenes import FingertipViewScene
 from pathlib import Path
 import os
 import tyro
