@@ -2,9 +2,6 @@
 
 Notes:
 - This was generated with help from Gemini.
-
-Author(s):
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 # Standard

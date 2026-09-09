@@ -1,7 +1,4 @@
 """Tests the forward kinematics of the robotic hand.
-
-Author(s):
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 # Standard

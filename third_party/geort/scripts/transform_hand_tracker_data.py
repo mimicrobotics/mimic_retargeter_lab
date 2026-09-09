@@ -2,9 +2,6 @@
 
 Applies necessary transformations to point cloud data to match
 expected GeoRT conventions.
-
-Author(s):
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 # Standard

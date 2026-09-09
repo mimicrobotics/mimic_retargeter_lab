@@ -1,7 +1,4 @@
 """Helper functions related to datasets.
-
-Author(s):
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 # Standard

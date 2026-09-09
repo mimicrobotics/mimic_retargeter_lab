@@ -1,7 +1,4 @@
 """Inspects the collected hand tracker data.
-
-Author(s):
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 # Standard

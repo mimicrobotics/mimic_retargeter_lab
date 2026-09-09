@@ -13,21 +13,19 @@ Usage Examples
 python visualize_hand_tracker_data.py \
     --mode frame \
     --frame_idx 0 \
-    --dataset_filename dataset_manus-test-001_subject-RJM.npy
+    --dataset_filename dataset_manus-test-001_subject-000.npy
 
 # 2. Interactive viewer
 python visualize_hand_tracker_data.py \
     --mode interactive \
-    --dataset_filename dataset_manus-test-001_subject-RJM.npy
+    --dataset_filename dataset_manus-test-001_subject-000.npy
 
 # 3. Export animation to MP4
 python visualize_hand_tracker_data.py \
     --mode animate \
     --out media/hand_motion.mp4 \
-    --dataset_filename dataset_manus-test-001_subject-RJM.npy
+    --dataset_filename dataset_manus-test-001_subject-000.npy
 
-Authors
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 # Standard

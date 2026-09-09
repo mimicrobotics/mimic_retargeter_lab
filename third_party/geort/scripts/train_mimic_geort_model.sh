@@ -4,7 +4,6 @@
 # Usage: ./train_mimic_geort_model.sh [HAND] [DATASET] [EXP_ID]
 # Example: ./train_mimic_geort_model.sh p50 dataset_manus_RJM_run-001 005
 # 
-# Author: Robert Jomar Malate (robert.malate@mimicrobotics.com)
 
 # Get the directory where the script file ($0) is located.
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"

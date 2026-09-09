@@ -3,9 +3,8 @@
 # Runs and records AVP hand tracker data.
 #
 # Usage: ./run_avp_data_collection.sh [SUBJECT_ID] [RUN_ID]
-# Example: ./run_avp_data_collection.sh RJM 001
+# Example: ./run_avp_data_collection.sh 000 001
 # 
-# Author: Robert Jomar Malate (robert.malate@mimicrobotics.com)
 
 # Get the directory where the script file ($0) is located.
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"

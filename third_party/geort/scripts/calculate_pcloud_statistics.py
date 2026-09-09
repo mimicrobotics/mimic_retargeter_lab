@@ -1,7 +1,4 @@
 """Calculates statistics for hand point cloud data.
-
-Author(s):
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 # Standard

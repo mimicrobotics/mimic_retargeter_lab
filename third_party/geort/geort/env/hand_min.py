@@ -1,7 +1,4 @@
 """Minimal hand kinematic model class.
-
-Author(s):
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 import numpy as np

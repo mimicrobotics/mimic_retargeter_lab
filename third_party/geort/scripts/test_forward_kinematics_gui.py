@@ -7,9 +7,6 @@ Features:
     - Opens a Tkinter GUI with one slider per active joint (user-order)
     - Moving sliders updates the hand pose in real time
     - Fingertips are visualized as red spheres (from HandViewerEnv)
-
-Author(s):
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 import tkinter as tk

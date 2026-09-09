@@ -1,7 +1,4 @@
 """ROS2 Node to record MANUS hand tracker data from normalized point clouds.
-
-Author(s):
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 # ROS2

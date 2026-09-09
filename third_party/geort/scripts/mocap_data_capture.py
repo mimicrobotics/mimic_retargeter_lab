@@ -1,7 +1,4 @@
 """Captures motion capture hand data and saves to disk.
-
-Author(s):
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 # Standard
@@ -77,7 +74,7 @@ def initialize_argparser():
     parser.add_argument(
         "--subject_id",
         type=str,
-        help="Subject identifier (ex. RJM, AAA)",
+        help="Subject identifier (ex. 000, AAA)",
         required=True,
     )
     parser.add_argument(

@@ -3,9 +3,6 @@
 - Subscribes to point clouds (Float32MultiArray), runs inference, and visualizes in MeshCat.
 - Topic: /hand_tracker/right/pcloud_normalized (std_msgs/Float32MultiArray)
        Expected layout: Flat array of size 75 (25 points * 3 coords)
-
-Author(s):
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 # Standard

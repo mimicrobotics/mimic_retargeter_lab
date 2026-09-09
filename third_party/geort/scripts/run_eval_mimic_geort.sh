@@ -5,7 +5,6 @@
 # Plays back the recorded data and runs the visualizer. Simplest way of 
 # checking the performance of the retargeter.
 #
-# Author: Robert Jomar Malate (robert.malate@mimicrobotics.com)
 
 # Get the directory where the script file ($0) is located.
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"

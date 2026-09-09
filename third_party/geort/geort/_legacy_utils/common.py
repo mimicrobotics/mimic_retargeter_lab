@@ -1,7 +1,4 @@
 """Common data types and constants used in the repo.
-
-Author(s):
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 # Standard

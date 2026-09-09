@@ -1,7 +1,4 @@
 """Helper functions for various tasks.
-
-Author(s):
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 # Standard

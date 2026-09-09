@@ -6,9 +6,6 @@ hand tracker point cloud data.
 Pinocchio kinematic models and is lightweight for quick inspection.
 - This is useful for quickly evaluating the model performance without
 needing to deploy it.
-
-Author(s):
-    - Robert Jomar Malate (robert.malate@mimicrobotics.com)
 """
 
 # Standard
