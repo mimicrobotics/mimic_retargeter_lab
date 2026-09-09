@@ -36,7 +36,7 @@ Retargeting algorithms are what enable humans to bridge the embodiment gap with 
 
 ```bash
 # Clone the repository
-git clone https://github.com/mimicrobotics/mimic_retargeter_lab.git
+git clone <repository-url>
 cd mimic_retargeter_lab
 
 # Install dependencies (creates ./.venv automatically)
