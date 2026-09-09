@@ -153,24 +153,6 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 Third-party components are documented in [LICENSE_THIRD_PARTY.md](LICENSE_THIRD_PARTY.md).
 
-## Citation
-
-If you use this repo, please cite our work:
-
-```bibtex
-@misc{malate2026_smoothoperator,
-      title={Smooth Operator: A Real-Time Sampling-Based Algorithm for Kinematic Hand Retargeting}, 
-      author={Robert Jomar Malate and Erik Bauer and Norica Bacuieti and Stefanos Charalambous and Elvis Nava and Robert K. Katzschmann and Benedek Forrai},
-      year={2026},
-      eprint={2607.07491},
-      archivePrefix={arXiv},
-      primaryClass={cs.RO},
-      url={https://arxiv.org/abs/2607.07491}, 
-}
-```
-
-This citation metadata is also available in machine-readable form in [CITATION.cff](CITATION.cff), which enables GitHub's "Cite this repository" button.
-
 ## References
 
 Using:
