@@ -19,9 +19,9 @@ Prerequisites:
     ManusZmqBridge.out is running and publishing to tcp://HOST:PORT.
 
 Usage:
-    # Constructed name -> dataset/manus/manus_right_subject-RJM_run-010.npz
-    python scripts/record_manus_zmq.py --subject RJM --run 10
-    python scripts/record_manus_zmq.py --chirality LEFT --subject RJM --run 11 --duration 10
+    # Constructed name -> dataset/manus/manus_right_subject-000_run-010.npz
+    python scripts/record_manus_zmq.py --subject 000 --run 10
+    python scripts/record_manus_zmq.py --chirality LEFT --subject 000 --run 11 --duration 10
 
     # Explicit output path (overrides constructed name)
     python scripts/record_manus_zmq.py -o recordings/right.npz
@@ -62,7 +62,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument(
         "--subject",
         default=None,
-        help="Subject name (e.g., RJM). Required if --output is not given.",
+        help="Subject name (e.g., 000). Required if --output is not given.",
     )
     p.add_argument(
         "--run",
@@ -118,7 +118,7 @@ def parse_args() -> argparse.Namespace:
 
     # If -o points to a directory (existing dir, or trailing separator), redirect
     # it to --output-dir so the filename is still constructed from --subject/--run.
-    # Lets `python record_manus_zmq.py -o dataset/manus/ --subject RJM --run 10`
+    # Lets `python record_manus_zmq.py -o dataset/manus/ --subject 000 --run 10`
     # do the obvious thing instead of producing a literal "dataset/manus.npz".
     if args.output is not None:
         out_str = str(args.output)

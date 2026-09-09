@@ -2,7 +2,7 @@
 #
 # Runs training of the geort model. 
 # Usage: ./train_mimic_geort_model.sh [HAND] [DATASET] [EXP_ID]
-# Example: ./train_mimic_geort_model.sh p50 dataset_manus_RJM_run-001 005
+# Example: ./train_mimic_geort_model.sh p50 dataset_manus_000_run-001 005
 # 
 
 # Get the directory where the script file ($0) is located.
@@ -20,7 +20,7 @@ fi
 
 # Configuration Defaults
 DEFAULT_HAND="mimic_p050_right"
-DEFAULT_DATASET="dataset_right_manus_subject-RJM_run-010"
+DEFAULT_DATASET="dataset_right_manus_subject-000_run-010"
 DEFAULT_EXP_ID="000"
 
 # Parse Arguments

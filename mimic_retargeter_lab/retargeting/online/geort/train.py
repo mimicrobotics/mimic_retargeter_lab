@@ -22,7 +22,7 @@ The orchestration:
 Run from repo root:
     JAX_PLATFORMS=cpu python -m mimic_retargeter_lab.retargeting.online.geort.train \\
         hand=mimic_p050_hand chirality=right tracker=manus \\
-        human_data=./dataset/manus/manus_right_subject-RJM_run-010.npz \\
+        human_data=./dataset/manus/manus_right_subject-000_run-010.npz \\
         exp_id=001
 """
 

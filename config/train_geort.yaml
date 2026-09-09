@@ -10,7 +10,7 @@ defaults:
 
 chirality: right       # left | right
 tracker: manus         # selects training.trackers.<tracker>.human_hand_ids
-human_data: "./dataset/manus/manus_right_subject-RJM_run-010.npz"        # required: path to .npz (manus) or .npy (legacy)
+human_data: "./dataset/manus/manus_right_subject-000_run-010.npz"        # required: path to .npz (manus) or .npy (legacy)
 exp_id: "000"
 
 # Loss weights and epoch count forwarded to GeoRTTrainer.train(**kwargs).
